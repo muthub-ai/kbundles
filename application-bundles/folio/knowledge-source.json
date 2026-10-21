@@ -1,0 +1,23 @@
+{
+  "appid": "folio",
+  "bootstrap": true,
+  "builder": "process:building-application-bundles@0.1.0",
+  "bundle_kind": "application",
+  "generated_at": "2026-10-20T19:30:00-05:00",
+  "graph_options": {
+    "exclude_globs": [],
+    "generated_globs": [],
+    "third_party_globs": []
+  },
+  "review": {
+    "approver": "@muthub-ai"
+  },
+  "schema": "kf-knowledge-source/1",
+  "source": {
+    "commit_sha": "8bca37ea8df4e3f6365c20a323bcd680c986a568",
+    "repo": "muthub-ai/muthu-v0-portfolio-website",
+    "repo_id": 1048024227,
+    "url": "https://github.com/muthub-ai/muthu-v0-portfolio-website"
+  },
+  "title": "Portfolio website (muthub.org)"
+}

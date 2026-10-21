@@ -1,0 +1,322 @@
+{
+  "counts": {
+    "edges_by_kind": {
+      "calls:import-bound": 197,
+      "calls:local": 55,
+      "calls:name-only": 31,
+      "declares:external": 66,
+      "defines:-": 192,
+      "imports:exact": 130,
+      "imports:external": 60,
+      "links:exact": 16,
+      "links:unresolved": 2,
+      "renders:import-bound": 53,
+      "renders:local": 11,
+      "renders:name-only": 1
+    },
+    "files_by_lang": {
+      "asset": 52,
+      "bash": 1,
+      "javascript": 4,
+      "json": 4,
+      "markdown": 17,
+      "python": 1,
+      "text": 9,
+      "tsx": 34,
+      "typescript": 28,
+      "yaml": 5
+    },
+    "generated_files": 2,
+    "nodes_by_kind": {
+      "external": 75,
+      "file": 155,
+      "function": 169,
+      "type": 23,
+      "unresolved": 21
+    },
+    "third_party_files": 0
+  },
+  "entrypoints": [
+    ".github/ci-run.sh (cli-main)",
+    "app/about/page.tsx (next-route)",
+    "app/error.tsx (next-route)",
+    "app/initiatives/[slug]/page.tsx (next-route)",
+    "app/initiatives/page.tsx (next-route)",
+    "app/layout.tsx (next-route)",
+    "app/llms.txt/route.ts (next-route)",
+    "app/md/[[...path]]/route.ts (next-route)",
+    "app/not-found.tsx (next-route)",
+    "app/now/page.tsx (next-route)",
+    "app/page.tsx (next-route)",
+    "app/playbooks/[slug]/assessment/page.tsx (next-route)",
+    "app/playbooks/[slug]/page.tsx (next-route)",
+    "app/playbooks/page.tsx (next-route)",
+    "app/reach/page.tsx (next-route)",
+    "app/rss.xml/route.ts (next-route)",
+    "app/search-index.json/route.ts (next-route)",
+    "app/search/page.tsx (next-route)",
+    "app/writing/[slug]/page.tsx (next-route)",
+    "app/writing/page.tsx (next-route)",
+    "app/writing/tag/[tag]/page.tsx (next-route)",
+    "app/writing/theme/[theme]/page.tsx (next-route)",
+    "scripts/check-links.mjs (cli-main)",
+    "scripts/check-public-content.mjs (cli-main)",
+    "scripts/og/make-images.py (cli-main)"
+  ],
+  "external_dependencies": [
+    {
+      "files": 26,
+      "package": "next"
+    },
+    {
+      "files": 13,
+      "package": "react"
+    },
+    {
+      "files": 5,
+      "package": "@playwright/test"
+    },
+    {
+      "files": 3,
+      "package": "next-themes"
+    },
+    {
+      "files": 2,
+      "package": "@vercel/analytics"
+    },
+    {
+      "files": 2,
+      "package": "@vercel/speed-insights"
+    },
+    {
+      "files": 2,
+      "package": "clsx"
+    },
+    {
+      "files": 2,
+      "package": "node:child_process"
+    },
+    {
+      "files": 2,
+      "package": "node:fs"
+    },
+    {
+      "files": 2,
+      "package": "node:path"
+    },
+    {
+      "files": 2,
+      "package": "tailwind-merge"
+    },
+    {
+      "files": 2,
+      "package": "tailwindcss"
+    },
+    {
+      "files": 1,
+      "package": "@hookform/resolvers"
+    },
+    {
+      "files": 1,
+      "package": "@radix-ui/react-accordion"
+    },
+    {
+      "files": 1,
+      "package": "@radix-ui/react-alert-dialog"
+    },
+    {
+      "files": 1,
+      "package": "@radix-ui/react-aspect-ratio"
+    },
+    {
+      "files": 1,
+      "package": "@radix-ui/react-avatar"
+    },
+    {
+      "files": 1,
+      "package": "@radix-ui/react-checkbox"
+    },
+    {
+      "files": 1,
+      "package": "@radix-ui/react-collapsible"
+    },
+    {
+      "files": 1,
+      "package": "@radix-ui/react-context-menu"
+    },
+    {
+      "files": 1,
+      "package": "@radix-ui/react-dialog"
+    },
+    {
+      "files": 1,
+      "package": "@radix-ui/react-dropdown-menu"
+    },
+    {
+      "files": 1,
+      "package": "@radix-ui/react-hover-card"
+    },
+    {
+      "files": 1,
+      "package": "@radix-ui/react-label"
+    },
+    {
+      "files": 1,
+      "package": "@radix-ui/react-menubar"
+    },
+    {
+      "files": 1,
+      "package": "@radix-ui/react-navigation-menu"
+    },
+    {
+      "files": 1,
+      "package": "@radix-ui/react-popover"
+    },
+    {
+      "files": 1,
+      "package": "@radix-ui/react-progress"
+    },
+    {
+      "files": 1,
+      "package": "@radix-ui/react-radio-group"
+    },
+    {
+      "files": 1,
+      "package": "@radix-ui/react-scroll-area"
+    }
+  ],
+  "fan_in_top": [
+    {
+      "id": "content/site.ts",
+      "weight": 41
+    },
+    {
+      "id": "content/playbooks.ts",
+      "weight": 23
+    },
+    {
+      "id": "lib/content.ts::getEssays",
+      "weight": 19
+    },
+    {
+      "id": "tailwind.config.ts::token",
+      "weight": 16
+    },
+    {
+      "id": "lib/seo.ts",
+      "weight": 15
+    },
+    {
+      "id": "lib/seo.ts::pageMetadata",
+      "weight": 14
+    },
+    {
+      "id": "lib/content.ts::dateLabel",
+      "weight": 13
+    },
+    {
+      "id": "lib/content.ts",
+      "weight": 11
+    },
+    {
+      "id": "lib/content.ts::getNotes",
+      "weight": 11
+    },
+    {
+      "id": "content/tags.ts",
+      "weight": 10
+    },
+    {
+      "id": "lib/content.ts::getInitiatives",
+      "weight": 10
+    },
+    {
+      "id": "lib/search.ts::plain",
+      "weight": 9
+    },
+    {
+      "id": "content/site.ts::themeName",
+      "weight": 8
+    },
+    {
+      "id": "scripts/og/make-images.py::font",
+      "weight": 8
+    },
+    {
+      "id": "components/figures.tsx",
+      "weight": 7
+    }
+  ],
+  "fan_out_top": [
+    {
+      "id": "playwright/tests/features.spec.ts",
+      "weight": 73
+    },
+    {
+      "id": "playwright/tests/content.spec.ts",
+      "weight": 43
+    },
+    {
+      "id": "playwright/tests/site.spec.ts",
+      "weight": 40
+    },
+    {
+      "id": "app/page.tsx::HomePage",
+      "weight": 29
+    },
+    {
+      "id": "app/writing/[slug]/page.tsx::WritingItemPage",
+      "weight": 27
+    },
+    {
+      "id": "components/search.tsx::SearchDialog",
+      "weight": 23
+    },
+    {
+      "id": "app/sitemap.ts::sitemap",
+      "weight": 21
+    },
+    {
+      "id": "lib/search.ts::buildSearchIndex",
+      "weight": 18
+    },
+    {
+      "id": "tailwind.config.ts",
+      "weight": 17
+    },
+    {
+      "id": "app/initiatives/[slug]/page.tsx::InitiativePage",
+      "weight": 16
+    },
+    {
+      "id": "components/writing-hub.tsx::WritingHub",
+      "weight": 16
+    },
+    {
+      "id": "app/layout.tsx",
+      "weight": 15
+    },
+    {
+      "id": "components/site-header.tsx::SiteHeader",
+      "weight": 15
+    },
+    {
+      "id": "scripts/og/make-images.py",
+      "weight": 14
+    },
+    {
+      "id": "app/md/[[...path]]/route.ts::render",
+      "weight": 12
+    }
+  ],
+  "graph_sha256": "c30e501c460d37c9779b2d401e1e376a2e5c0290377d4b5c5d3a5ba92fbfe70d",
+  "hotspot_definition": "fan-in/fan-out of internal nodes over calls+renders+imports+links; no churn",
+  "parse_errors": [
+    "components/figures.tsx"
+  ],
+  "schema": "kf-code-graph-metrics/1",
+  "source": {
+    "commit_sha": "8bca37ea8df4e3f6365c20a323bcd680c986a568",
+    "repo": "muthub-ai/muthu-v0-portfolio-website"
+  }
+}

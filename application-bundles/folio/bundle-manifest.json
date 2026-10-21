@@ -1,0 +1,18 @@
+{
+  "bundle": {"appid": "folio", "kind": "application", "okf_version": "0.2", "schema": "kf-bundle-manifest/1"},
+  "entries": [
+    {"generated_at": "2026-10-20T19:30:00-05:00", "generated_by": "process:building-application-bundles@0.1.0", "path": "code-graph/code-graph.jsonl", "sha256": "c30e501c460d37c9779b2d401e1e376a2e5c0290377d4b5c5d3a5ba92fbfe70d", "type": "application-bundle/code-graph"},
+    {"generated_at": "2026-10-20T19:30:00-05:00", "generated_by": "process:building-application-bundles@0.1.0", "path": "code-graph/metrics.json", "sha256": "e53b0646e4cbb255467e3d75debdc82017a922127d43308de26d73be1842d3da", "type": "application-bundle/code-graph-metrics"},
+    {"generated_at": "2026-10-20T19:30:00-05:00", "generated_by": "process:kfbundle.views@0.1.0", "path": "code-graph/views/dependencies.md", "sha256": "b93eab22901cab6d70012c8c22fc76fd1a2db191c1ceb7655a6b478f66637544", "type": "application-bundle/code-graph-view"},
+    {"generated_at": "2026-10-20T19:30:00-05:00", "generated_by": "process:kfbundle.views@0.1.0", "path": "code-graph/views/modules.md", "sha256": "aedd7ae363bdb635e2f32c50845862523ce922c81a6019d0e278629307b7679b", "type": "application-bundle/code-graph-view"},
+    {"generated_at": "2026-10-20T19:30:00-05:00", "generated_by": "process:building-application-bundles@0.1.0", "path": "domains-maps/agent-readability.md", "sha256": "1eb44ceee7e7d37e621dc2a2eb29f223070827a08e0cabcf8f7025ecf4fa93ad", "type": "application-bundle/domain-map"},
+    {"generated_at": "2026-10-20T19:30:00-05:00", "generated_by": "process:building-application-bundles@0.1.0", "path": "domains-maps/editorial-content.md", "sha256": "06c0e49d39221923956afb1326ac05f770138e9247a533e501ee1d3b83e7b88b", "type": "application-bundle/domain-map"},
+    {"generated_at": "2026-10-20T19:30:00-05:00", "generated_by": "process:building-application-bundles@0.1.0", "path": "sections/application-architecture.md", "sha256": "c0b8a73511af9d4012bd299479b688f6ab5e85bc2b15fefce374911d139c9fc8", "type": "application-bundle/application-architecture"},
+    {"generated_at": "2026-10-20T19:30:00-05:00", "generated_by": "process:building-application-bundles@0.1.0", "path": "sections/business-architecture.md", "sha256": "c725a823d5a47afb0147d89903b21fd8b76239ba2e2411286c62393851a462d4", "type": "application-bundle/business-architecture"},
+    {"generated_at": "2026-10-20T19:30:00-05:00", "generated_by": "process:building-application-bundles@0.1.0", "path": "sections/data-architecture.md", "sha256": "87800fffb80fdd437d56e1fa2da4fe7f36ff55d1161a288d7082d835bb5f1c40", "type": "application-bundle/data-architecture"},
+    {"generated_at": "2026-10-20T19:30:00-05:00", "generated_by": "process:building-application-bundles@0.1.0", "path": "sections/executive-summary.md", "sha256": "cdc8a0cf99767e196ef0d38f448d3498fc1e686fd9cc0aae0b6f790a2c137d16", "type": "application-bundle/executive-summary"},
+    {"generated_at": "2026-10-20T19:30:00-05:00", "generated_by": "process:building-application-bundles@0.1.0", "path": "sections/operating-model.md", "sha256": "a122422d018eba444fb19aa04ab84672743e18dc5f36c3ea81409e0cca701dd9", "type": "application-bundle/operating-model"},
+    {"generated_at": "2026-10-20T19:30:00-05:00", "generated_by": "process:building-application-bundles@0.1.0", "path": "sections/security-architecture.md", "sha256": "4db2812c20886a1d17a429771206b245f582ded93e351dd12a896f8db53dccec", "type": "application-bundle/security-architecture"},
+    {"generated_at": "2026-10-20T19:30:00-05:00", "generated_by": "process:building-application-bundles@0.1.0", "path": "sections/technology-architecture.md", "sha256": "c92a01c0c6409f8b6ceffb074066937ba945f9f87734910a37abd62fd444c626", "type": "application-bundle/technology-architecture"}
+  ]
+}
