@@ -1,0 +1,7 @@
+# OWNERS for folio (Portfolio website (muthub.org))
+# Who may approve knowledge for this app: ceremony PRs, bundle updates and changes to
+# this file. Read by kf-knowledge-gate from main only. Change it with an owners PR
+# (branch owners/folio, title '[KF-OWNERS] folio — <what changed>').
+approvers:
+  - genlinemedia
+  - muthub-ai
