@@ -1,0 +1,34 @@
+{
+  "class": "bundle-update",
+  "conclusion": "bootstrap-ok",
+  "appid": "cfskl",
+  "team": null,
+  "ceremony": null,
+  "approval": "direct bootstrap: approval not applicable (never approved)",
+  "gate_version": "0.1.0",
+  "failing_gates": [],
+  "findings": [
+    {
+      "gate": "B6",
+      "severity": "warn",
+      "path": "application-bundles/cfskl/domains-maps/c4-adr-vocabulary.md",
+      "message": "[^contract] cites 88 lines (c4designer/SKILL.md#L55-L142); cite the smallest range that supports the claim"
+    },
+    {
+      "gate": "B6",
+      "severity": "warn",
+      "path": "application-bundles/cfskl/sections/application-architecture.md",
+      "message": "[^suite1] cites 84 lines (tests/test-skill-format.sh#L52-L135); cite the smallest range that supports the claim"
+    },
+    {
+      "gate": "G7",
+      "severity": "warn",
+      "path": "application-bundles/cfskl/knowledge-source.json",
+      "message": "direct bootstrap \u2014 approval by @muthub-ai was never requested (content is flagged x_kf.bootstrap)"
+    }
+  ],
+  "step": "bundle-cfskl",
+  "base": "97668444a92fcd32930cd1be4c69c52745fb2606",
+  "head": "ed94810d458512fb4f3c8467db54b1b4cb74788d",
+  "mode": "bootstrap (local gate)"
+}

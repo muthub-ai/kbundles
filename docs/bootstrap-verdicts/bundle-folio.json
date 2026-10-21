@@ -1,0 +1,22 @@
+{
+  "class": "bundle-update",
+  "conclusion": "bootstrap-ok",
+  "appid": "folio",
+  "team": null,
+  "ceremony": null,
+  "approval": "direct bootstrap: approval not applicable (never approved)",
+  "gate_version": "0.1.0",
+  "failing_gates": [],
+  "findings": [
+    {
+      "gate": "G7",
+      "severity": "warn",
+      "path": "application-bundles/folio/knowledge-source.json",
+      "message": "direct bootstrap \u2014 approval by @muthub-ai was never requested (content is flagged x_kf.bootstrap)"
+    }
+  ],
+  "step": "bundle-folio",
+  "base": "ed94810d458512fb4f3c8467db54b1b4cb74788d",
+  "head": "fb3423d7ebb6807a3767789668f7e576bf2c264a",
+  "mode": "bootstrap (local gate)"
+}

@@ -1,0 +1,22 @@
+{
+  "class": "ceremony",
+  "conclusion": "bootstrap-ok",
+  "appid": "kfsit",
+  "team": "site-build",
+  "ceremony": "standup",
+  "approval": "direct bootstrap: approval not applicable (never approved)",
+  "gate_version": "0.1.0",
+  "failing_gates": [],
+  "findings": [
+    {
+      "gate": "G7",
+      "severity": "warn",
+      "path": "application-bundles/kfsit/knowledge-sources/agile-ceremonies/standup/site-build/standup_2026-10-19.md",
+      "message": "direct bootstrap \u2014 approval by @muthub-ai was never requested (content is flagged x_kf.bootstrap)"
+    }
+  ],
+  "step": "seed-kfsit-site-build-standup-2026-10-19",
+  "base": "84332cc4f80e877eb9e4c0025020c7b5f116e2fd",
+  "head": "f39df0778946da106866a4d3b80d3f1a4d6047d1",
+  "mode": "bootstrap (local gate)"
+}

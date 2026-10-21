@@ -1,0 +1,22 @@
+{
+  "class": "bundle-update",
+  "conclusion": "bootstrap-ok",
+  "appid": "kfcor",
+  "team": null,
+  "ceremony": null,
+  "approval": "direct bootstrap: approval not applicable (never approved)",
+  "gate_version": "0.1.0",
+  "failing_gates": [],
+  "findings": [
+    {
+      "gate": "G7",
+      "severity": "warn",
+      "path": "application-bundles/kfcor/knowledge-source.json",
+      "message": "direct bootstrap \u2014 approval by @muthub-ai was never requested (content is flagged x_kf.bootstrap)"
+    }
+  ],
+  "step": "bundle-kfcor",
+  "base": "fb3423d7ebb6807a3767789668f7e576bf2c264a",
+  "head": "8eb817f4e3a630f3fdc8a66529317ea28fb9bbf7",
+  "mode": "bootstrap (local gate)"
+}

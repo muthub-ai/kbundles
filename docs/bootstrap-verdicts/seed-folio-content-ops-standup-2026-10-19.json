@@ -1,0 +1,28 @@
+{
+  "class": "ceremony",
+  "conclusion": "bootstrap-ok",
+  "appid": "folio",
+  "team": "content-ops",
+  "ceremony": "standup",
+  "approval": "direct bootstrap: approval not applicable (never approved)",
+  "gate_version": "0.1.0",
+  "failing_gates": [],
+  "findings": [
+    {
+      "gate": "G2",
+      "severity": "warn",
+      "path": "application-bundles/folio/knowledge-sources/agile-ceremonies/standup/content-ops/standup_2026-10-19.md",
+      "message": "expected section 'Action items' is absent (soft check)"
+    },
+    {
+      "gate": "G7",
+      "severity": "warn",
+      "path": "application-bundles/folio/knowledge-sources/agile-ceremonies/standup/content-ops/standup_2026-10-19.md",
+      "message": "direct bootstrap \u2014 approval by @muthub-ai was never requested (content is flagged x_kf.bootstrap)"
+    }
+  ],
+  "step": "seed-folio-content-ops-standup-2026-10-19",
+  "base": "212533b679132dbb20ec584e5395031636f781c0",
+  "head": "8c677f94e5fed5afb66aee76aa2771e6fa218dee",
+  "mode": "bootstrap (local gate)"
+}

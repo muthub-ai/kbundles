@@ -1,0 +1,28 @@
+{
+  "class": "ceremony",
+  "conclusion": "bootstrap-ok",
+  "appid": "aacod",
+  "team": "mcp-integrations",
+  "ceremony": "standup",
+  "approval": "direct bootstrap: approval not applicable (never approved)",
+  "gate_version": "0.1.0",
+  "failing_gates": [],
+  "findings": [
+    {
+      "gate": "G2",
+      "severity": "warn",
+      "path": "application-bundles/aacod/knowledge-sources/agile-ceremonies/standup/mcp-integrations/standup_2026-10-19.md",
+      "message": "expected section 'Action items' is absent (soft check)"
+    },
+    {
+      "gate": "G7",
+      "severity": "warn",
+      "path": "application-bundles/aacod/knowledge-sources/agile-ceremonies/standup/mcp-integrations/standup_2026-10-19.md",
+      "message": "direct bootstrap \u2014 approval by @muthub-ai was never requested (content is flagged x_kf.bootstrap)"
+    }
+  ],
+  "step": "seed-aacod-mcp-integrations-standup-2026-10-19",
+  "base": "3d120b44c2c0bf5315744fc063b0eca3b4b6dbc0",
+  "head": "e3c6c907f523abb579e0ac18882c7d192dff3c3b",
+  "mode": "bootstrap (local gate)"
+}

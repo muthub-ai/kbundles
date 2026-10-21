@@ -1,0 +1,22 @@
+{
+  "class": "ceremony",
+  "conclusion": "bootstrap-ok",
+  "appid": "cfskl",
+  "team": "adr-practice",
+  "ceremony": "standup",
+  "approval": "direct bootstrap: approval not applicable (never approved)",
+  "gate_version": "0.1.0",
+  "failing_gates": [],
+  "findings": [
+    {
+      "gate": "G7",
+      "severity": "warn",
+      "path": "application-bundles/cfskl/knowledge-sources/agile-ceremonies/standup/adr-practice/standup_2026-10-19.md",
+      "message": "direct bootstrap \u2014 approval by @muthub-ai was never requested (content is flagged x_kf.bootstrap)"
+    }
+  ],
+  "step": "seed-cfskl-adr-practice-standup-2026-10-19",
+  "base": "3d92e901800ac9748e4be2d2cef6da62b5c0b73b",
+  "head": "8413470e47c9300ee8d8ea45ff6ad73220117d06",
+  "mode": "bootstrap (local gate)"
+}

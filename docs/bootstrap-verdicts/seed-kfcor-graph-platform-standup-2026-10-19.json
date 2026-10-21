@@ -1,0 +1,28 @@
+{
+  "class": "ceremony",
+  "conclusion": "bootstrap-ok",
+  "appid": "kfcor",
+  "team": "graph-platform",
+  "ceremony": "standup",
+  "approval": "direct bootstrap: approval not applicable (never approved)",
+  "gate_version": "0.1.0",
+  "failing_gates": [],
+  "findings": [
+    {
+      "gate": "G2",
+      "severity": "warn",
+      "path": "application-bundles/kfcor/knowledge-sources/agile-ceremonies/standup/graph-platform/standup_2026-10-19.md",
+      "message": "expected section 'Blockers' is absent (soft check)"
+    },
+    {
+      "gate": "G7",
+      "severity": "warn",
+      "path": "application-bundles/kfcor/knowledge-sources/agile-ceremonies/standup/graph-platform/standup_2026-10-19.md",
+      "message": "direct bootstrap \u2014 approval by @muthub-ai was never requested (content is flagged x_kf.bootstrap)"
+    }
+  ],
+  "step": "seed-kfcor-graph-platform-standup-2026-10-19",
+  "base": "90b2fd91e2c97052dd3517f0f8fea4637776a27e",
+  "head": "85cedc3ab560b43b954377f8797c7a9d324dcb63",
+  "mode": "bootstrap (local gate)"
+}

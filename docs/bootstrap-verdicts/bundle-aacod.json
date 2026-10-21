@@ -1,0 +1,22 @@
+{
+  "class": "bundle-update",
+  "conclusion": "bootstrap-ok",
+  "appid": "aacod",
+  "team": null,
+  "ceremony": null,
+  "approval": "direct bootstrap: approval not applicable (never approved)",
+  "gate_version": "0.1.0",
+  "failing_gates": [],
+  "findings": [
+    {
+      "gate": "G7",
+      "severity": "warn",
+      "path": "application-bundles/aacod/knowledge-source.json",
+      "message": "direct bootstrap \u2014 approval by @muthub-ai was never requested (content is flagged x_kf.bootstrap)"
+    }
+  ],
+  "step": "bundle-aacod",
+  "base": "10a3958e3d362f0f868bcb0baf2b77271d201677",
+  "head": "97668444a92fcd32930cd1be4c69c52745fb2606",
+  "mode": "bootstrap (local gate)"
+}

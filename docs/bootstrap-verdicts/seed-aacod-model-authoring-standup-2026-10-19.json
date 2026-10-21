@@ -1,0 +1,28 @@
+{
+  "class": "ceremony",
+  "conclusion": "bootstrap-ok",
+  "appid": "aacod",
+  "team": "model-authoring",
+  "ceremony": "standup",
+  "approval": "direct bootstrap: approval not applicable (never approved)",
+  "gate_version": "0.1.0",
+  "failing_gates": [],
+  "findings": [
+    {
+      "gate": "G2",
+      "severity": "warn",
+      "path": "application-bundles/aacod/knowledge-sources/agile-ceremonies/standup/model-authoring/standup_2026-10-19.md",
+      "message": "expected section 'Blockers' is absent (soft check)"
+    },
+    {
+      "gate": "G7",
+      "severity": "warn",
+      "path": "application-bundles/aacod/knowledge-sources/agile-ceremonies/standup/model-authoring/standup_2026-10-19.md",
+      "message": "direct bootstrap \u2014 approval by @muthub-ai was never requested (content is flagged x_kf.bootstrap)"
+    }
+  ],
+  "step": "seed-aacod-model-authoring-standup-2026-10-19",
+  "base": "e3c6c907f523abb579e0ac18882c7d192dff3c3b",
+  "head": "4a772c6a557c13e05059f61cc022ace66093a254",
+  "mode": "bootstrap (local gate)"
+}

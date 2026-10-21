@@ -1,0 +1,22 @@
+{
+  "class": "ceremony",
+  "conclusion": "bootstrap-ok",
+  "appid": "kfcor",
+  "team": "fabric-core",
+  "ceremony": "standup",
+  "approval": "direct bootstrap: approval not applicable (never approved)",
+  "gate_version": "0.1.0",
+  "failing_gates": [],
+  "findings": [
+    {
+      "gate": "G7",
+      "severity": "warn",
+      "path": "application-bundles/kfcor/knowledge-sources/agile-ceremonies/standup/fabric-core/standup_2026-10-19.md",
+      "message": "direct bootstrap \u2014 approval by @muthub-ai was never requested (content is flagged x_kf.bootstrap)"
+    }
+  ],
+  "step": "seed-kfcor-fabric-core-standup-2026-10-19",
+  "base": "7d84b5db1caef8b521f3d6c964f83243f340e405",
+  "head": "90b2fd91e2c97052dd3517f0f8fea4637776a27e",
+  "mode": "bootstrap (local gate)"
+}
