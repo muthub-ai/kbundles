@@ -8,7 +8,7 @@ reserved_appids: [index, admin, other, appbd, dombd, prcbd]
 reserved_team_slugs: [index, log, all, shared, archive, standup, sprint-planning, backlog-refinement, retro]
 ceremonies: [standup, sprint-planning, backlog-refinement, retro]
 require_synthetic: true            # this prototype's meetings and teams are fabricated
-revert_fallback_approvers: [muthub-ai]
+revert_fallback_approvers: [muthub-ai, kf-writer-demo]
 appids:
   kfcor:
     title: Knowledge Foundation core
