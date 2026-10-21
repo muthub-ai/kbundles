@@ -1,4 +1,4 @@
-# kfcor — bundle log
+# kfcor — bundle log (edited)
 
 ## 2026-10-20: Application bundle created
 
