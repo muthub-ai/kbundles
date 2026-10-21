@@ -16,3 +16,7 @@ jobs:
       - run: pip install --disable-pip-version-check -r .github/kf/toolchain.lock
       - name: Lint every bundle on main
         run: python3 tools/tripwire.py
+      - name: Verify registry repo ids against GitHub
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 tools/verify_registry.py
