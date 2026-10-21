@@ -11,7 +11,9 @@ on:
 permissions: {}
 concurrency:
   group: kf-gate-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  # Never cancel a running gate: a cancelled run's check-suite voids the check run it already
+  # posted ("Expected — waiting for status"). Newer events queue; superseded pending runs are dropped.
+  cancel-in-progress: false
 jobs:
   gate:
     if: github.event_name == 'pull_request_target'
