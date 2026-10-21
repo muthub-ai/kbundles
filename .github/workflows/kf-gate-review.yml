@@ -1,0 +1,12 @@
+# Unprivileged trigger: pull_request_review runs merge-ref code, so nothing privileged lives here.
+# Its completion fires kf-gate-rerun.yml (workflow_run), which runs default-branch code.
+name: kf-gate-review
+on:
+  pull_request_review:
+    types: [submitted, dismissed]
+permissions: {}
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "review on PR #${{ github.event.pull_request.number }} — kf-gate-rerun will re-evaluate approval"

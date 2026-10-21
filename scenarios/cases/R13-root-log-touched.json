@@ -1,0 +1,12 @@
+{
+  "extends": "scenarios/cases/D01-kfcor-fabric-core-standup.json",
+  "id": "R13",
+  "tamper": [
+    {
+      "op": "replace_in_file",
+      "file": "application-bundles/kfcor/log.md",
+      "find": "# kfcor — bundle log\n",
+      "replace": "# kfcor — bundle log (edited)\n"
+    }
+  ]
+}

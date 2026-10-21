@@ -1,0 +1,12 @@
+{
+  "extends": "scenarios/cases/D01-kfcor-fabric-core-standup.json",
+  "id": "R14",
+  "tamper": [
+    {
+      "op": "replace_in_file",
+      "file": ".github/kf/config.yml",
+      "find": "revert_fallback_approvers: [muthub-ai]",
+      "replace": "revert_fallback_approvers: [muthub-ai, kf-writer-demo]"
+    }
+  ]
+}

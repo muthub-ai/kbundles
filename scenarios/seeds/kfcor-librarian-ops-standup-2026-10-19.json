@@ -1,0 +1,70 @@
+{
+  "id": "seed-kfcor-librarian-ops",
+  "grillresult_version": 2,
+  "answers": {
+    "appid": "kfcor",
+    "ceremony": "standup",
+    "team": "librarian-ops",
+    "ceremony_date": "2026-10-19",
+    "approver": "@muthub-ai",
+    "requested_by": "@muthub-ai"
+  },
+  "generated_at": "2026-10-19T17:30:00-04:00",
+  "recap": "scenarios/recaps/kfcor-librarian-ops-standup-2026-10-19.md",
+  "meeting": {
+    "title": "librarian-ops daily standup",
+    "meeting_id": "fixture-kfcor-librarian-ops-2026-10-19",
+    "meeting_datetime": "2026-10-19T09:30:00-04:00"
+  },
+  "attendance": [
+    {
+      "name": "Dev P.",
+      "duration": "14m"
+    },
+    {
+      "name": "Elif K.",
+      "duration": "15m"
+    }
+  ],
+  "items": [
+    {
+      "id": "DEC-1",
+      "confidence": "medium",
+      "text": "Raise the local classifier confidence threshold before the next ingest run.",
+      "citations": [
+        {
+          "fid": "dec1",
+          "source": "s1",
+          "locator": "Ingest",
+          "span": "Decision: raise the classifier confidence threshold before the next ingest run."
+        }
+      ]
+    },
+    {
+      "id": "BLK-1",
+      "confidence": "medium",
+      "text": "The weekly curator stops halfway through lint when it reaches its spend cap.",
+      "citations": [
+        {
+          "fid": "blk1",
+          "source": "s1",
+          "locator": "Curation",
+          "span": "the weekly curator hit its spend cap on Sunday and stopped halfway through lint."
+        }
+      ]
+    },
+    {
+      "id": "ACT-1",
+      "confidence": "medium",
+      "text": "Split the weekly job into separate lint and consolidate runs, each with its own cap.",
+      "citations": [
+        {
+          "fid": "act1",
+          "source": "s1",
+          "locator": "Curation",
+          "span": "Elif will split the weekly job into lint and consolidate runs with separate caps."
+        }
+      ]
+    }
+  ]
+}

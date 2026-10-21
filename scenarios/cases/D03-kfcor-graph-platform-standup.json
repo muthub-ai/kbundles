@@ -1,0 +1,32 @@
+{
+  "id": "D03",
+  "grillresult_version": 2,
+  "answers": {
+    "appid": "kfcor",
+    "ceremony": "standup",
+    "team": "graph-platform",
+    "ceremony_date": "2026-10-20",
+    "approver": "@kf-approver-demo",
+    "requested_by": "@kf-writer-demo"
+  },
+  "generated_at": "2026-10-20T19:00:00+05:30",
+  "recap": "scenarios/recaps/kfcor-graph-platform-standup-2026-10-20.md",
+  "items": [
+    {
+      "id": "ACT-1",
+      "confidence": "medium",
+      "text": "Add a CI check that fails when two builds of the same commit produce different graphs.",
+      "citations": [
+        {
+          "fid": "act1",
+          "source": "s1",
+          "locator": "Determinism",
+          "span": "Hana will add a CI check that fails when two builds of the same commit differ."
+        }
+      ]
+    }
+  ],
+  "pr": {
+    "author": "kf-writer-demo"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "D05",
+  "grillresult_version": 2,
+  "answers": {
+    "appid": "kfcor",
+    "ceremony": "sprint-planning",
+    "team": "graph-platform",
+    "ceremony_date": "2026-10-20",
+    "approver": "@kf-approver-demo",
+    "requested_by": "@kf-writer-demo"
+  },
+  "generated_at": "2026-10-20T16:00:00+05:30",
+  "recap": "scenarios/recaps/kfcor-graph-platform-sprint-planning-2026-10-20.md",
+  "extra": {
+    "Sprint goal": [
+      {
+        "text": "Make graph builds byte-reproducible across releases.",
+        "citations": [
+          {
+            "fid": "goal",
+            "source": "s1",
+            "locator": "Goal",
+            "span": "Sprint goal: Make graph builds byte-reproducible across releases."
+          }
+        ]
+      }
+    ]
+  },
+  "items": [
+    {
+      "id": "DEC-1",
+      "confidence": "high",
+      "text": "Commit to the sprint goal and one supporting reviewer story.",
+      "citations": [
+        {
+          "fid": "dec1",
+          "source": "s1",
+          "locator": "Commitments",
+          "span": "The team committed to the goal and to one supporting story for reviewers."
+        }
+      ]
+    }
+  ],
+  "pr": {
+    "author": "kf-writer-demo"
+  }
+}

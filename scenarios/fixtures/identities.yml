@@ -1,0 +1,6 @@
+# Fixture identities for local mode and CI fixtures (the live repo has one real identity).
+users:
+  muthub-ai: {permission: admin}         # repo owner; owner of every appid; code owner
+  kf-approver-demo: {permission: write}  # the named approver in green scenarios
+  kf-writer-demo: {permission: write}    # a writer who is NOT the named approver (also PR author)
+  kf-outsider-demo: {permission: read}   # resolvable but cannot approve

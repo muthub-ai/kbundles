@@ -1,0 +1,12 @@
+{
+  "extends": "scenarios/cases/D01-kfcor-fabric-core-standup.json",
+  "id": "R02",
+  "tamper": [
+    {
+      "op": "replace_in_file",
+      "file": "application-bundles/kfcor/sections/executive-summary.md",
+      "find": "# Executive summary",
+      "replace": "# Executive summary (edited by a grill PR)"
+    }
+  ]
+}

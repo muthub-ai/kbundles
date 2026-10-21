@@ -1,0 +1,57 @@
+{
+  "id": "seed-folio-web-experience",
+  "grillresult_version": 2,
+  "answers": {
+    "appid": "folio",
+    "ceremony": "standup",
+    "team": "web-experience",
+    "ceremony_date": "2026-10-19",
+    "approver": "@muthub-ai",
+    "requested_by": "@muthub-ai"
+  },
+  "generated_at": "2026-10-19T17:30:00-05:00",
+  "recap": "scenarios/recaps/folio-web-experience-standup-2026-10-19.md",
+  "meeting": {
+    "title": "web-experience daily standup",
+    "meeting_id": "fixture-folio-web-experience-2026-10-19",
+    "meeting_datetime": "2026-10-19T09:30:00-05:00"
+  },
+  "attendance": [
+    {
+      "name": "Maya C.",
+      "duration": "14m"
+    },
+    {
+      "name": "Nils O.",
+      "duration": "15m"
+    }
+  ],
+  "items": [
+    {
+      "id": "BLK-1",
+      "confidence": "medium",
+      "text": "llms.txt omits the newest playbooks because its generator reads a stale content index.",
+      "citations": [
+        {
+          "fid": "blk1",
+          "source": "s1",
+          "locator": "Agents",
+          "span": "llms.txt is missing the newest playbooks because the generator reads a stale content index."
+        }
+      ]
+    },
+    {
+      "id": "ACT-1",
+      "confidence": "medium",
+      "text": "Regenerate the content index during the build instead of committing it.",
+      "citations": [
+        {
+          "fid": "act1",
+          "source": "s1",
+          "locator": "Agents",
+          "span": "Nils will regenerate the index during the build instead of committing it."
+        }
+      ]
+    }
+  ]
+}

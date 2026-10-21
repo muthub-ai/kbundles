@@ -1,0 +1,57 @@
+{
+  "id": "seed-aacod-policy-governance",
+  "grillresult_version": 2,
+  "answers": {
+    "appid": "aacod",
+    "ceremony": "standup",
+    "team": "policy-governance",
+    "ceremony_date": "2026-10-19",
+    "approver": "@muthub-ai",
+    "requested_by": "@muthub-ai"
+  },
+  "generated_at": "2026-10-19T17:30:00+02:00",
+  "recap": "scenarios/recaps/aacod-policy-governance-standup-2026-10-19.md",
+  "meeting": {
+    "title": "policy-governance daily standup",
+    "meeting_id": "fixture-aacod-policy-governance-2026-10-19",
+    "meeting_datetime": "2026-10-19T09:30:00+02:00"
+  },
+  "attendance": [
+    {
+      "name": "Sven E.",
+      "duration": "14m"
+    },
+    {
+      "name": "Tara J.",
+      "duration": "15m"
+    }
+  ],
+  "items": [
+    {
+      "id": "BLK-1",
+      "confidence": "medium",
+      "text": "Three policy waivers expire next week without confirmed renewal from their owners.",
+      "citations": [
+        {
+          "fid": "blk1",
+          "source": "s1",
+          "locator": "Waivers",
+          "span": "three waivers expire next week and the owners have not confirmed renewal."
+        }
+      ]
+    },
+    {
+      "id": "ACT-1",
+      "confidence": "medium",
+      "text": "Open renewal reminders and mark unconfirmed waivers for expiry.",
+      "citations": [
+        {
+          "fid": "act1",
+          "source": "s1",
+          "locator": "Waivers",
+          "span": "Tara will open renewal reminders and mark unconfirmed waivers for expiry."
+        }
+      ]
+    }
+  ]
+}

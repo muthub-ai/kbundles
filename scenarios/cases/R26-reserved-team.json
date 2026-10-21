@@ -1,0 +1,7 @@
+{
+  "extends": "scenarios/cases/D01-kfcor-fabric-core-standup.json",
+  "id": "R26",
+  "answers": {
+    "team": "shared"
+  }
+}

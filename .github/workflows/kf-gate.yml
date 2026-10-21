@@ -1,0 +1,38 @@
+# kf-knowledge-gate — required check on every PR to main.
+# pull_request_target executes BASE-ref code only; the PR head is fetched and read as DATA
+# (never checked out, never executed). The verdict is a Checks-API check run named
+# "kf-knowledge-gate" so action_required → approval → success can work.
+# Demo-grade identity: GITHUB_TOKEN (GitHub Actions app). PRODUCTION.md: KF Gate App pinning.
+name: kf-knowledge-gate
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+  merge_group: {}   # dormant until a merge queue is enabled (plan O8)
+permissions: {}
+concurrency:
+  group: kf-gate-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  gate:
+    if: github.event_name == 'pull_request_target'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+      checks: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2 — BASE ref only
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b  # v5.3.0
+        with:
+          python-version: "3.12"
+      - name: Install pinned toolchain (base-ref lock)
+        run: pip install --disable-pip-version-check -r .github/kf/toolchain.lock
+      - name: Run gate
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 gate/run.py --github --pr ${{ github.event.pull_request.number }}

@@ -1,0 +1,42 @@
+{
+  "id": "D02",
+  "grillresult_version": 2,
+  "answers": {
+    "appid": "kfcor",
+    "ceremony": "standup",
+    "team": "librarian-ops",
+    "ceremony_date": "2026-10-20",
+    "approver": "@kf-approver-demo",
+    "requested_by": "@kf-writer-demo"
+  },
+  "generated_at": "2026-10-20T17:00:00-04:00",
+  "recap": "scenarios/recaps/kfcor-librarian-ops-standup-2026-10-20.md",
+  "attendance": [
+    {
+      "name": "Dev P.",
+      "duration": "14m"
+    },
+    {
+      "name": "Elif K.",
+      "duration": "14m"
+    }
+  ],
+  "items": [
+    {
+      "id": "DEC-1",
+      "confidence": "medium",
+      "text": "Keep the raised classifier threshold and record it in wiki.config.yaml.",
+      "citations": [
+        {
+          "fid": "dec1",
+          "source": "s1",
+          "locator": "Ingest",
+          "span": "Decision: keep the new threshold and record it in wiki.config.yaml."
+        }
+      ]
+    }
+  ],
+  "pr": {
+    "author": "kf-writer-demo"
+  }
+}

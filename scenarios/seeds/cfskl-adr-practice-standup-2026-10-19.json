@@ -1,0 +1,57 @@
+{
+  "id": "seed-cfskl-adr-practice",
+  "grillresult_version": 2,
+  "answers": {
+    "appid": "cfskl",
+    "ceremony": "standup",
+    "team": "adr-practice",
+    "ceremony_date": "2026-10-19",
+    "approver": "@muthub-ai",
+    "requested_by": "@muthub-ai"
+  },
+  "generated_at": "2026-10-19T17:30:00+08:00",
+  "recap": "scenarios/recaps/cfskl-adr-practice-standup-2026-10-19.md",
+  "meeting": {
+    "title": "adr-practice daily standup",
+    "meeting_id": "fixture-cfskl-adr-practice-2026-10-19",
+    "meeting_datetime": "2026-10-19T09:30:00+08:00"
+  },
+  "attendance": [
+    {
+      "name": "Yara S.",
+      "duration": "14m"
+    },
+    {
+      "name": "Zane K.",
+      "duration": "15m"
+    }
+  ],
+  "items": [
+    {
+      "id": "BLK-1",
+      "confidence": "medium",
+      "text": "adr-scribe describes a Nygard template while the shipped template uses MADR headings.",
+      "citations": [
+        {
+          "fid": "blk1",
+          "source": "s1",
+          "locator": "Template",
+          "span": "adr-scribe describes a Nygard template but the shipped template uses MADR headings."
+        }
+      ]
+    },
+    {
+      "id": "ACT-1",
+      "confidence": "medium",
+      "text": "Align the adr-scribe text with the MADR template and the validator's required sections.",
+      "citations": [
+        {
+          "fid": "act1",
+          "source": "s1",
+          "locator": "Template",
+          "span": "Zane will align the skill text with the MADR template and the validator's required sections."
+        }
+      ]
+    }
+  ]
+}

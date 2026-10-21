@@ -1,0 +1,9 @@
+{
+  "extends": "scenarios/cases/D07-kfcor-librarian-ops-refinement.json",
+  "id": "R10",
+  "tamper": [
+    {
+      "op": "fake_history"
+    }
+  ]
+}

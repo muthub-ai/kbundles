@@ -1,0 +1,45 @@
+{
+  "extends": "scenarios/cases/D01-kfcor-fabric-core-standup.json",
+  "id": "R08",
+  "items": [
+    {
+      "id": "DEC-1",
+      "confidence": "high",
+      "text": "Document the stale_after rule in the note template so new captures include it.",
+      "citations": [
+        {
+          "fid": "dec1",
+          "source": "s1",
+          "locator": "Validator",
+          "span": "Decision: document the stale_after rule in the note template so new captures include it."
+        }
+      ]
+    },
+    {
+      "id": "BLK-1",
+      "confidence": "high",
+      "text": "The publish workflow still reads the pre-rotation secret name.",
+      "citations": [
+        {
+          "fid": "blk1",
+          "source": "s1",
+          "locator": "Releases",
+          "span": "key rotation is done but the publish workflow still reads the old secret name."
+        }
+      ]
+    },
+    {
+      "id": "ACT-1",
+      "confidence": "high",
+      "text": "Rename the secret reference in publish.yml today; questions to chen.l@example.com.",
+      "citations": [
+        {
+          "fid": "act1",
+          "source": "s1",
+          "locator": "Releases",
+          "span": "Chen will rename the secret reference in publish.yml today."
+        }
+      ]
+    }
+  ]
+}

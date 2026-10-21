@@ -1,0 +1,11 @@
+{
+  "extends": "scenarios/cases/D01-kfcor-fabric-core-standup.json",
+  "id": "R17",
+  "tamper": [
+    {
+      "op": "pr",
+      "key": "branch",
+      "value": "grill/kfcor/standup/2026-10-20"
+    }
+  ]
+}

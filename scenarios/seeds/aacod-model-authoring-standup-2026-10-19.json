@@ -1,0 +1,70 @@
+{
+  "id": "seed-aacod-model-authoring",
+  "grillresult_version": 2,
+  "answers": {
+    "appid": "aacod",
+    "ceremony": "standup",
+    "team": "model-authoring",
+    "ceremony_date": "2026-10-19",
+    "approver": "@muthub-ai",
+    "requested_by": "@muthub-ai"
+  },
+  "generated_at": "2026-10-19T17:30:00-05:00",
+  "recap": "scenarios/recaps/aacod-model-authoring-standup-2026-10-19.md",
+  "meeting": {
+    "title": "model-authoring daily standup",
+    "meeting_id": "fixture-aacod-model-authoring-2026-10-19",
+    "meeting_datetime": "2026-10-19T09:30:00-05:00"
+  },
+  "attendance": [
+    {
+      "name": "Quinn H.",
+      "duration": "14m"
+    },
+    {
+      "name": "Rosa G.",
+      "duration": "15m"
+    }
+  ],
+  "items": [
+    {
+      "id": "DEC-1",
+      "confidence": "high",
+      "text": "Keep the model schema strict and migrate the two models that use the old relationship field this sprint.",
+      "citations": [
+        {
+          "fid": "dec1",
+          "source": "s1",
+          "locator": "Schema",
+          "span": "Decision: keep the schema strict and migrate the two models this sprint."
+        }
+      ]
+    },
+    {
+      "id": "STY-1",
+      "confidence": "medium",
+      "text": "As a model author, I want validation errors shown next to the node that caused them so that I can fix models in the editor.",
+      "citations": [
+        {
+          "fid": "sty1",
+          "source": "s1",
+          "locator": "Editor",
+          "span": "authors want the diagram editor to show validation errors next to the node that caused them."
+        }
+      ]
+    },
+    {
+      "id": "ACT-1",
+      "confidence": "medium",
+      "text": "Migrate the two models that still use the old relationship field name.",
+      "citations": [
+        {
+          "fid": "act1",
+          "source": "s1",
+          "locator": "Schema",
+          "span": "two system models fail validation because they use the old relationship field name."
+        }
+      ]
+    }
+  ]
+}

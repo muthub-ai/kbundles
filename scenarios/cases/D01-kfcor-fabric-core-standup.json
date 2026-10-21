@@ -1,0 +1,77 @@
+{
+  "id": "D01",
+  "grillresult_version": 2,
+  "answers": {
+    "appid": "kfcor",
+    "ceremony": "standup",
+    "team": "fabric-core",
+    "ceremony_date": "2026-10-20",
+    "approver": "@kf-approver-demo",
+    "requested_by": "@kf-writer-demo"
+  },
+  "generated_at": "2026-10-20T17:30:00-05:00",
+  "recap": "scenarios/recaps/kfcor-fabric-core-standup-2026-10-20.md",
+  "meeting": {
+    "title": "fabric-core daily standup",
+    "meeting_id": "fixture-kfcor-fabric-core-2026-10-20",
+    "meeting_datetime": "2026-10-20T09:30:00-05:00"
+  },
+  "attendance": [
+    {
+      "name": "Asha R.",
+      "duration": "15m"
+    },
+    {
+      "name": "Ben T.",
+      "duration": "15m"
+    },
+    {
+      "name": "Chen L.",
+      "duration": "12m"
+    }
+  ],
+  "items": [
+    {
+      "id": "DEC-1",
+      "confidence": "high",
+      "text": "Document the stale_after rule in the note template so new captures include it.",
+      "citations": [
+        {
+          "fid": "dec1",
+          "source": "s1",
+          "locator": "Validator",
+          "span": "Decision: document the stale_after rule in the note template so new captures include it."
+        }
+      ]
+    },
+    {
+      "id": "BLK-1",
+      "confidence": "high",
+      "text": "The publish workflow still reads the pre-rotation secret name.",
+      "citations": [
+        {
+          "fid": "blk1",
+          "source": "s1",
+          "locator": "Releases",
+          "span": "key rotation is done but the publish workflow still reads the old secret name."
+        }
+      ]
+    },
+    {
+      "id": "ACT-1",
+      "confidence": "high",
+      "text": "Rename the secret reference in publish.yml today.",
+      "citations": [
+        {
+          "fid": "act1",
+          "source": "s1",
+          "locator": "Releases",
+          "span": "Chen will rename the secret reference in publish.yml today."
+        }
+      ]
+    }
+  ],
+  "pr": {
+    "author": "kf-writer-demo"
+  }
+}

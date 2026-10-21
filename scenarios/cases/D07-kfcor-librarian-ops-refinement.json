@@ -1,0 +1,32 @@
+{
+  "id": "D07",
+  "grillresult_version": 2,
+  "answers": {
+    "appid": "kfcor",
+    "ceremony": "backlog-refinement",
+    "team": "librarian-ops",
+    "ceremony_date": "2026-10-20",
+    "approver": "@kf-approver-demo",
+    "requested_by": "@kf-writer-demo"
+  },
+  "generated_at": "2026-10-20T17:00:00-04:00",
+  "recap": "scenarios/recaps/kfcor-librarian-ops-backlog-refinement-2026-10-20.md",
+  "items": [
+    {
+      "id": "STY-1",
+      "confidence": "medium",
+      "text": "As a curator, I want a dry-run mode for the weekly job so that I can review planned edits before anything is written.",
+      "citations": [
+        {
+          "fid": "sty1",
+          "source": "s1",
+          "locator": "Stories",
+          "span": "curators want a dry-run mode for the weekly job that reports planned edits without writing."
+        }
+      ]
+    }
+  ],
+  "pr": {
+    "author": "kf-writer-demo"
+  }
+}

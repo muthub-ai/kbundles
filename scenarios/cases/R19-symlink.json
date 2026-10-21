@@ -1,0 +1,11 @@
+{
+  "extends": "scenarios/cases/D01-kfcor-fabric-core-standup.json",
+  "id": "R19",
+  "tamper": [
+    {
+      "op": "symlink",
+      "path": "application-bundles/kfcor/knowledge-sources/agile-ceremonies/standup/fabric-core/latest.md",
+      "target": "standup_2026-10-20.md"
+    }
+  ]
+}

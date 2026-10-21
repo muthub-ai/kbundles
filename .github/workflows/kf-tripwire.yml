@@ -1,0 +1,18 @@
+# Post-merge tripwire: re-lint main after every push. Alert-only (warnings + summary), never blocks.
+name: kf-tripwire
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  lint-main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+      - uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b  # v5.3.0
+        with:
+          python-version: "3.12"
+      - run: pip install --disable-pip-version-check -r .github/kf/toolchain.lock
+      - name: Lint every bundle on main
+        run: python3 tools/tripwire.py

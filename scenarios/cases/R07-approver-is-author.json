@@ -1,0 +1,7 @@
+{
+  "extends": "scenarios/cases/D01-kfcor-fabric-core-standup.json",
+  "id": "R07",
+  "answers": {
+    "approver": "@kf-writer-demo"
+  }
+}

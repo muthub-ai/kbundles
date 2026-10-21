@@ -1,0 +1,10 @@
+{
+  "extends": "scenarios/cases/D01-kfcor-fabric-core-standup.json",
+  "id": "R16",
+  "answers": {
+    "ceremony_date": "2026-10-23"
+  },
+  "meeting": {
+    "meeting_datetime": "2026-10-23T09:30:00-05:00"
+  }
+}

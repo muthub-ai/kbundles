@@ -1,0 +1,9 @@
+{
+  "extends": "scenarios/cases/D01-kfcor-fabric-core-standup.json",
+  "id": "R09",
+  "tamper": [
+    {
+      "op": "reserialize_manifest"
+    }
+  ]
+}

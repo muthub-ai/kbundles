@@ -1,0 +1,73 @@
+{
+  "id": "D06",
+  "grillresult_version": 2,
+  "answers": {
+    "appid": "kfsit",
+    "ceremony": "retro",
+    "team": "site-build",
+    "ceremony_date": "2026-10-17",
+    "approver": "@kf-approver-demo",
+    "requested_by": "@kf-writer-demo"
+  },
+  "generated_at": "2026-10-17T16:00:00-05:00",
+  "recap": "scenarios/recaps/kfsit-site-build-retro-2026-10-17.md",
+  "extra": {
+    "Went well": [
+      {
+        "text": "The pinned Quartz bump landed with no broken pages.",
+        "citations": [
+          {
+            "fid": "well1",
+            "source": "s1",
+            "locator": "Went well",
+            "span": "The pinned Quartz bump landed without a single broken page."
+          }
+        ]
+      }
+    ],
+    "To improve": [
+      {
+        "text": "Preview failures still look like successful deploys.",
+        "citations": [
+          {
+            "fid": "imp1",
+            "source": "s1",
+            "locator": "To improve",
+            "span": "Preview failures still look like green deploys in Vercel."
+          }
+        ]
+      }
+    ]
+  },
+  "items": [
+    {
+      "id": "ACT-1",
+      "confidence": "high",
+      "text": "Make the preview script exit non-zero on a failed build.",
+      "citations": [
+        {
+          "fid": "act1",
+          "source": "s1",
+          "locator": "Actions",
+          "span": "Ivan will make the preview script exit non-zero on a failed build."
+        }
+      ]
+    },
+    {
+      "id": "RSK-1",
+      "confidence": "medium",
+      "text": "A misleading preview could let a broken site be approved by eye.",
+      "citations": [
+        {
+          "fid": "rsk1",
+          "source": "s1",
+          "locator": "Risks",
+          "span": "If preview stays misleading, a broken site could be approved by eye."
+        }
+      ]
+    }
+  ],
+  "pr": {
+    "author": "kf-writer-demo"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "id": "seed-kfcor-fabric-core",
+  "grillresult_version": 2,
+  "answers": {
+    "appid": "kfcor",
+    "ceremony": "standup",
+    "team": "fabric-core",
+    "ceremony_date": "2026-10-19",
+    "approver": "@muthub-ai",
+    "requested_by": "@muthub-ai"
+  },
+  "generated_at": "2026-10-19T17:30:00-05:00",
+  "recap": "scenarios/recaps/kfcor-fabric-core-standup-2026-10-19.md",
+  "meeting": {
+    "title": "fabric-core daily standup",
+    "meeting_id": "fixture-kfcor-fabric-core-2026-10-19",
+    "meeting_datetime": "2026-10-19T09:30:00-05:00"
+  },
+  "attendance": [
+    {
+      "name": "Asha R.",
+      "duration": "14m"
+    },
+    {
+      "name": "Ben T.",
+      "duration": "15m"
+    },
+    {
+      "name": "Chen L.",
+      "duration": "16m"
+    }
+  ],
+  "items": [
+    {
+      "id": "DEC-1",
+      "confidence": "high",
+      "text": "Keep the stale_after requirement strict in kb check and fix the three inbox drafts instead of relaxing the schema.",
+      "citations": [
+        {
+          "fid": "dec1",
+          "source": "s1",
+          "locator": "Validator",
+          "span": "We agreed to keep the rule strict and fix the drafts rather than relax the schema."
+        }
+      ]
+    },
+    {
+      "id": "BLK-1",
+      "confidence": "high",
+      "text": "Release publishing is blocked until the GitHub App private key rotation is complete.",
+      "citations": [
+        {
+          "fid": "blk1",
+          "source": "s1",
+          "locator": "Releases",
+          "span": "the publish workflow is blocked because the GitHub App private key rotation is not done yet."
+        }
+      ]
+    },
+    {
+      "id": "ACT-1",
+      "confidence": "high",
+      "text": "Rotate the GitHub App key and update the repository secret before Wednesday.",
+      "citations": [
+        {
+          "fid": "act1",
+          "source": "s1",
+          "locator": "Releases",
+          "span": "Chen will rotate the key and update the repository secret before Wednesday."
+        }
+      ]
+    }
+  ]
+}

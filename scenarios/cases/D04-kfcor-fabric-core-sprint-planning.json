@@ -1,0 +1,47 @@
+{
+  "id": "D04",
+  "grillresult_version": 2,
+  "answers": {
+    "appid": "kfcor",
+    "ceremony": "sprint-planning",
+    "team": "fabric-core",
+    "ceremony_date": "2026-10-20",
+    "approver": "@kf-approver-demo",
+    "requested_by": "@kf-writer-demo"
+  },
+  "generated_at": "2026-10-20T16:00:00-05:00",
+  "recap": "scenarios/recaps/kfcor-fabric-core-sprint-planning-2026-10-20.md",
+  "extra": {
+    "Sprint goal": [
+      {
+        "text": "Ship strict stale_after validation with a migration guide.",
+        "citations": [
+          {
+            "fid": "goal",
+            "source": "s1",
+            "locator": "Goal",
+            "span": "Sprint goal: Ship strict stale_after validation with a migration guide."
+          }
+        ]
+      }
+    ]
+  },
+  "items": [
+    {
+      "id": "DEC-1",
+      "confidence": "high",
+      "text": "Commit to the sprint goal and one supporting reviewer story.",
+      "citations": [
+        {
+          "fid": "dec1",
+          "source": "s1",
+          "locator": "Commitments",
+          "span": "The team committed to the goal and to one supporting story for reviewers."
+        }
+      ]
+    }
+  ],
+  "pr": {
+    "author": "kf-writer-demo"
+  }
+}

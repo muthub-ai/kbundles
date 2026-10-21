@@ -1,0 +1,59 @@
+# kbundles trust root — CODE-OWNER REVIEW REQUIRED (see .github/CODEOWNERS).
+# The gate reads this file from the BASE ref only, so a PR can never change
+# the registry, teams, owners or fallback approvers that judge it.
+schema: kf-trust-root/1
+repo: muthub-ai/kbundles
+code_owners: [muthub-ai]
+reserved_appids: [index, admin, other, appbd, dombd, prcbd]
+reserved_team_slugs: [index, log, all, shared, archive, standup, sprint-planning, backlog-refinement, retro]
+ceremonies: [standup, sprint-planning, backlog-refinement, retro]
+require_synthetic: true            # this prototype's meetings and teams are fabricated
+revert_fallback_approvers: [muthub-ai]
+appids:
+  kfcor:
+    title: Knowledge Foundation core
+    repo: muthub-ai/knowledge-foundation
+    repo_id: 1423734395
+    owners: [muthub-ai]
+    teams:
+      fabric-core: {timezone: America/Chicago}
+      librarian-ops: {timezone: America/New_York}
+      graph-platform: {timezone: Asia/Kolkata}
+    aliases: {}
+  kfsit:
+    title: Knowledge Foundation site
+    repo: muthub-ai/knowledge-foundation-site
+    repo_id: 1423734759
+    owners: [muthub-ai]
+    teams:
+      site-build: {timezone: America/Chicago}
+      explorer-ux: {timezone: Europe/London}
+    aliases: {}
+  folio:
+    title: Portfolio website (muthub.org)
+    repo: muthub-ai/muthu-v0-portfolio-website
+    repo_id: 1048024227
+    owners: [muthub-ai]
+    teams:
+      web-experience: {timezone: America/Chicago}
+      content-ops: {timezone: America/Los_Angeles}
+    aliases: {}
+  aacod:
+    title: Architecture as Code
+    repo: muthub-ai/aac
+    repo_id: 1175682613
+    owners: [muthub-ai]
+    teams:
+      model-authoring: {timezone: America/Chicago}
+      policy-governance: {timezone: Europe/Berlin}
+      mcp-integrations: {timezone: Australia/Sydney}
+    aliases: {}
+  cfskl:
+    title: C4 skills
+    repo: muthub-ai/c4-skills
+    repo_id: 1221298791
+    owners: [muthub-ai]
+    teams:
+      skill-authoring: {timezone: America/Chicago}
+      adr-practice: {timezone: Asia/Singapore}
+    aliases: {}

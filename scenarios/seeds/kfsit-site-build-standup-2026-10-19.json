@@ -1,0 +1,70 @@
+{
+  "id": "seed-kfsit-site-build",
+  "grillresult_version": 2,
+  "answers": {
+    "appid": "kfsit",
+    "ceremony": "standup",
+    "team": "site-build",
+    "ceremony_date": "2026-10-19",
+    "approver": "@muthub-ai",
+    "requested_by": "@muthub-ai"
+  },
+  "generated_at": "2026-10-19T17:30:00-05:00",
+  "recap": "scenarios/recaps/kfsit-site-build-standup-2026-10-19.md",
+  "meeting": {
+    "title": "site-build daily standup",
+    "meeting_id": "fixture-kfsit-site-build-2026-10-19",
+    "meeting_datetime": "2026-10-19T09:30:00-05:00"
+  },
+  "attendance": [
+    {
+      "name": "Ivan D.",
+      "duration": "14m"
+    },
+    {
+      "name": "Jo W.",
+      "duration": "15m"
+    }
+  ],
+  "items": [
+    {
+      "id": "DEC-1",
+      "confidence": "high",
+      "text": "Keep the GitHub check as the sole merge gate until the preview build fails with a non-zero exit.",
+      "citations": [
+        {
+          "fid": "dec1",
+          "source": "s1",
+          "locator": "Preview",
+          "span": "We agreed the GitHub check stays the only merge gate until the preview script fails properly."
+        }
+      ]
+    },
+    {
+      "id": "BLK-1",
+      "confidence": "medium",
+      "text": "Failed preview builds exit zero and render their log as the page, so they look like successful deploys.",
+      "citations": [
+        {
+          "fid": "blk1",
+          "source": "s1",
+          "locator": "Preview",
+          "span": "a failed preview build exits zero and shows its log as the page, which looks like a good deploy."
+        }
+      ]
+    },
+    {
+      "id": "ACT-1",
+      "confidence": "medium",
+      "text": "Bump quartz.ref to the next pinned commit and run the full page check.",
+      "citations": [
+        {
+          "fid": "act1",
+          "source": "s1",
+          "locator": "Quartz",
+          "span": "Jo will bump quartz.ref to the next pinned commit and run the full page check."
+        }
+      ]
+    }
+  ]
+}

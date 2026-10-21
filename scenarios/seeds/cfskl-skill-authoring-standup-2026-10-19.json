@@ -1,0 +1,57 @@
+{
+  "id": "seed-cfskl-skill-authoring",
+  "grillresult_version": 2,
+  "answers": {
+    "appid": "cfskl",
+    "ceremony": "standup",
+    "team": "skill-authoring",
+    "ceremony_date": "2026-10-19",
+    "approver": "@muthub-ai",
+    "requested_by": "@muthub-ai"
+  },
+  "generated_at": "2026-10-19T17:30:00-05:00",
+  "recap": "scenarios/recaps/cfskl-skill-authoring-standup-2026-10-19.md",
+  "meeting": {
+    "title": "skill-authoring daily standup",
+    "meeting_id": "fixture-cfskl-skill-authoring-2026-10-19",
+    "meeting_datetime": "2026-10-19T09:30:00-05:00"
+  },
+  "attendance": [
+    {
+      "name": "Wen Y.",
+      "duration": "14m"
+    },
+    {
+      "name": "Xavi M.",
+      "duration": "15m"
+    }
+  ],
+  "items": [
+    {
+      "id": "DEC-1",
+      "confidence": "high",
+      "text": "Quote every skill description and add a real YAML parse of SKILL.md frontmatter to the test suite.",
+      "citations": [
+        {
+          "fid": "dec1",
+          "source": "s1",
+          "locator": "Frontmatter",
+          "span": "We agreed to quote every skill description and add a YAML parse to the test suite."
+        }
+      ]
+    },
+    {
+      "id": "BLK-1",
+      "confidence": "high",
+      "text": "The c4designer SKILL.md frontmatter does not parse because its description contains unquoted colons.",
+      "citations": [
+        {
+          "fid": "blk1",
+          "source": "s1",
+          "locator": "Frontmatter",
+          "span": "c4designer SKILL.md frontmatter does not parse because the description contains unquoted colons."
+        }
+      ]
+    }
+  ]
+}

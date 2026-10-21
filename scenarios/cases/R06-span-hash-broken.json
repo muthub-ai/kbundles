@@ -1,0 +1,12 @@
+{
+  "extends": "scenarios/cases/D01-kfcor-fabric-core-standup.json",
+  "id": "R06",
+  "tamper": [
+    {
+      "op": "break_span",
+      "fid": "blk1",
+      "find": "still reads the old secret name",
+      "replace": "reads the new secret name"
+    }
+  ]
+}

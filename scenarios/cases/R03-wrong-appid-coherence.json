@@ -1,0 +1,12 @@
+{
+  "extends": "scenarios/cases/D01-kfcor-fabric-core-standup.json",
+  "id": "R03",
+  "tamper": [
+    {
+      "op": "replace_in_file",
+      "file": "ceremony",
+      "find": "  appid: kfcor",
+      "replace": "  appid: kfsit"
+    }
+  ]
+}

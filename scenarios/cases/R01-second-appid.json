@@ -1,0 +1,11 @@
+{
+  "extends": "scenarios/cases/D01-kfcor-fabric-core-standup.json",
+  "id": "R01",
+  "tamper": [
+    {
+      "op": "add_file",
+      "path": "application-bundles/kfsit/sections/notes.md",
+      "content": "stray edit in another app\n"
+    }
+  ]
+}

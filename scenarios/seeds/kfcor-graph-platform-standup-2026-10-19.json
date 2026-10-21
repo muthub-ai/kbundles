@@ -1,0 +1,74 @@
+{
+  "id": "seed-kfcor-graph-platform",
+  "grillresult_version": 2,
+  "answers": {
+    "appid": "kfcor",
+    "ceremony": "standup",
+    "team": "graph-platform",
+    "ceremony_date": "2026-10-19",
+    "approver": "@muthub-ai",
+    "requested_by": "@muthub-ai"
+  },
+  "generated_at": "2026-10-19T17:30:00+05:30",
+  "recap": "scenarios/recaps/kfcor-graph-platform-standup-2026-10-19.md",
+  "meeting": {
+    "title": "graph-platform daily standup",
+    "meeting_id": "fixture-kfcor-graph-platform-2026-10-19",
+    "meeting_datetime": "2026-10-19T09:30:00+05:30"
+  },
+  "attendance": [
+    {
+      "name": "Farah N.",
+      "duration": "14m"
+    },
+    {
+      "name": "Gopal S.",
+      "duration": "15m"
+    },
+    {
+      "name": "Hana M.",
+      "duration": "16m"
+    }
+  ],
+  "items": [
+    {
+      "id": "DEC-1",
+      "confidence": "high",
+      "text": "Move the build timestamp out of graph.json into report.md so identical releases produce identical graphs.",
+      "citations": [
+        {
+          "fid": "dec1",
+          "source": "s1",
+          "locator": "Determinism",
+          "span": "We decided to keep layout seeds fixed and move the timestamp into report.md only."
+        }
+      ]
+    },
+    {
+      "id": "STY-1",
+      "confidence": "medium",
+      "text": "As a reader, I want to toggle machine-suggested relations separately from authored edges so that I can tell them apart.",
+      "citations": [
+        {
+          "fid": "sty1",
+          "source": "s1",
+          "locator": "Explorer",
+          "span": "the site wants a toggle that shows machine-suggested relations separately from authored edges."
+        }
+      ]
+    },
+    {
+      "id": "ACT-1",
+      "confidence": "medium",
+      "text": "Draft the relation-toggle story jointly with the site team this week.",
+      "citations": [
+        {
+          "fid": "act1",
+          "source": "s1",
+          "locator": "Explorer",
+          "span": "Farah will draft the story with the site team this week."
+        }
+      ]
+    }
+  ]
+}

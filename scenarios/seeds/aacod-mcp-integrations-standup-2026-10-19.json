@@ -1,0 +1,57 @@
+{
+  "id": "seed-aacod-mcp-integrations",
+  "grillresult_version": 2,
+  "answers": {
+    "appid": "aacod",
+    "ceremony": "standup",
+    "team": "mcp-integrations",
+    "ceremony_date": "2026-10-19",
+    "approver": "@muthub-ai",
+    "requested_by": "@muthub-ai"
+  },
+  "generated_at": "2026-10-19T17:30:00+11:00",
+  "recap": "scenarios/recaps/aacod-mcp-integrations-standup-2026-10-19.md",
+  "meeting": {
+    "title": "mcp-integrations daily standup",
+    "meeting_id": "fixture-aacod-mcp-integrations-2026-10-19",
+    "meeting_datetime": "2026-10-19T09:30:00+11:00"
+  },
+  "attendance": [
+    {
+      "name": "Uma Z.",
+      "duration": "14m"
+    },
+    {
+      "name": "Vik R.",
+      "duration": "15m"
+    }
+  ],
+  "items": [
+    {
+      "id": "DEC-1",
+      "confidence": "high",
+      "text": "Stream validation results from the MCP validate tool instead of returning one large response.",
+      "citations": [
+        {
+          "fid": "dec1",
+          "source": "s1",
+          "locator": "MCP",
+          "span": "We decided to stream validation results instead of returning one large response."
+        }
+      ]
+    },
+    {
+      "id": "BLK-1",
+      "confidence": "medium",
+      "text": "The MCP server's validate tool times out on the largest model in CI.",
+      "citations": [
+        {
+          "fid": "blk1",
+          "source": "s1",
+          "locator": "MCP",
+          "span": "the MCP server's validate tool times out on the largest model in CI."
+        }
+      ]
+    }
+  ]
+}

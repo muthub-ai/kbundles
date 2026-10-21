@@ -1,0 +1,57 @@
+{
+  "id": "seed-kfsit-explorer-ux",
+  "grillresult_version": 2,
+  "answers": {
+    "appid": "kfsit",
+    "ceremony": "standup",
+    "team": "explorer-ux",
+    "ceremony_date": "2026-10-19",
+    "approver": "@muthub-ai",
+    "requested_by": "@muthub-ai"
+  },
+  "generated_at": "2026-10-19T17:30:00+01:00",
+  "recap": "scenarios/recaps/kfsit-explorer-ux-standup-2026-10-19.md",
+  "meeting": {
+    "title": "explorer-ux daily standup",
+    "meeting_id": "fixture-kfsit-explorer-ux-2026-10-19",
+    "meeting_datetime": "2026-10-19T09:30:00+01:00"
+  },
+  "attendance": [
+    {
+      "name": "Kofi A.",
+      "duration": "14m"
+    },
+    {
+      "name": "Lena B.",
+      "duration": "15m"
+    }
+  ],
+  "items": [
+    {
+      "id": "STY-1",
+      "confidence": "high",
+      "text": "As a keyboard user, I want to move between neighbouring nodes in the explorer so that the graph is usable without a mouse.",
+      "citations": [
+        {
+          "fid": "sty1",
+          "source": "s1",
+          "locator": "Navigation",
+          "span": "keyboard users cannot move between neighbouring nodes in the explorer."
+        }
+      ]
+    },
+    {
+      "id": "ACT-1",
+      "confidence": "low",
+      "text": "Correct the explorer.ts header comment that says node positions are precomputed.",
+      "citations": [
+        {
+          "fid": "act1",
+          "source": "s1",
+          "locator": "Navigation",
+          "span": "the layout comment in explorer.ts still says positions are precomputed, which misled a reviewer."
+        }
+      ]
+    }
+  ]
+}

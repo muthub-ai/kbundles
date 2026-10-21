@@ -1,0 +1,57 @@
+{
+  "id": "seed-folio-content-ops",
+  "grillresult_version": 2,
+  "answers": {
+    "appid": "folio",
+    "ceremony": "standup",
+    "team": "content-ops",
+    "ceremony_date": "2026-10-19",
+    "approver": "@muthub-ai",
+    "requested_by": "@muthub-ai"
+  },
+  "generated_at": "2026-10-19T17:30:00-07:00",
+  "recap": "scenarios/recaps/folio-content-ops-standup-2026-10-19.md",
+  "meeting": {
+    "title": "content-ops daily standup",
+    "meeting_id": "fixture-folio-content-ops-2026-10-19",
+    "meeting_datetime": "2026-10-19T09:30:00-07:00"
+  },
+  "attendance": [
+    {
+      "name": "Omar F.",
+      "duration": "14m"
+    },
+    {
+      "name": "Priya V.",
+      "duration": "15m"
+    }
+  ],
+  "items": [
+    {
+      "id": "DEC-1",
+      "confidence": "high",
+      "text": "Updated dates may never precede published dates; the content integrity check stays blocking.",
+      "citations": [
+        {
+          "fid": "dec1",
+          "source": "s1",
+          "locator": "Integrity",
+          "span": "We decided that updated dates must never precede published dates and the check stays blocking."
+        }
+      ]
+    },
+    {
+      "id": "BLK-1",
+      "confidence": "low",
+      "text": "One essay has an updated date earlier than its published date and fails the integrity check.",
+      "citations": [
+        {
+          "fid": "blk1",
+          "source": "s1",
+          "locator": "Integrity",
+          "span": "the content integrity check flagged an essay whose updated date is earlier than its published date."
+        }
+      ]
+    }
+  ]
+}
