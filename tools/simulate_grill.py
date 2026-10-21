@@ -295,6 +295,14 @@ def simulate(sc: dict, repo: str, base: str, mode: str, refresh: bool = False) -
     return r
 
 
+def author_check(prs: list[dict], me: str, branch: str) -> None:
+    """Spec §7.2 step 1 / E6: never clobber someone else's open PR on the deterministic branch.
+    (A bare --force-with-lease would NOT protect it: the preceding fetch makes the lease match.)"""
+    if prs and prs[0]["user"]["login"].lower() != me.lower():
+        raise SimError(f"open PR #{prs[0]['number']} on {branch} belongs to @{prs[0]['user']['login']} — "
+                       "aborting (author check, E6); coordinate instead of clobbering")
+
+
 def push_and_open(repo: str, r: dict, sc: dict) -> None:
     """Spec §7.2: author check → explicit-SHA lease → open or update the PR (live only)."""
     full = git(repo, "remote", "get-url", "origin").rstrip("/").removesuffix(".git").split("github.com/")[-1]
@@ -302,9 +310,7 @@ def push_and_open(repo: str, r: dict, sc: dict) -> None:
     res = subprocess.run(["gh", "api", f"repos/{full}/pulls?head={full.split('/')[0]}:{r['branch']}&state=open"],
                          capture_output=True, text=True)
     prs = json.loads(res.stdout or "[]") if res.returncode == 0 else []
-    if prs and prs[0]["user"]["login"].lower() != me.lower():
-        raise SimError(f"open PR #{prs[0]['number']} on {r['branch']} belongs to @{prs[0]['user']['login']} — "
-                       "aborting (author check, E6); coordinate instead of clobbering")
+    author_check(prs, me, r["branch"])
     remote = git(repo, "ls-remote", "origin", f"refs/heads/{r['branch']}").split("\t")[0]
     git(repo, "push", "-q", f"--force-with-lease=refs/heads/{r['branch']}:{remote}", "--force-if-includes",
         "origin", f"HEAD:refs/heads/{r['branch']}")

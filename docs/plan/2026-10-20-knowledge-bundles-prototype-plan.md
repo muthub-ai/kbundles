@@ -236,3 +236,16 @@ Canonical code lives in `skills/building-application-bundles/scripts/` (versione
 ## Appendix A — Review & confirmation record
 
 Independent reviewer: Claude Opus 5.5 (same reviewer as spec v0.1→v0.4). Round 1: 18 findings (P1 CRITICAL trust‑root unprotected / fail‑open `other` class; P2–P4, P6, P7, P9, P10, P13, P14 HIGH; P5, P8, P11, P12, P15–P17 MEDIUM/LOW; P18 GOOD list) — all adopted. Confirm round: **C1** (factual vs. Assessment blocks) accepted with reviewer's tightened rule (block definition incl. list items/table rows, no-new-footnote rule, ≥1 factual block, ≤50% assessments, advisory entailment); **C2** (G11 mechanics) accepted with base‑ref `toolchain.lock` comparison and single data‑only fetch serving both citation checks and the extractor re‑run; **C3** (bootstrap recommendation vs. owner's original choice) agreed as presented in §7/§13‑5, with the identities dependency stated. Reviewer verdict: **CONFIRMED** at v0.2.
+
+---
+
+## As-built deviations (2026-10-20)
+
+Recorded after implementation. The plan text above is unchanged; these notes record where the build departed from it, and why.
+
+- **Shared library location.** The canonical library is `skills/building-application-bundles/scripts/kfbundle/`, which the gate imports. There is no top-level `kf_lint/`. This keeps the skill self-contained for reuse in other repositories, and leaves one copy of the lint rules.
+- **Added a `tooling` PR class.** Changes under `.github/`, `gate/`, `tools/`, `skills/` and `scenarios/` are their own class, and a code owner must approve them. Mixing tooling changes with knowledge changes is still `unknown` and fails closed.
+- **Gate layout.** The engine and plumbing live in `gate/kfgate/`, with one module per gate in `gate/gates/`. The entry point is `gate/run.py`, which has a local mode and a GitHub mode.
+- **Live PRs are red paths only.** The repository has one real identity. Green, approval, merge, refresh and revert paths are therefore proven in the fixture matrix (`scenarios/run_fixtures.py`, 40 scenarios) with fixture identities. The ten live PRs (`scenarios/open_live_prs.py`) each also show G7.
+- **No KF Gate App.** The check run is posted by the GitHub Actions app. The App, the rulesets and the forgery fix are specified in `PRODUCTION.md`.
+- **Bootstrap re-verification.** `tools/bootstrap.py --reverify` re-judges every bootstrap commit using the current gate code. All 17 steps are `bootstrap-ok`.

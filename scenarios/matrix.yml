@@ -1,0 +1,328 @@
+# Scenario matrix — the single source of truth for the demo gallery (plan §8).
+# Every scenario names the spec v0.4 acceptance criterion (§13 #n) or plan decision it proves.
+# run_fixtures.py replays all of them in gate local mode; open_live_prs.py opens the `live: true`
+# ones as real PRs. README's matrix is generated from this file (run_fixtures.py --write-readme).
+schema: kf-scenario-matrix/1
+identities: scenarios/fixtures/identities.yml
+default_now: "2026-10-20T23:00:00Z"
+scenarios:
+  # ------------------------------------------------------------------ green paths
+  - id: F01
+    title: Standup awaits the named approver; another writer's approval does not count; named approval passes
+    criterion: "§13 #2, #3 · I3 · S first-contribution warn"
+    steps:
+      - simulate: {scenario: scenarios/cases/D01-kfcor-fabric-core-standup.json}
+      - gate: {expect: action_required, class: ceremony, warns: [S]}
+      - review: {user: kf-writer-demo}
+      - gate: {expect: action_required}
+      - review: {user: kf-approver-demo}
+      - gate: {expect: success}
+  - id: F02
+    title: Rerun for the same meeting updates the same branch — no duplicate PRs
+    criterion: "§13 #8 · I2 · D13"
+    steps:
+      - simulate: {scenario: scenarios/cases/D01-kfcor-fabric-core-standup.json}
+      - refresh: {scenario: scenarios/cases/D01b-kfcor-fabric-core-standup-rerun.json}
+      - gate: {expect: action_required}
+  - id: F03
+    title: Three established kfcor teams land same-day standups — zero conflicts, zero refresh, zero re-approval
+    criterion: "§13 #7a · I9 (team isolation)"
+    steps:
+      - simulate: {scenario: scenarios/cases/D01-kfcor-fabric-core-standup.json, as: a}
+      - simulate: {scenario: scenarios/cases/D02-kfcor-librarian-ops-standup.json, as: b}
+      - simulate: {scenario: scenarios/cases/D03-kfcor-graph-platform-standup.json, as: c}
+      - review: {of: a, user: kf-approver-demo}
+      - review: {of: b, user: kf-approver-demo}
+      - review: {of: c, user: kf-approver-demo}
+      - gate: {of: a, expect: success}
+      - merge: {of: a}
+      - gate: {of: b, expect: success}
+      - merge: {of: b}
+      - gate: {of: c, expect: success}
+      - merge: {of: c}
+  - id: F04
+    title: Two teams' FIRST sprint-planning entries share a manifest gap — one conflict, one --refresh, approval survives
+    criterion: "§13 #7b, #8 · I8 (content-bound approval)"
+    steps:
+      - simulate: {scenario: scenarios/cases/D04-kfcor-fabric-core-sprint-planning.json, as: a}
+      - simulate: {scenario: scenarios/cases/D05-kfcor-graph-platform-sprint-planning.json, as: b}
+      - review: {of: a, user: kf-approver-demo}
+      - review: {of: b, user: kf-approver-demo}
+      - merge: {of: a}
+      - merge: {of: b, expect_conflict: true}
+      - refresh: {of: b}
+      - gate: {of: b, expect: success}
+      - merge: {of: b}
+  - id: F05
+    title: --refresh two days after approval keeps the approval (dates frozen in the GrillResult)
+    criterion: "§13 #8 · determinism rule §8.2"
+    steps:
+      - simulate: {scenario: scenarios/cases/D01-kfcor-fabric-core-standup.json, as: a}
+      - review: {of: a, user: kf-approver-demo}
+      - simulate: {scenario: scenarios/cases/D02-kfcor-librarian-ops-standup.json, as: other}
+      - merge: {of: other}
+      - refresh: {of: a}
+      - gate: {of: a, expect: success, now: "2026-10-22T23:00:00Z"}
+  - id: F06
+    title: Retro profile with Went well / To improve / ACT / RSK passes
+    criterion: "§5.2 ceremony profiles"
+    steps:
+      - simulate: {scenario: scenarios/cases/D06-kfsit-site-build-retro.json}
+      - gate: {expect: action_required}
+  - id: F07
+    title: Valid revert — semantic inverse of a merged ceremony PR, approved by the original approver
+    criterion: "§13 #11 · §8.5 revert class"
+    steps:
+      - simulate: {scenario: scenarios/cases/D02-kfcor-librarian-ops-standup.json, as: a}
+      - review: {of: a, user: kf-approver-demo}
+      - merge: {of: a}
+      - revert: {of: a, as: rv, reason: "fixture removal of sensitive content"}
+      - gate: {of: rv, expect: action_required, class: revert}
+      - review: {of: rv, user: kf-approver-demo}
+      - gate: {of: rv, expect: success}
+  - id: F08
+    title: Bundle update — citations verified at the pinned SHA, graph reproduced, owner approves
+    criterion: "D18 bundle-update class · G6-bundle · G11"
+    steps:
+      - bundle_edit:
+          appid: kfcor
+          ops:
+            - {op: replace, file: sections/executive-summary.md, find: "## Why it matters\n",
+               replace: "## Why it matters\n\nThe site repository is a separate consumer that builds only from release assets.[^readme-repos]\n\n"}
+      - gate: {expect: action_required, class: bundle-update}
+      - review: {user: muthub-ai}
+      - gate: {expect: success}
+  - id: F09
+    title: Trust-root/tooling change needs a code owner's approval
+    criterion: "plan §6.1 tooling class · P1"
+    steps:
+      - edit: {branch: tooling/fixture-note, ops: [{op: write, file: scenarios/NOTES.md, content: "fixture note\n"}]}
+      - gate: {expect: action_required, class: tooling}
+      - review: {user: muthub-ai}
+      - gate: {expect: success}
+  - id: F10
+    title: Docs-only change passes without approval
+    criterion: "plan §6.1 other class"
+    steps:
+      - edit: {branch: docs/fixture-note, ops: [{op: write, file: docs/fixture-note.md, content: "note\n"}]}
+      - gate: {expect: success, class: other}
+  - id: F11
+    title: Zero findings — no file, no PR
+    criterion: "§13 #10 · I7"
+    steps:
+      - zero: {scenario: scenarios/cases/Z01-zero-findings.json}
+  - id: F12
+    title: Clobber protection — the safe-push author check aborts on someone else's open PR
+    criterion: "§7.2 step 1 · E6"
+    steps:
+      - unit: {check: author_check}
+  # ------------------------------------------------------------------ red paths: ceremony class
+  - id: R01
+    title: Ceremony PR also touches a second appid
+    criterion: "§13 #5 · G1"
+    live: true
+    steps:
+      - simulate: {scenario: scenarios/cases/R01-second-appid.json}
+      - gate: {expect: failure, gates: [G1]}
+  - id: R02
+    title: Ceremony PR edits a bundle section (out of allowlist)
+    criterion: "§13 #5 · G1"
+    steps:
+      - simulate: {scenario: scenarios/cases/R02-out-of-allowlist.json}
+      - gate: {expect: failure, gates: [G1]}
+  - id: R03
+    title: Wrong-appid coherence — path says kfcor, frontmatter says kfsit
+    criterion: "D19 · G3"
+    live: true
+    steps:
+      - simulate: {scenario: scenarios/cases/R03-wrong-appid-coherence.json}
+      - gate: {expect: failure, gates: [G3]}
+  - id: R04
+    title: Unregistered appid folder
+    criterion: "D19 registry · G3"
+    steps:
+      - simulate: {scenario: scenarios/cases/R04-unregistered-appid.json}
+      - gate: {expect: failure, gates: [G3]}
+  - id: R05
+    title: Team not registered under the appid (team→appid binding)
+    criterion: "D19 · G3 hard binding"
+    live: true
+    steps:
+      - simulate: {scenario: scenarios/cases/R05-team-not-under-appid.json}
+      - gate: {expect: failure, gates: [G3]}
+  - id: R06
+    title: Evidence span tampered — hash no longer matches
+    criterion: "§13 #5 · G6"
+    live: true
+    steps:
+      - simulate: {scenario: scenarios/cases/R06-span-hash-broken.json}
+      - gate: {expect: failure, gates: [G6]}
+  - id: R07
+    title: Approver is the PR author
+    criterion: "§13 #5 · G7"
+    steps:
+      - simulate: {scenario: scenarios/cases/R07-approver-is-author.json}
+      - gate: {expect: failure, gates: [G7]}
+  - id: R08
+    title: Email address in knowledge text
+    criterion: "§13 #5 · G9"
+    live: true
+    steps:
+      - simulate: {scenario: scenarios/cases/R08-pii-email.json}
+      - gate: {expect: failure, gates: [G9]}
+  - id: R09
+    title: Manifest re-serialized (parse→stringify) instead of byte-spliced
+    criterion: "§13 #6 · G4 byte-splice"
+    live: true
+    steps:
+      - simulate: {scenario: scenarios/cases/R09-manifest-reserialized.json}
+      - gate: {expect: failure, gates: [G4]}
+  - id: R10
+    title: New ceremony-team log seeded with fabricated history
+    criterion: "§13 #9 · G4 creation rule"
+    steps:
+      - simulate: {scenario: scenarios/cases/R10-fake-team-log-history.json}
+      - gate: {expect: failure, gates: [G4]}
+  - id: R13
+    title: Ceremony PR touches the appid-root log.md
+    criterion: "§13 #5 · D16 · G1"
+    live: true
+    steps:
+      - simulate: {scenario: scenarios/cases/R13-root-log-touched.json}
+      - gate: {expect: failure, gates: [G1]}
+  - id: R14
+    title: Trust-root config edited inside a knowledge PR — class unknown, fails closed
+    criterion: "plan §6.1 · P1"
+    live: true
+    steps:
+      - simulate: {scenario: scenarios/cases/R14-trust-root-mixed.json}
+      - gate: {expect: failure, class: unknown, gates: [CLASS]}
+  - id: R15
+    title: RSK- item in a standup (profile violation)
+    criterion: "§5.2 · G2"
+    steps:
+      - simulate: {scenario: scenarios/cases/R15-risk-in-standup.json}
+      - gate: {expect: failure, gates: [G2]}
+  - id: R16
+    title: Ceremony date in the future in every time zone (UTC+14 rule)
+    criterion: "§14 · G3"
+    live: true
+    steps:
+      - simulate: {scenario: scenarios/cases/R16-future-date.json}
+      - gate: {expect: failure, gates: [G3]}
+  - id: R17
+    title: Short (4-segment) grill branch
+    criterion: "§14 · G3"
+    steps:
+      - simulate: {scenario: scenarios/cases/R17-short-branch.json}
+      - gate: {expect: failure, gates: [G3]}
+  - id: R18
+    title: Commit without the client trailer
+    criterion: "G10"
+    steps:
+      - simulate: {scenario: scenarios/cases/R18-missing-trailer.json}
+      - gate: {expect: failure, gates: [G10]}
+  - id: R19
+    title: Symlink in a knowledge PR
+    criterion: "§13 #5 · G1"
+    steps:
+      - simulate: {scenario: scenarios/cases/R19-symlink.json}
+      - gate: {expect: failure, gates: [G1]}
+  - id: R20
+    title: Rename of an accepted ceremony file (delete + add) without a revert
+    criterion: "§13 #5 · protected content · revert class"
+    steps:
+      - simulate: {scenario: scenarios/cases/R20-rename-accepted.json}
+      - gate: {expect: failure, gates: [RV]}
+  - id: R26
+    title: Reserved team slug
+    criterion: "§14 · G3"
+    steps:
+      - simulate: {scenario: scenarios/cases/R26-reserved-team.json}
+      - gate: {expect: failure, gates: [G3]}
+  - id: R12
+    title: Literal git revert of a bootstrapped (never-approved) seed is rejected
+    criterion: "§13 #11 · revert class · x_kf.bootstrap"
+    steps:
+      - revert:
+          seed_path: application-bundles/kfcor/knowledge-sources/agile-ceremonies/standup/fabric-core/standup_2026-10-19.md
+          literal: true
+          as: rv
+      - gate: {of: rv, expect: failure, class: revert, gates: [RV]}
+  # ------------------------------------------------------------------ red paths: bundle-update class
+  - id: R11
+    title: Bundle update touches knowledge-sources/
+    criterion: "D18 · B1"
+    live: true
+    steps:
+      - bundle_edit:
+          appid: kfcor
+          ops:
+            - {op: write, file: knowledge-sources/agile-ceremonies/standup/fabric-core/notes.md, content: "smuggled\n"}
+      - gate: {expect: failure, gates: [B1]}
+  - id: R21
+    title: Section made only of assessments (50% cap)
+    criterion: "§6.3 G6-bundle rule (3) · confirm-round fixture"
+    steps:
+      - bundle_edit:
+          appid: kfcor
+          ops:
+            - {op: replace, file: sections/executive-summary.md, find: "## Why it matters\n",
+               replace: "## Why it matters\n\n*Assessment:* Extra opinion one.[^readme-repos]\n\n*Assessment:* Extra opinion two.[^readme-repos]\n\n*Assessment:* Extra opinion three.[^readme-repos]\n\n*Assessment:* Extra opinion four.[^readme-repos]\n\n*Assessment:* Extra opinion five.[^readme-repos]\n\n*Assessment:* Extra opinion six.[^readme-repos]\n\n*Assessment:* Extra opinion seven.[^readme-repos]\n\n*Assessment:* Extra opinion eight.[^readme-repos]\n\n"}
+      - gate: {expect: failure, gates: [B6]}
+  - id: R22
+    title: Graph claims a toolchain other than the base-ref lock
+    criterion: "§6.4 G11 (i) · confirm-round fixture"
+    steps:
+      - bundle_edit:
+          appid: kfcor
+          ops:
+            - {op: replace, file: code-graph/code-graph.jsonl, find: '"tree-sitter":"0.25.2"', replace: '"tree-sitter":"0.26.0"'}
+      - gate: {expect: failure, gates: [G11]}
+  - id: R23
+    title: Hand-edited graph does not reproduce byte-for-byte
+    criterion: "§6.4 G11 (iii)"
+    steps:
+      - bundle_edit:
+          appid: kfcor
+          ops:
+            - {op: graph_bump_bytes, file: code-graph/code-graph.jsonl}
+      - gate: {expect: failure, gates: [G11]}
+  - id: R24
+    title: Mixed commit SHAs inside one bundle
+    criterion: "§6.3 · B6 mixed-version rule"
+    steps:
+      - bundle_edit:
+          appid: kfcor
+          stamp: false
+          ops:
+            - {op: replace, file: sections/executive-summary.md, find: "commit_sha: 78d41952391c91356afbebfaee129b8b40a12561",
+               replace: "commit_sha: 0000000000000000000000000000000000000000"}
+      - gate: {expect: failure, gates: [B6]}
+  - id: R25
+    title: Uncited claim block in a section
+    criterion: "§6.3 G6-bundle rule (1)"
+    steps:
+      - bundle_edit:
+          appid: kfcor
+          ops:
+            - {op: replace, file: sections/executive-summary.md, find: "## Why it matters\n",
+               replace: "## Why it matters\n\nThis paragraph makes a claim with no evidence at all.\n\n"}
+      - gate: {expect: failure, gates: [B6]}
+  - id: R29
+    title: Bundle-update approver is not an owner of the appid
+    criterion: "D19 · G7 owners(appid)"
+    steps:
+      - bundle_edit:
+          appid: kfcor
+          ops:
+            - {op: set_approver, file: knowledge-source.json, value: "@kf-approver-demo"}
+      - gate: {expect: failure, gates: [G7]}
+  - id: R30
+    title: Approved commit content differs from head — approval is stale, check stays pending
+    criterion: "§8.2 content-bound approval"
+    steps:
+      - simulate: {scenario: scenarios/cases/D01-kfcor-fabric-core-standup.json}
+      - review: {user: kf-approver-demo}
+      - refresh: {scenario: scenarios/cases/D01b-kfcor-fabric-core-standup-rerun.json}
+      - gate: {expect: action_required}

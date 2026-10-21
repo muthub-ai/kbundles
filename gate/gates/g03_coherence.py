@@ -16,6 +16,8 @@ def check(ctx):
     path = n.get("cer_path", "")
     f = lambda msg, sev="error": out.append(Finding(GATE, msg, path, sev))  # noqa: E731
     cfg = ctx.config or {}
+    if not ctx.appid:
+        return out          # G1 already reports a PR that spans several appids
     if ctx.appid in (cfg.get("reserved_appids") or []):
         f(f"appid '{ctx.appid}' is reserved")
     reg = ctx.appid_cfg()

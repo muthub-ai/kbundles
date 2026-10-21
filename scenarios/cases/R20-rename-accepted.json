@@ -1,0 +1,11 @@
+{
+  "extends": "scenarios/cases/D01-kfcor-fabric-core-standup.json",
+  "id": "R20",
+  "tamper": [
+    {
+      "op": "rename",
+      "from": "application-bundles/kfcor/knowledge-sources/agile-ceremonies/standup/fabric-core/standup_2026-10-19.md",
+      "to": "application-bundles/kfcor/knowledge-sources/agile-ceremonies/standup/fabric-core/standup_2026-10-18.md"
+    }
+  ]
+}

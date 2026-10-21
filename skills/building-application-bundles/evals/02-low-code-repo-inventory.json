@@ -1,0 +1,12 @@
+{
+  "skills": ["building-application-bundles"],
+  "query": "Create the application bundle graph for the markdown-heavy repo muthub-ai/c4-skills at commit 670fdcd9a8bc6bc9583a56390877ec742fee50ac (appid cfskl).",
+  "files": [],
+  "pinned": {"repo": "muthub-ai/c4-skills", "commit_sha": "670fdcd9a8bc6bc9583a56390877ec742fee50ac", "appid": "cfskl"},
+  "deterministic_checks": {"nodes_between": [120, 220], "min_edges_by_kind": {"links": 50}, "parse_errors_include": ["c4designer/SKILL.md"]},
+  "expected_behavior": [
+    "Recognizes that most of the repo is Markdown and YAML and still produces a non-trivial inventory graph (links, declares, frontmatter keys)",
+    "Reports the SKILL.md frontmatter parse error instead of silently dropping the file",
+    "Writes the 'application architecture' section as a skills architecture (skill folders, references, tests)"
+  ]
+}

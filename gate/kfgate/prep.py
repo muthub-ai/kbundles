@@ -23,6 +23,10 @@ def fm_offset(text: str) -> int:
 def prep_ceremony(ctx) -> None:
     files = [c for c in ctx.changes if PATH_RE.match(c.path) and not c.path.endswith("/log.md")]
     ctx.notes["ceremony_files"] = files
+    # judge the real ceremony file: a regular file named <ceremony>_<date>.md (symlinks and strays are
+    # still in `files`, so G1/G8 report them)
+    files = sorted(files, key=lambda c: (c.new_mode == "120000",
+                                         not FILE_RE.match(PATH_RE.match(c.path).group("file")), c.path))
     if not files or not ctx.appid:
         return
     path = files[0].path

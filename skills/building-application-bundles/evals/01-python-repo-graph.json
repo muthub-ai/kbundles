@@ -1,0 +1,12 @@
+{
+  "skills": ["building-application-bundles"],
+  "query": "Build the code graph for muthub-ai/knowledge-foundation at commit 78d41952391c91356afbebfaee129b8b40a12561 as application bundle kfcor and validate it.",
+  "files": [],
+  "pinned": {"repo": "muthub-ai/knowledge-foundation", "commit_sha": "78d41952391c91356afbebfaee129b8b40a12561", "appid": "kfcor"},
+  "deterministic_checks": {"nodes_between": [450, 650], "edges_between": [950, 1250], "min_edges_by_kind": {"imports": 40, "links": 150, "calls": 300}, "validator": "pass"},
+  "expected_behavior": [
+    "Runs scripts/build_bundle.py init and graph instead of writing its own extractor",
+    "Produces a code graph whose node and edge counts fall inside the pinned bands",
+    "Runs validate_bundle.py with --reproduce and reaches PASS before declaring success"
+  ]
+}
