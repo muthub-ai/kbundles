@@ -1,0 +1,300 @@
+{
+  "counts": {
+    "edges_by_kind": {
+      "calls:import-bound": 271,
+      "calls:local": 109,
+      "calls:name-only": 119,
+      "declares:external": 6,
+      "defines:-": 252,
+      "imports:exact": 43,
+      "imports:external": 112,
+      "links:exact": 176,
+      "links:unresolved": 2
+    },
+    "files_by_lang": {
+      "bash": 1,
+      "javascript": 1,
+      "json": 3,
+      "make": 1,
+      "markdown": 148,
+      "python": 23,
+      "text": 9,
+      "yaml": 9
+    },
+    "generated_files": 0,
+    "nodes_by_kind": {
+      "class": 40,
+      "external": 34,
+      "file": 195,
+      "function": 95,
+      "method": 117,
+      "unresolved": 28
+    },
+    "third_party_files": 0
+  },
+  "entrypoints": [
+    ".github/ci-run.sh (cli-main)",
+    "tests/test_flow.py (cli-main)",
+    "tests/test_governance_graph.py (cli-main)",
+    "tests/test_ingest.py (cli-main)",
+    "tests/test_rules.py (cli-main)",
+    "tests/test_semantic_layer.py (cli-main)",
+    "tools/kb/__main__.py (cli-main)",
+    "tools/librarian/ingest.py (cli-main)",
+    "tools/librarian/seed_from_site.py (cli-main)"
+  ],
+  "external_dependencies": [
+    {
+      "files": 17,
+      "package": "pathlib"
+    },
+    {
+      "files": 11,
+      "package": "typing"
+    },
+    {
+      "files": 7,
+      "package": "json"
+    },
+    {
+      "files": 7,
+      "package": "sys"
+    },
+    {
+      "files": 6,
+      "package": "datetime"
+    },
+    {
+      "files": 6,
+      "package": "kb"
+    },
+    {
+      "files": 6,
+      "package": "re"
+    },
+    {
+      "files": 5,
+      "package": "os"
+    },
+    {
+      "files": 5,
+      "package": "unittest"
+    },
+    {
+      "files": 4,
+      "package": "dataclasses"
+    },
+    {
+      "files": 4,
+      "package": "jsonschema"
+    },
+    {
+      "files": 4,
+      "package": "tempfile"
+    },
+    {
+      "files": 3,
+      "package": "argparse"
+    },
+    {
+      "files": 3,
+      "package": "llmw2"
+    },
+    {
+      "files": 3,
+      "package": "shutil"
+    },
+    {
+      "files": 3,
+      "package": "yaml"
+    },
+    {
+      "files": 2,
+      "package": "collections"
+    },
+    {
+      "files": 2,
+      "package": "ingest"
+    },
+    {
+      "files": 2,
+      "package": "networkx"
+    },
+    {
+      "files": 2,
+      "package": "semantica"
+    },
+    {
+      "files": 2,
+      "package": "subprocess"
+    },
+    {
+      "files": 2,
+      "package": "types"
+    },
+    {
+      "files": 1,
+      "package": "calendar"
+    },
+    {
+      "files": 1,
+      "package": "fs"
+    },
+    {
+      "files": 1,
+      "package": "functools"
+    },
+    {
+      "files": 1,
+      "package": "hashlib"
+    },
+    {
+      "files": 1,
+      "package": "llmwiki2"
+    },
+    {
+      "files": 1,
+      "package": "logging"
+    },
+    {
+      "files": 1,
+      "package": "module"
+    },
+    {
+      "files": 1,
+      "package": "numpy"
+    }
+  ],
+  "fan_in_top": [
+    {
+      "id": "tools/kb/validate.py::Problem",
+      "weight": 23
+    },
+    {
+      "id": "tests/test_semantic_layer.py::E",
+      "weight": 18
+    },
+    {
+      "id": "tests/helpers.py::note_fm",
+      "weight": 16
+    },
+    {
+      "id": "tests/test_flow.py::EndToEnd.kb",
+      "weight": 12
+    },
+    {
+      "id": "tests/test_rules.py::rules",
+      "weight": 9
+    },
+    {
+      "id": "tools/kb/extractors/__init__.py",
+      "weight": 9
+    },
+    {
+      "id": "tools/librarian/dump-site-content.js::c",
+      "weight": 9
+    },
+    {
+      "id": "tools/kb/extractors/resolution.py::_norm",
+      "weight": 8
+    },
+    {
+      "id": "wiki/ai-native-sdlc/the-ai-native-sdlc-when-typing-code-stops-being-the.md",
+      "weight": 8
+    },
+    {
+      "id": "wiki/governed-ai/architecture-that-runs-why-ai-era-governance-must-be-code.md",
+      "weight": 8
+    },
+    {
+      "id": "wiki/governed-ai/model-is-a-tool-harness-is-the-strategy.md",
+      "weight": 8
+    },
+    {
+      "id": "tools/kb/__init__.py",
+      "weight": 7
+    },
+    {
+      "id": "tools/kb/__main__.py::_report",
+      "weight": 7
+    },
+    {
+      "id": "tools/kb/okf.py::read",
+      "weight": 7
+    },
+    {
+      "id": "tools/kb/okf.py::write",
+      "weight": 7
+    }
+  ],
+  "fan_out_top": [
+    {
+      "id": "tests/test_flow.py::EndToEnd.test_capture_to_published_site",
+      "weight": 47
+    },
+    {
+      "id": "tools/kb/extractors/semantica_adapter.py::SemanticaExtractor.extract",
+      "weight": 28
+    },
+    {
+      "id": "tools/kb/graph.py::build",
+      "weight": 26
+    },
+    {
+      "id": "tests/test_flow.py",
+      "weight": 25
+    },
+    {
+      "id": "tools/kb/__main__.py::main",
+      "weight": 25
+    },
+    {
+      "id": "tools/kb/extractors/resolution.py::resolve",
+      "weight": 22
+    },
+    {
+      "id": "tools/kb/validate.py::validate",
+      "weight": 20
+    },
+    {
+      "id": "tests/test_semantic_layer.py",
+      "weight": 19
+    },
+    {
+      "id": "tests/test_governance_graph.py",
+      "weight": 18
+    },
+    {
+      "id": "tools/kb/extractors/semantica_adapter.py",
+      "weight": 17
+    },
+    {
+      "id": "decisions/README.md",
+      "weight": 16
+    },
+    {
+      "id": "tests/test_governance_graph.py::GovernanceTests.test_stamp_is_human_only_idempotent_and_promotes_drafts",
+      "weight": 16
+    },
+    {
+      "id": "tools/kb/dates.py::check_dates",
+      "weight": 16
+    },
+    {
+      "id": "tools/kb/__main__.py",
+      "weight": 15
+    },
+    {
+      "id": "tools/librarian/seed_from_site.py",
+      "weight": 15
+    }
+  ],
+  "graph_sha256": "881e9bd0100d27591d42a861bc0797c5ae5cb88f764837f511242482b5d82a7d",
+  "hotspot_definition": "fan-in/fan-out of internal nodes over calls+renders+imports+links; no churn",
+  "parse_errors": [],
+  "schema": "kf-code-graph-metrics/1",
+  "source": {
+    "commit_sha": "78d41952391c91356afbebfaee129b8b40a12561",
+    "repo": "muthub-ai/knowledge-foundation"
+  }
+}
