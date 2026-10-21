@@ -73,7 +73,7 @@ def pr_payload(api: API_, repo: str, number: int) -> dict:
         raise RuntimeError(f"cannot read PR #{number}: {pr}")
     reviews = [{"user": r["user"]["login"], "state": r["state"], "commit_id": r["commit_id"]}
                for r in api.paged(f"/repos/{repo}/pulls/{number}/reviews") if r.get("user")]
-    return {"number": number, "author": pr["user"]["login"], "branch": pr["head"]["ref"],
+    return {"number": number, "author": pr["user"]["login"], "branch": pr["head"]["ref"], "title": pr.get("title") or "",
             "body": pr.get("body") or "", "labels": [lb["name"] for lb in pr.get("labels", [])],
             "reviews": reviews, "head_sha": pr["head"]["sha"], "base_ref": pr["base"]["ref"]}
 

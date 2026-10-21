@@ -23,6 +23,7 @@ CLASS_GATES = {
     "bundle-update": ["bundle_update", "g06b_bundle_provenance", "g11_graph_reproducible", "g07b",
                       "g09_pii", "g10_trailer", "protected_content"],
     "revert": ["revert_class", "g10_trailer", "g09_pii"],
+    "owners": ["owners_class", "g09_pii", "protected_content"],
     "tooling": ["protected_content"],
     "other": ["protected_content"],
     "unknown": [],
@@ -61,9 +62,8 @@ class Verdict:
 def _g07b(ctx):
     from gates.g07_approver import approver_problems
     ks = ctx.notes.get("ks") or {}
-    owners = (ctx.appid_cfg() or {}).get("owners") or []
     return approver_problems(ctx, (ks.get("review") or {}).get("approver"),
-                             f"application-bundles/{ctx.appid}/knowledge-source.json", owners)
+                             f"application-bundles/{ctx.appid}/knowledge-source.json")
 
 
 def evaluate(ctx, fetch=None) -> Verdict:
@@ -101,6 +101,8 @@ def evaluate(ctx, fetch=None) -> Verdict:
         allowed = {str(((ctx.notes.get("ks") or {}).get("review") or {}).get("approver", ""))}
     elif cls == "revert":
         allowed = set(ctx.notes.get("revert_approvers", []))
+    elif cls == "owners":
+        allowed = set(ctx.notes.get("owners_approvers", []))
     elif cls == "tooling":
         allowed = set((ctx.config or {}).get("code_owners", []))
     ok, note = approval.evaluate(ctx, allowed, fetch)

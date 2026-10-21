@@ -185,15 +185,17 @@ class Run:
             mpath = os.path.join(repo, "application-bundles", appid, "bundle-manifest.json")
             with open(mpath, encoding="utf-8") as fh:
                 m = fh.read()
-            with open(mpath, "w", encoding="utf-8", newline="\n") as fh:
-                fh.write(splice_remove(m, fpath.split("/", 2)[2]))
+            if f'"{fpath.split("/", 2)[2]}"' in m:      # legacy (pre-v0.5) ceremony files only
+                with open(mpath, "w", encoding="utf-8", newline="\n") as fh:
+                    fh.write(splice_remove(m, fpath.split("/", 2)[2]))
         else:
             os.remove(os.path.join(repo, fpath))
             mpath = os.path.join(repo, "application-bundles", appid, "bundle-manifest.json")
             with open(mpath, encoding="utf-8") as fh:
                 m = fh.read()
-            with open(mpath, "w", encoding="utf-8", newline="\n") as fh:
-                fh.write(splice_remove(m, fpath.split("/", 2)[2]))
+            if f'"{fpath.split("/", 2)[2]}"' in m:      # legacy (pre-v0.5) ceremony files only
+                with open(mpath, "w", encoding="utf-8", newline="\n") as fh:
+                    fh.write(splice_remove(m, fpath.split("/", 2)[2]))
             lpath = os.path.join(repo, os.path.dirname(fpath), "log.md")
             with open(lpath, encoding="utf-8") as fh:
                 log = fh.read()
@@ -261,17 +263,20 @@ class Run:
             fh.write(controls.insert_log_block(log, controls.log_block(date, a.get("summary", "Bundle update"),
                                                                       [a.get("bullet", "Fixture bundle update.")]), date))
         head = self.commit(repo, f"kf({appid}): bundle update\n\nKF-Bundle-Builder: building-application-bundles@0.1.0")
-        st["prs"][a.get("as", "pr")] = {"branch": branch, "head": head, "title": f"bundle update {appid}",
+        title = a.get("title", f"[KF-BUNDLE] {appid} @ {ks['source']['commit_sha'][:12]} — "
+                               f"{a.get('summary', 'Bundle update')}")
+        st["prs"][a.get("as", "pr")] = {"branch": branch, "head": head, "title": title,
                                         "meta": {"author": a.get("author", "kf-writer-demo"), "branch": branch,
-                                                 "body": ""}}
+                                                 "body": "", "title": title}}
 
     def s_edit(self, repo, st, a):
         sh(repo, "switch", "-q", "-C", a["branch"], "main")
         self._edit(repo, a["ops"])
         head = self.commit(repo, a.get("message", "chore: edit"))
-        st["prs"][a.get("as", "pr")] = {"branch": a["branch"], "head": head, "title": a["branch"],
+        title = a.get("title", a["branch"])
+        st["prs"][a.get("as", "pr")] = {"branch": a["branch"], "head": head, "title": title,
                                         "meta": {"author": a.get("author", "kf-writer-demo"), "branch": a["branch"],
-                                                 "body": ""}}
+                                                 "body": "", "title": title}}
 
     def s_unit(self, repo, st, a):
         if a["check"] == "author_check":

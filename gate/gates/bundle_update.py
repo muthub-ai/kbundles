@@ -32,7 +32,9 @@ def check(ctx):
         rel = c.path[len(root):]
         if c.new_mode in ("120000", "160000"):
             out.append(Finding("B1", "symlinks and submodules are not allowed", c.path))
-        if rel.startswith("knowledge-sources/"):
+        if rel == "OWNERS":
+            out.append(Finding("B1", "OWNERS changes only through an owners PR (branch owners/<appid>)", c.path))
+        elif rel.startswith("knowledge-sources/"):
             out.append(Finding("B1", "bundle-update PRs may not touch knowledge-sources/ — ceremony knowledge "
                                      "changes only through the ceremony and revert classes", c.path))
         elif not BUNDLE_FILE_RE.match(rel):
@@ -58,6 +60,10 @@ def check(ctx):
     want = f"bundle/{ctx.appid}/{sha[:12]}"
     if not ctx.bootstrap and ctx.pr.branch != want:
         out.append(Finding("B3", f"branch must be '{want}' (found '{ctx.pr.branch}')"))
+    if not ctx.bootstrap and not re.match(rf"^\[KF-BUNDLE\] {re.escape(ctx.appid)} @ {re.escape(sha[:12])} — \S.*$",
+                                          ctx.pr.title or ""):
+        out.append(Finding("B3", f"title must look like '[KF-BUNDLE] {ctx.appid} @ {sha[:12]} — <summary>' "
+                                 f"(found '{ctx.pr.title}')"))
     mpath = root + "bundle-manifest.json"
     for prob in verify_bundle_ops(ctx.mb_text(mpath), ctx.head_text(mpath) or ""):
         out.append(Finding("B4", prob, mpath))

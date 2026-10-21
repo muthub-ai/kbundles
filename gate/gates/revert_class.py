@@ -53,9 +53,12 @@ def check(ctx):
             f("a revert may change only the target file, its manifest entry and its ceremony-team log", c.path)
     if not any(c.path == fpath and c.status == "D" for c in ctx.changes):
         f("the target ceremony file must be deleted", fpath)
+    legacy = any(c.path == mpath for c in tchanges)   # pre-v0.5 ceremony commits also spliced the manifest
     try:
-        if ctx.head_text(mpath) != splice_remove(ctx.mb_text(mpath) or "", rel_to_bundle(fpath)):
+        if legacy and ctx.head_text(mpath) != splice_remove(ctx.mb_text(mpath) or "", rel_to_bundle(fpath)):
             f("manifest must equal the base with exactly the target entry removed (inverse splice)", mpath)
+        elif not legacy and any(c.path == mpath for c in ctx.changes):
+            f("the target never touched the manifest, so its revert may not either", mpath)
     except ManifestError as exc:
         f(f"manifest: {exc}", mpath)
     base_log, head_log = ctx.mb_text(lpath) or "", ctx.head_text(lpath)

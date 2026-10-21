@@ -1,15 +1,13 @@
 """G4 — semantic + byte additive-only.
 
 Ceremony file is added (accepted knowledge is never edited in place); the
-manifest is base + exactly one byte-spliced entry (no re-serialization);
-the ceremony-team log either is created as title + exactly one block, or
+ceremony-team log (which registers the file — ceremony PRs never touch the
+manifest, spec v0.5) either is created as title + exactly one block, or
 gains exactly one block at its newest-first position with every other byte kept.
 """
-from kfgate.ceremony_doc import log_blocks, log_title, rel_to_bundle
+from kfgate.ceremony_doc import log_blocks
 from kfgate.context import Finding
 from kfgate.textdiff import insertions
-
-from kfbundle.manifest import verify_single_splice
 
 GATE = "G4"
 
@@ -46,17 +44,5 @@ def check(ctx):
         if c.status != "A":
             out.append(Finding(GATE, "accepted ceremony knowledge is immutable — a ceremony PR may only "
                                      "ADD its file (corrections go through the revert class)", c.path))
-    mpath = n["manifest_path"]
-    base_m, head_m = ctx.mb_text(mpath), ctx.head_text(mpath)
-    if base_m is None or head_m is None:
-        out.append(Finding(GATE, "bundle-manifest.json is missing", mpath))
-    else:
-        entry, err = verify_single_splice(base_m, head_m)
-        if err:
-            out.append(Finding(GATE, err, mpath))
-        elif entry and entry.get("path") != rel_to_bundle(n["cer_path"]):
-            out.append(Finding(GATE, f"the new manifest entry registers {entry.get('path')!r}, not the "
-                                     "ceremony file", mpath))
-        n["manifest_entry"] = entry
     _check_log(ctx.mb_text(n["log_path"]), ctx.head_text(n["log_path"]), out, n["log_path"])
     return out

@@ -1,4 +1,5 @@
-"""G5 — registration: the manifest entry and the log block describe exactly the new file."""
+"""G5 — registration: the ceremony-team log block registers exactly the new file (spec v0.5:
+ceremony PRs never touch the manifest; the team log is the registration)."""
 import datetime as dt
 from zoneinfo import ZoneInfo
 
@@ -15,17 +16,6 @@ def check(ctx):
     fm = n.get("cer_fm")
     if not fm or "cer_path" not in n:
         return out
-    entry = n.get("manifest_entry")
-    if entry:
-        want = {"type": fm.get("type"), "team": ctx.team, "added": get_path(fm, "generated.at"),
-                "generated_by": get_path(fm, "generated.by")}
-        for k, v in want.items():
-            if entry.get(k) != v:
-                out.append(Finding(GATE, f"manifest entry {k}={entry.get(k)!r} but the file says {v!r}",
-                                   n["manifest_path"]))
-        if get_path(entry, "review.approver") != get_path(fm, "x_kf.review.approver"):
-            out.append(Finding(GATE, "manifest entry approver differs from the file's x_kf.review.approver",
-                               n["manifest_path"]))
     log = ctx.head_text(n["log_path"]) or ""
     link = f"[{n['cer_file']}]({n['cer_file']})"
     blocks = [b for b in log_blocks(log) if link in b[1]]

@@ -1,0 +1,7 @@
+{
+  "extends": "scenarios/cases/D01-kfcor-fabric-core-standup.json",
+  "id": "R31",
+  "tamper": [
+    {"op": "pr", "key": "title", "value": "Standup notes for fabric-core"}
+  ]
+}

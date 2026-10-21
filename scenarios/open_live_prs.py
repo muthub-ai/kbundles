@@ -37,7 +37,8 @@ import simulate_grill as sim  # noqa: E402
 # branch (D13: a rerun updates the same PR). Live, each needs its own PR, so each gets
 # its own ceremony date; the run date (log heading) is unchanged.
 LIVE_DATES = {"R01": "2026-10-06", "R03": "2026-10-07", "R06": "2026-10-08", "R08": "2026-10-09",
-              "R09": "2026-10-12", "R13": "2026-10-13", "L01": "2026-10-14"}
+              "R09": "2026-10-12", "R13": "2026-10-13", "L01": "2026-10-14",
+              "R31": "2026-10-15", "R32": "2026-10-16"}
 
 MARK_START, MARK_END = "<!-- live-prs:start -->", "<!-- live-prs:end -->"
 FOOTER = ("🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\n"
@@ -115,7 +116,7 @@ def push_and_open(repo: str, full: str, me: str, pr: dict, sc: dict, gate_args: 
     subprocess.run(["git", "-C", repo, "push", "-q", f"--force-with-lease=refs/heads/{branch}:{remote}",
                     url, f"{pr['head']}:refs/heads/{branch}"], check=True)
     body = (pr["meta"].get("body") or "") + f"\n\n---\n{demo_note(sc, gate_args)}\n\n{FOOTER}\n"
-    title = f"[demo {sc['id']}] {pr.get('title') or sc['title']}"
+    title = pr["meta"].get("title") or pr.get("title")   # the real naming convention — demo marker lives in the body
     if prs:
         num = prs[0]["number"]
         gh(f"repos/{full}/pulls/{num}", "-X", "PATCH", "-f", f"title={title}", "-f", f"body={body}")

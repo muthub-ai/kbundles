@@ -39,13 +39,14 @@ paragraph, list item and table row cites source lines by hash**
 kbundles/
 ├── application-bundles/<appid>/       # one application bundle per app (5-letter appid)
 │   ├── index.md · log.md              # OKF reserved files (log is insert-only)
-│   ├── bundle-manifest.json           # one canonical line per file; byte-spliced, never re-serialized
+│   ├── OWNERS                         # who may approve this app's knowledge (read from main only)
+│   ├── bundle-manifest.json           # one canonical line per bundle file; never touched by ceremony PRs
 │   ├── knowledge-source.json          # source repo + immutable repo id + pinned commit + approver
 │   ├── sections/*.md                  # 7 architecture sections with per-claim citations
 │   ├── domains-maps/*.md              # domain vocabulary, cited
 │   ├── code-graph/                    # code-graph.jsonl · metrics.json · views/*.md (derived)
 │   └── knowledge-sources/agile-ceremonies/<ceremony>/<team>/   # candidate knowledge from ceremonies
-├── .github/kf/config.yml              # TRUST ROOT: appid registry, owners, teams, time zones, fallback approvers
+├── .github/kf/config.yml              # TRUST ROOT: appid registry, teams, time zones, KF stewards, fallback approvers
 ├── .github/kf/toolchain.lock          # pinned tree-sitter toolchain (G11 compares against the base ref)
 ├── .github/workflows/                 # kf-gate · kf-gate-review → kf-gate-rerun · kf-tripwire · kf-fixtures
 ├── gate/                              # kf-knowledge-gate (one module per gate under gate/gates/)
@@ -61,7 +62,7 @@ kbundles/
 flowchart LR
   M["Teams ceremony<br/>+ Copilot recap"] --> S["grill-me<br/>(here: simulate_grill.py)"]
   R["Source repo<br/>at a pinned commit"] --> B["building-application-bundles<br/>skill"]
-  S -- "ceremony PR<br/>3 files of one appid+team" --> G{"kf-knowledge-gate"}
+  S -- "ceremony PR<br/>2 files, only in knowledge-sources/" --> G{"kf-knowledge-gate"}
   B -- "bundle-update PR<br/>one appid, no knowledge-sources/" --> G
   G -- "hard gates fail" --> X["❌ failure<br/>request changes"]
   G -- "gates pass" --> W["⏳ action_required<br/>review requested from the named approver"]
@@ -70,8 +71,9 @@ flowchart LR
 
 | PR class | What it may change | Who must approve |
 |---|---|---|
-| **ceremony** | one ceremony file + that ceremony-team `log.md` + the appid manifest | the approver named in the file's frontmatter |
-| **bundle-update** | `sections/`, `domains-maps/`, `code-graph/`, control files of one appid | the approver in `knowledge-source.json`, who must own the appid |
+| **ceremony** | one ceremony file + that team's `log.md` — **only inside `knowledge-sources/agile-ceremonies/<ceremony>/<team>/`** | the approver named in the file, who must be in the app's `OWNERS` |
+| **bundle-update** | `sections/`, `domains-maps/`, `code-graph/`, control files of one appid | the approver in `knowledge-source.json`, who must be in the app's `OWNERS` |
+| **owners** | exactly `application-bundles/<appid>/OWNERS` | a current approver in that `OWNERS` — or a KF steward when the app has none yet (claim) |
 | **revert** | the exact semantic inverse of one merged ceremony commit + a `Reverted` log block | the original approver or the fallback team |
 | **tooling** | trust root and tooling (`.github/`, `gate/`, `tools/`, `skills/`, `scenarios/`) | a code owner |
 | **other** | `README.md`, `PRODUCTION.md`, `docs/**` | nobody (protected-content rule still applies) |
@@ -81,21 +83,39 @@ flowchart LR
 
 | Gate | Rule |
 |---|---|
-| G1 | Path allowlist: one appid (+ team), exact write-set; no symlinks, submodules or mode changes; never the appid-root log |
+| G1 | Path allowlist: one appid + team; **only the ceremony file and its team log, both inside `knowledge-sources/`** — nothing else (not the manifest); no symlinks, submodules or mode changes |
 | G2 | OKF + `x_kf` schema, ceremony profiles (allowed sections hard, expected sections soft), `knowledge_id` and `content_sha256` recomputed |
-| G3 | Coherence and registry (D19): path ⇔ file name ⇔ branch ⇔ frontmatter; appid registered; **team registered under that appid**; date not in the future at UTC+14 |
-| G4 | Additive-only: ceremony file added; manifest = base + exactly one **byte-spliced** entry; team log created as title + one block or gains one block newest-first |
-| G5 | Manifest entry and log block describe exactly the new file; log heading uses the run date in the team time zone |
+| G3 | Coherence, registry and **naming**: path ⇔ file name ⇔ branch ⇔ **PR title** ⇔ frontmatter; appid registered; team registered under that appid; date not in the future at UTC+14 |
+| G4 | Additive-only: ceremony file added; team log created as title + one block or gains one block newest-first (insert-only) |
+| G5 | The team-log block registers exactly the new file; its heading uses the run date in the team time zone |
 | G6 | Every item cites a span; every span is in the PR body and hashes to its footnote |
-| G7 | Approver resolvable, not the author, has write permission (bundle updates: an owner of the appid) |
+| G7 | Approver resolvable, not the author, has write permission, and **listed in the app's `OWNERS`** (KF stewards while an app has none) |
 | G8 | One ceremony file, ≤256 KB, UTF-8 |
 | G9 | No emails, phone numbers or employee ids |
 | G10 | Client trailer on every commit |
-| B1–B6 | Bundle-update write-set, registry/branch coherence, manifest/log/index rules, **every section claim verified at the pinned SHA** |
+| B1–B6 | Bundle-update write-set, registry/branch/**title** coherence, manifest/log/index rules, **every section claim verified at the pinned SHA** |
+| OW | Owners class: only `OWNERS` of one registered appid; branch `owners/<appid>`; title `[KF-OWNERS] <appid> — …`; valid logins with write access |
 | G11 | Graph toolchain equals the base-ref lock; extractor re-run at the pinned SHA reproduces graph, metrics and views byte-for-byte |
 | PC | Protected content on every PR: accepted ceremony knowledge is immutable; logs are insert-only |
 | RV | Revert class: semantic inverse of one merged ceremony commit; bootstrapped content is never a revert target |
 | Approval | `success` only when the named approver approved content identical to head (survives `--refresh`; stale on any content change) |
+
+### Naming conventions (enforced)
+
+| PR kind | Branch | Title |
+|---|---|---|
+| ceremony | `grill/<appid>/<ceremony>/<team>/<YYYY-MM-DD>` | `[KF] <appid> · <team> · <ceremony> · <YYYY-MM-DD> — candidate knowledge (<n> items)` |
+| bundle-update | `bundle/<appid>/<first 12 of source commit>` | `[KF-BUNDLE] <appid> @ <first 12 of source commit> — <summary>` |
+| owners | `owners/<appid>` | `[KF-OWNERS] <appid> — <what changed>` |
+
+### OWNERS
+
+Each app has `application-bundles/<appid>/OWNERS` — a YAML list of `approvers`
+(GitHub logins). Nobody has to know every app's owners up front: an app
+without an `OWNERS` file falls back to the **KF stewards** in the trust root,
+and a team **claims** its app with an owners PR that a steward approves. From
+then on the app's own approvers govern changes to it. The gate reads
+`OWNERS` from `main` only, so no PR can approve itself into ownership.
 
 ## Scenario matrix
 
@@ -104,14 +124,14 @@ scratch clone in gate local mode (CI: `kf-fixtures`). Rows marked *live* are
 also open as real pull requests.
 
 <!-- scenario-matrix:start -->
-**40/40 scenarios pass** (28s, gate local mode, fresh scratch clone per scenario).
+**48/48 scenarios pass** (32s, gate local mode, fresh scratch clone per scenario).
 
 | Id | Scenario | Proves (spec / plan) | Live PR | Observed | Result |
 |---|---|---|---|---|---|
 | F01 | Standup awaits the named approver; another writer's approval does not count; named approval passes | §13 #2, #3 · I3 · S first-contribution warn |  | ceremony:action_required warn[S] → ceremony:action_required → ceremony:success | ✅ |
 | F02 | Rerun for the same meeting updates the same branch — no duplicate PRs | §13 #8 · I2 · D13 |  | ceremony:action_required | ✅ |
 | F03 | Three established kfcor teams land same-day standups — zero conflicts, zero refresh, zero re-approval | §13 #7a · I9 (team isolation) |  | ceremony:success → squash-merged → ceremony:success → squash-merged → ceremony:success → squash-merged | ✅ |
-| F04 | Two teams' FIRST sprint-planning entries share a manifest gap — one conflict, one --refresh, approval survives | §13 #7b, #8 · I8 (content-bound approval) |  | squash-merged → merge conflict (expected) → ceremony:success → squash-merged | ✅ |
+| F04 | Two teams' FIRST sprint-planning entries land the same day — no manifest, so no conflict and no --refresh | spec v0.5 write-set (knowledge-sources/ only) · I9 |  | ceremony:success → squash-merged → ceremony:success → squash-merged | ✅ |
 | F05 | --refresh two days after approval keeps the approval (dates frozen in the GrillResult) | §13 #8 · determinism rule §8.2 |  | squash-merged → ceremony:success | ✅ |
 | F06 | Retro profile with Went well / To improve / ACT / RSK passes | §5.2 ceremony profiles |  | ceremony:action_required | ✅ |
 | F07 | Valid revert — semantic inverse of a merged ceremony PR, approved by the original approver | §13 #11 · §8.5 revert class |  | squash-merged → revert:action_required → revert:success | ✅ |
@@ -123,12 +143,12 @@ also open as real pull requests.
 | R01 | Ceremony PR also touches a second appid | §13 #5 · G1 | yes | ceremony:failure [G1] | ✅ |
 | R02 | Ceremony PR edits a bundle section (out of allowlist) | §13 #5 · G1 |  | ceremony:failure [G1] | ✅ |
 | R03 | Wrong-appid coherence — path says kfcor, frontmatter says kfsit | D19 · G3 | yes | ceremony:failure [G2,G3] | ✅ |
-| R04 | Unregistered appid folder | D19 registry · G3 |  | ceremony:failure [G3,G4] | ✅ |
+| R04 | Unregistered appid folder | D19 registry · G3 |  | ceremony:failure [G3] | ✅ |
 | R05 | Team not registered under the appid (team→appid binding) | D19 · G3 hard binding | yes | ceremony:failure [G3] | ✅ |
 | R06 | Evidence span tampered — hash no longer matches | §13 #5 · G6 | yes | ceremony:failure [G6] | ✅ |
 | R07 | Approver is the PR author | §13 #5 · G7 |  | ceremony:failure [G7] | ✅ |
 | R08 | Email address in knowledge text | §13 #5 · G9 | yes | ceremony:failure [G9] | ✅ |
-| R09 | Manifest re-serialized (parse→stringify) instead of byte-spliced | §13 #6 · G4 byte-splice | yes | ceremony:failure [G4,PC] | ✅ |
+| R09 | Ceremony PR also rewrites the bundle manifest — outside knowledge-sources/ | spec v0.5 write-set · G1 · PC | yes | ceremony:failure [G1,PC] | ✅ |
 | R10 | New ceremony-team log seeded with fabricated history | §13 #9 · G4 creation rule |  | ceremony:failure [G4] | ✅ |
 | R13 | Ceremony PR touches the appid-root log.md | §13 #5 · D16 · G1 | yes | ceremony:failure [G1,PC] | ✅ |
 | R14 | Trust-root config edited inside a knowledge PR — class unknown, fails closed | plan §6.1 · P1 | yes | unknown:failure [CLASS] | ✅ |
@@ -140,12 +160,20 @@ also open as real pull requests.
 | R20 | Rename of an accepted ceremony file (delete + add) without a revert | §13 #5 · protected content · revert class |  | revert:failure [G10,RV] | ✅ |
 | R26 | Reserved team slug | §14 · G3 |  | ceremony:failure [G3] | ✅ |
 | R12 | Literal git revert of a bootstrapped (never-approved) seed is rejected | §13 #11 · revert class · x_kf.bootstrap |  | revert:failure [RV] | ✅ |
+| R31 | Ceremony PR title does not follow the naming convention | spec v0.5 naming · G3 | yes | ceremony:failure [G3] | ✅ |
+| R32 | Named approver is not in the app's OWNERS (nor a steward) | spec v0.5 OWNERS · G7 | yes | ceremony:failure [G7] | ✅ |
+| R33 | Approver owns a DIFFERENT app — their OWNERS entry does not carry over to kfcor | spec v0.5 OWNERS · cross-app isolation · G7 |  | ceremony:failure [G7] | ✅ |
+| F13 | An app's OWNERS file is claimed by PR — a KF steward approves, then the app governs itself | spec v0.5 OWNERS claim |  | owners:action_required → owners:success | ✅ |
+| R34 | OWNERS change approved by someone who is not a current approver — stays pending | spec v0.5 OWNERS · approval |  | owners:action_required | ✅ |
+| R35 | OWNERS change on the wrong branch / with the wrong title | spec v0.5 naming · OW |  | owners:failure [OW] | ✅ |
+| R36 | OWNERS change mixed with a section edit — fails closed | spec v0.5 · one kind of change per PR |  | unknown:failure [CLASS] | ✅ |
 | R11 | Bundle update touches knowledge-sources/ | D18 · B1 | yes | bundle-update:failure [B1] | ✅ |
 | R21 | Section made only of assessments (50% cap) | §6.3 G6-bundle rule (3) · confirm-round fixture |  | bundle-update:failure [B6] | ✅ |
 | R22 | Graph claims a toolchain other than the base-ref lock | §6.4 G11 (i) · confirm-round fixture |  | bundle-update:failure [G11] | ✅ |
 | R23 | Hand-edited graph does not reproduce byte-for-byte | §6.4 G11 (iii) |  | bundle-update:failure [G11] | ✅ |
 | R24 | Mixed commit SHAs inside one bundle | §6.3 · B6 mixed-version rule |  | bundle-update:failure [B6] | ✅ |
 | R25 | Uncited claim block in a section | §6.3 G6-bundle rule (1) |  | bundle-update:failure [B6] | ✅ |
+| R37 | Bundle-update PR title does not follow the naming convention | spec v0.5 naming · B3 |  | bundle-update:failure [B3] | ✅ |
 | R29 | Bundle-update approver is not an owner of the appid | D19 · G7 owners(appid) |  | bundle-update:failure [G7] | ✅ |
 | R30 | Approved commit content differs from head — approval is stale, check stays pending | §8.2 content-bound approval |  | ceremony:action_required | ✅ |
 <!-- scenario-matrix:end -->

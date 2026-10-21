@@ -17,6 +17,9 @@ import yaml  # noqa: E402
 from kfbundle.lint import lint_bundle  # noqa: E402
 from kfbundle.manifest import ManifestError, parse_manifest  # noqa: E402
 
+sys.path.insert(0, os.path.join(ROOT, "gate"))
+from kfgate.owners import parse as owners_parse  # noqa: E402
+
 
 def main() -> int:
     with open(os.path.join(ROOT, ".github/kf/config.yml"), encoding="utf-8") as fh:
@@ -34,8 +37,17 @@ def main() -> int:
             continue
         for path in glob.glob(os.path.join(bdir, "knowledge-sources", "agile-ceremonies", "*", "*", "*.md")):
             rel = os.path.relpath(path, bdir).replace(os.sep, "/")
-            if not rel.endswith("/log.md") and rel not in registered:
-                alerts.append(f"{appid}/{rel}: ceremony file on main is not registered in the manifest")
+            if rel.endswith("/log.md") or rel in registered:      # legacy files are also in the manifest
+                continue
+            fname = os.path.basename(rel)
+            log = os.path.join(os.path.dirname(path), "log.md")
+            text = open(log, encoding="utf-8").read() if os.path.exists(log) else ""
+            if f"[{fname}]({fname})" not in text:
+                alerts.append(f"{appid}/{rel}: ceremony file on main is not registered in its team log.md")
+        if os.path.exists(os.path.join(bdir, "OWNERS")):
+            _, err = owners_parse(open(os.path.join(bdir, "OWNERS"), encoding="utf-8").read())
+            if err:
+                alerts.append(f"{appid}/OWNERS: {err}")
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     lines = ["## kf-tripwire", ""] + ([f"- ⚠️ {a}" for a in alerts] or ["✅ main is consistent: every bundle lints clean."])
     if summary:

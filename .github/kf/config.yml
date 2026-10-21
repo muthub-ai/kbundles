@@ -4,17 +4,19 @@
 schema: kf-trust-root/1
 repo: muthub-ai/kbundles
 code_owners: [muthub-ai, genlinemedia]
-reserved_appids: [index, admin, other, appbd, dombd, prcbd]
+code_reserved_appids: [index, admin, other, appbd, dombd, prcbd]
 reserved_team_slugs: [index, log, all, shared, archive, standup, sprint-planning, backlog-refinement, retro]
 ceremonies: [standup, sprint-planning, backlog-refinement, retro]
 require_synthetic: true            # this prototype's meetings and teams are fabricated
 revert_fallback_approvers: [muthub-ai, genlinemedia]
+# Fallback approvers for any app that has no application-bundles/<appid>/OWNERS file yet,
+# and the approvers of an app's FIRST OWNERS file (the "claim"). Spec v0.5.
+kf_stewards: [muthub-ai, genlinemedia]
 appids:
   kfcor:
     title: Knowledge Foundation core
     repo: muthub-ai/knowledge-foundation
     repo_id: 1423734395
-    owners: [muthub-ai, genlinemedia]
     teams:
       fabric-core: {timezone: America/Chicago}
       librarian-ops: {timezone: America/New_York}
@@ -24,7 +26,6 @@ appids:
     title: Knowledge Foundation site
     repo: muthub-ai/knowledge-foundation-site
     repo_id: 1423734759
-    owners: [muthub-ai, genlinemedia]
     teams:
       site-build: {timezone: America/Chicago}
       explorer-ux: {timezone: Europe/London}
@@ -33,7 +34,6 @@ appids:
     title: Portfolio website (muthub.org)
     repo: muthub-ai/muthu-v0-portfolio-website
     repo_id: 1048024227
-    owners: [muthub-ai, genlinemedia]
     teams:
       web-experience: {timezone: America/Chicago}
       content-ops: {timezone: America/Los_Angeles}
@@ -42,7 +42,6 @@ appids:
     title: Architecture as Code
     repo: muthub-ai/aac
     repo_id: 1175682613
-    owners: [muthub-ai, genlinemedia]
     teams:
       model-authoring: {timezone: America/Chicago}
       policy-governance: {timezone: Europe/Berlin}
@@ -52,7 +51,6 @@ appids:
     title: C4 skills
     repo: muthub-ai/c4-skills
     repo_id: 1221298791
-    owners: [muthub-ai, genlinemedia]
     teams:
       skill-authoring: {timezone: America/Chicago}
       adr-practice: {timezone: Asia/Singapore}

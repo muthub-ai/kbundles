@@ -62,7 +62,7 @@ def bundle_entries(bundle_dir: str, generated_at: str) -> list[dict]:
         for name in sorted(files):
             rel = os.path.relpath(os.path.join(root, name), bundle_dir).replace(os.sep, "/")
             if rel.startswith(CEREMONY_PREFIX) or rel in ("index.md", "log.md", "bundle-manifest.json",
-                                                          "knowledge-source.json"):
+                                                          "knowledge-source.json", "OWNERS"):
                 continue
             with open(os.path.join(root, name), "rb") as fh:
                 data = fh.read()
