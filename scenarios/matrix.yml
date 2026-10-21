@@ -289,6 +289,7 @@ scenarios:
       - bundle_edit:
           appid: kfcor
           ops:
+            - {op: set_approver, file: knowledge-source.json, value: "@genlinemedia"}
             - {op: write, file: knowledge-sources/agile-ceremonies/standup/fabric-core/notes.md, content: "smuggled\n"}
       - gate: {expect: failure, gates: [B1]}
   - id: R21
