@@ -9,4 +9,6 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "review on PR #${{ github.event.pull_request.number }} — kf-gate-rerun will re-evaluate approval"
+      - env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: echo "review on PR ${PR_NUMBER}; kf-gate-rerun will re-evaluate approval"
