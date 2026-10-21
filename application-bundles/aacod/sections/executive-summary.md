@@ -40,6 +40,8 @@ There are four ways in, all reading the same YAML. Architects and engineers use 
 | MCP server `aac-mcp` | `mcp-server/bin/aac-mcp.ts` | Resources, tools and prompts for agents over stdio [^g-mcp-main] |
 | Governance pipeline | `.github/workflows/aac-pipeline.yml` | Validates, lints, builds diagrams and publishes the docs site [^wf-header] |
 
+The `aac` command-line tool's entry point is `cli/bin/aac.ts`.[^g-cli-entry]
+
 ## Shape in numbers
 
 The code graph classifies these files as entry points: the Next.js routes (`/`, `/dashboard`, `/systems/[id]`), the MCP binary and its three tool modules, and the OPA bundle build script.[^g-home][^g-dashboard][^g-system-page][^g-tool-validate][^g-tool-lint][^g-tool-waiver][^g-bundle-sh]
