@@ -1,6 +1,8 @@
-# Fixture identities for local mode and CI fixtures (the live repo has one real identity).
+# Identities for local mode and CI fixtures. muthub-ai and genlinemedia are real GitHub accounts;
+# the *-demo users are fictional and exist only here.
 users:
   muthub-ai: {permission: admin}         # repo owner; owner of every appid; code owner
-  kf-approver-demo: {permission: write}  # the named approver in green scenarios
+  genlinemedia: {permission: write}      # real second identity: the named approver; owner of every appid; code owner
+  kf-nonowner-demo: {permission: write}  # can approve ceremonies but owns no appid (R29)
   kf-writer-demo: {permission: write}    # a writer who is NOT the named approver (also PR author)
   kf-outsider-demo: {permission: read}   # resolvable but cannot approve

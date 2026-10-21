@@ -11,8 +11,9 @@ gate on GitHub (pull_request_target, base-ref code) then posts the
 
   python3 scenarios/open_live_prs.py [--only R01,R06] [--dry-run] [--write-readme README.md]
 
-Every live PR is red by design; with one real identity each also carries a
-G7 finding (the fixture approver does not exist on GitHub).
+Red scenarios (R..) fail on the gate they were built to trip. Green scenarios
+(L..) wait in action_required until the named approver, @genlinemedia,
+approves on GitHub; kf-gate-review then re-runs the gate and it turns success.
 """
 from __future__ import annotations
 
@@ -36,7 +37,7 @@ import simulate_grill as sim  # noqa: E402
 # branch (D13: a rerun updates the same PR). Live, each needs its own PR, so each gets
 # its own ceremony date; the run date (log heading) is unchanged.
 LIVE_DATES = {"R01": "2026-10-06", "R03": "2026-10-07", "R06": "2026-10-08", "R08": "2026-10-09",
-              "R09": "2026-10-12", "R13": "2026-10-13"}
+              "R09": "2026-10-12", "R13": "2026-10-13", "L01": "2026-10-14"}
 
 MARK_START, MARK_END = "<!-- live-prs:start -->", "<!-- live-prs:end -->"
 FOOTER = ("🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\n"
@@ -85,13 +86,21 @@ def _replay(run: rf.Run, sc: dict) -> tuple[str, dict, dict]:
     raise rf.Fail(f"{sc['id']}: no gate step")
 
 
+def expected(gate_args: dict) -> str:
+    if gate_args["expect"] == "failure":
+        return "failure on " + (", ".join(gate_args.get("gates", [])) or gate_args.get("class", ""))
+    return "action_required → success after @genlinemedia approves"
+
+
 def demo_note(sc: dict, gate_args: dict) -> str:
-    gates = ", ".join(gate_args.get("gates", [])) or gate_args.get("class", "")
-    return (f"**Demo PR — scenario {sc['id']}: {sc['title']}** ({sc.get('criterion', '')}).\n\n"
-            f"Opened by `scenarios/open_live_prs.py` to show kf-knowledge-gate rejecting a bad change. "
-            f"Expected check: **failure** on **{gates}**. Because this demo repository has a single real "
-            f"GitHub identity, the check also reports **G7** (the fixture approver does not exist on GitHub). "
-            f"Do not merge; close when done.")
+    head = f"**Demo PR — scenario {sc['id']}: {sc['title']}** ({sc.get('criterion', '')}).\n\n"
+    if gate_args["expect"] == "failure":
+        return head + (f"Opened by `scenarios/open_live_prs.py` to show kf-knowledge-gate rejecting a bad change. "
+                       f"Expected check: **{expected(gate_args)}**. Do not merge; close when done.")
+    return head + ("Opened by `scenarios/open_live_prs.py` to show the green path. The check stays "
+                   "**action_required** until the named approver **@genlinemedia** approves this exact content; "
+                   "kf-gate-review then re-runs the gate and it turns **success**. A review from anyone else "
+                   "does not count.")
 
 
 def push_and_open(repo: str, full: str, me: str, pr: dict, sc: dict, gate_args: dict) -> dict:
@@ -117,14 +126,13 @@ def push_and_open(repo: str, full: str, me: str, pr: dict, sc: dict, gate_args: 
         action = "opened"
     print(f"{sc['id']}: {action} PR #{num} ({branch} @ {pr['head'][:12]})")
     return {"id": sc["id"], "title": sc["title"], "number": num, "url": f"{url}/pull/{num}",
-            "expect": gate_args.get("gates", []) or [gate_args.get("class", "")]}
+            "expect": expected(gate_args)}
 
 
 def write_readme(path: str, rows: list[dict]) -> None:
-    lines = ["| Scenario | What it does | Pull request | Expected failing gates |", "|---|---|---|---|"]
-    for r in rows:
-        lines.append(f"| {r['id']} | {r['title']} | [#{r['number']}]({r['url']}) | "
-                     f"{', '.join(r['expect'])} (+ G7 in demo mode) |")
+    lines = ["| Scenario | What it does | Pull request | Expected check |", "|---|---|---|---|"]
+    for r in sorted(rows, key=lambda r: (r["id"][0] != "L", r["id"])):
+        lines.append(f"| {r['id']} | {r['title']} | [#{r['number']}]({r['url']}) | {r['expect']} |")
     with open(path, encoding="utf-8") as fh:
         text = fh.read()
     a, b = text.index(MARK_START) + len(MARK_START), text.index(MARK_END)
@@ -152,7 +160,7 @@ def main(argv=None) -> int:
         try:
             repo, pr, gate_args = replay(run, sc)  # raises if the local verdict is not the expected one
             if a.dry_run:
-                print(f"{sc['id']}: local verdict as expected ({', '.join(gate_args.get('gates', []))}); not pushed")
+                print(f"{sc['id']}: local verdict as expected ({expected(gate_args)}); not pushed")
                 continue
             rows.append(push_and_open(repo, a.repo, me, pr, sc, gate_args))
         except Exception as exc:  # noqa: BLE001

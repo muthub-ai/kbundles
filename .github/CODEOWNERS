@@ -1,6 +1,6 @@
 # Trust root and tooling — changes need a code owner's review (gate class `tooling`).
-/.github/      @muthub-ai
-/gate/         @muthub-ai
-/tools/        @muthub-ai
-/skills/       @muthub-ai
-/scenarios/    @muthub-ai
+/.github/      @muthub-ai @genlinemedia
+/gate/         @muthub-ai @genlinemedia
+/tools/        @muthub-ai @genlinemedia
+/skills/       @muthub-ai @genlinemedia
+/scenarios/    @muthub-ai @genlinemedia

@@ -297,7 +297,7 @@ def main(argv=None) -> int:
     only = set(a.only.split(",")) if a.only else None
     rows, failures, t0 = [], 0, time.time()
     for sc in matrix["scenarios"]:
-        if only and sc["id"] not in only:
+        if (only and sc["id"] not in only) or (sc.get("live_only") and not only):
             continue
         res = run.run_scenario(sc)
         failures += not res["ok"]

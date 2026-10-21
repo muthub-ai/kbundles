@@ -5,8 +5,8 @@
     {
       "op": "replace_in_file",
       "file": ".github/kf/config.yml",
-      "find": "revert_fallback_approvers: [muthub-ai]",
-      "replace": "revert_fallback_approvers: [muthub-ai, kf-writer-demo]"
+      "find": "revert_fallback_approvers: [muthub-ai, genlinemedia]",
+      "replace": "revert_fallback_approvers: [muthub-ai, genlinemedia, kf-writer-demo]"
     }
   ]
 }

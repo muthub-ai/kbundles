@@ -15,7 +15,7 @@ scenarios:
       - gate: {expect: action_required, class: ceremony, warns: [S]}
       - review: {user: kf-writer-demo}
       - gate: {expect: action_required}
-      - review: {user: kf-approver-demo}
+      - review: {user: genlinemedia}
       - gate: {expect: success}
   - id: F02
     title: Rerun for the same meeting updates the same branch — no duplicate PRs
@@ -31,9 +31,9 @@ scenarios:
       - simulate: {scenario: scenarios/cases/D01-kfcor-fabric-core-standup.json, as: a}
       - simulate: {scenario: scenarios/cases/D02-kfcor-librarian-ops-standup.json, as: b}
       - simulate: {scenario: scenarios/cases/D03-kfcor-graph-platform-standup.json, as: c}
-      - review: {of: a, user: kf-approver-demo}
-      - review: {of: b, user: kf-approver-demo}
-      - review: {of: c, user: kf-approver-demo}
+      - review: {of: a, user: genlinemedia}
+      - review: {of: b, user: genlinemedia}
+      - review: {of: c, user: genlinemedia}
       - gate: {of: a, expect: success}
       - merge: {of: a}
       - gate: {of: b, expect: success}
@@ -46,8 +46,8 @@ scenarios:
     steps:
       - simulate: {scenario: scenarios/cases/D04-kfcor-fabric-core-sprint-planning.json, as: a}
       - simulate: {scenario: scenarios/cases/D05-kfcor-graph-platform-sprint-planning.json, as: b}
-      - review: {of: a, user: kf-approver-demo}
-      - review: {of: b, user: kf-approver-demo}
+      - review: {of: a, user: genlinemedia}
+      - review: {of: b, user: genlinemedia}
       - merge: {of: a}
       - merge: {of: b, expect_conflict: true}
       - refresh: {of: b}
@@ -58,7 +58,7 @@ scenarios:
     criterion: "§13 #8 · determinism rule §8.2"
     steps:
       - simulate: {scenario: scenarios/cases/D01-kfcor-fabric-core-standup.json, as: a}
-      - review: {of: a, user: kf-approver-demo}
+      - review: {of: a, user: genlinemedia}
       - simulate: {scenario: scenarios/cases/D02-kfcor-librarian-ops-standup.json, as: other}
       - merge: {of: other}
       - refresh: {of: a}
@@ -74,11 +74,11 @@ scenarios:
     criterion: "§13 #11 · §8.5 revert class"
     steps:
       - simulate: {scenario: scenarios/cases/D02-kfcor-librarian-ops-standup.json, as: a}
-      - review: {of: a, user: kf-approver-demo}
+      - review: {of: a, user: genlinemedia}
       - merge: {of: a}
       - revert: {of: a, as: rv, reason: "fixture removal of sensitive content"}
       - gate: {of: rv, expect: action_required, class: revert}
-      - review: {of: rv, user: kf-approver-demo}
+      - review: {of: rv, user: genlinemedia}
       - gate: {of: rv, expect: success}
   - id: F08
     title: Bundle update — citations verified at the pinned SHA, graph reproduced, owner approves
@@ -116,6 +116,37 @@ scenarios:
     criterion: "§7.2 step 1 · E6"
     steps:
       - unit: {check: author_check}
+  # ------------------------------------------------------------------ live-only green demos
+  # Same logic as F01 / F08, but with content no fixture reuses: once a live demo PR is merged,
+  # main contains it, and the fixtures (which start from main) must not collide with it.
+  # run_fixtures.py skips these unless named with --only.
+  - id: L01
+    title: "Live green ceremony: standup waits for @genlinemedia, passes on approval"
+    criterion: "§13 #2, #3 · I3 (live)"
+    live: true
+    live_only: true
+    steps:
+      - simulate: {scenario: scenarios/cases/D01-kfcor-fabric-core-standup.json}
+      - gate: {expect: action_required, class: ceremony}
+      - review: {user: genlinemedia}
+      - gate: {expect: success}
+  - id: L02
+    title: "Live green bundle update: cited aacod claim, owner @genlinemedia approves"
+    criterion: "D18 bundle-update · G6-bundle · G11 (live)"
+    live: true
+    live_only: true
+    steps:
+      - bundle_edit:
+          appid: aacod
+          ops:
+            - {op: set_approver, file: knowledge-source.json, value: "@genlinemedia"}
+            - {op: replace, file: sections/executive-summary.md, find: "## Shape in numbers\n",
+               replace: "The `aac` command-line tool's entry point is `cli/bin/aac.ts`.[^g-cli-entry]\n\n## Shape in numbers\n"}
+          summary: Executive summary names the CLI entry point
+          bullet: Adds a cited sentence naming the aac CLI entry point.
+      - gate: {expect: action_required, class: bundle-update}
+      - review: {user: genlinemedia}
+      - gate: {expect: success}
   # ------------------------------------------------------------------ red paths: ceremony class
   - id: R01
     title: Ceremony PR also touches a second appid
@@ -316,13 +347,13 @@ scenarios:
       - bundle_edit:
           appid: kfcor
           ops:
-            - {op: set_approver, file: knowledge-source.json, value: "@kf-approver-demo"}
+            - {op: set_approver, file: knowledge-source.json, value: "@kf-nonowner-demo"}
       - gate: {expect: failure, gates: [G7]}
   - id: R30
     title: Approved commit content differs from head — approval is stale, check stays pending
     criterion: "§8.2 content-bound approval"
     steps:
       - simulate: {scenario: scenarios/cases/D01-kfcor-fabric-core-standup.json}
-      - review: {user: kf-approver-demo}
+      - review: {user: genlinemedia}
       - refresh: {scenario: scenarios/cases/D01b-kfcor-fabric-core-standup-rerun.json}
       - gate: {expect: action_required}
