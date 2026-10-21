@@ -1,0 +1,23 @@
+{
+  "appid": "cfskl",
+  "bootstrap": true,
+  "builder": "process:building-application-bundles@0.1.0",
+  "bundle_kind": "application",
+  "generated_at": "2026-10-20T19:30:00-05:00",
+  "graph_options": {
+    "exclude_globs": [],
+    "generated_globs": [],
+    "third_party_globs": []
+  },
+  "review": {
+    "approver": "@muthub-ai"
+  },
+  "schema": "kf-knowledge-source/1",
+  "source": {
+    "commit_sha": "670fdcd9a8bc6bc9583a56390877ec742fee50ac",
+    "repo": "muthub-ai/c4-skills",
+    "repo_id": 1221298791,
+    "url": "https://github.com/muthub-ai/c4-skills"
+  },
+  "title": "C4 skills"
+}

@@ -1,0 +1,254 @@
+{
+  "counts": {
+    "edges_by_kind": {
+      "calls:import-bound": 2,
+      "calls:local": 4,
+      "calls:name-only": 5,
+      "declares:external": 14,
+      "defines:-": 6,
+      "imports:exact": 1,
+      "imports:external": 13,
+      "links:exact": 77,
+      "links:unresolved": 2
+    },
+    "files_by_lang": {
+      "bash": 4,
+      "javascript": 9,
+      "json": 35,
+      "make": 1,
+      "markdown": 60,
+      "text": 11,
+      "yaml": 3
+    },
+    "generated_files": 1,
+    "nodes_by_kind": {
+      "external": 20,
+      "file": 123,
+      "function": 6,
+      "unresolved": 7
+    },
+    "third_party_files": 0
+  },
+  "entrypoints": [
+    "install.sh (cli-main)",
+    "tests/test-skill-format.sh (cli-main)",
+    "tests/validate-adr.sh (cli-main)",
+    "tests/validate-c4-diagram.sh (cli-main)"
+  ],
+  "external_dependencies": [
+    {
+      "files": 4,
+      "package": "react"
+    },
+    {
+      "files": 2,
+      "package": "express"
+    },
+    {
+      "files": 2,
+      "package": "pg"
+    },
+    {
+      "files": 2,
+      "package": "prism-react-renderer"
+    },
+    {
+      "files": 2,
+      "package": "react-dom"
+    },
+    {
+      "files": 1,
+      "package": ""
+    },
+    {
+      "files": 1,
+      "package": "@docusaurus/ComponentCreator"
+    },
+    {
+      "files": 1,
+      "package": "@docusaurus/core"
+    },
+    {
+      "files": 1,
+      "package": "@docusaurus/module-type-aliases"
+    },
+    {
+      "files": 1,
+      "package": "@docusaurus/preset-classic"
+    },
+    {
+      "files": 1,
+      "package": "@docusaurus/theme-mermaid"
+    },
+    {
+      "files": 1,
+      "package": "@docusaurus/types"
+    },
+    {
+      "files": 1,
+      "package": "@generated/docusaurus-plugin-content-docs"
+    },
+    {
+      "files": 1,
+      "package": "@mdx-js/react"
+    },
+    {
+      "files": 1,
+      "package": "@site/docs"
+    },
+    {
+      "files": 1,
+      "package": "@theme/DocItem"
+    },
+    {
+      "files": 1,
+      "package": "@theme/DocRoot"
+    },
+    {
+      "files": 1,
+      "package": "@theme/DocVersionRoot"
+    },
+    {
+      "files": 1,
+      "package": "@theme/DocsRoot"
+    },
+    {
+      "files": 1,
+      "package": "clsx"
+    }
+  ],
+  "fan_in_top": [
+    {
+      "id": "tests/test-skill-format.sh::fail",
+      "weight": 15
+    },
+    {
+      "id": "tests/test-skill-format.sh::pass",
+      "weight": 14
+    },
+    {
+      "id": "c4designer/review-checklist.md",
+      "weight": 12
+    },
+    {
+      "id": "c4designer/SKILL.md",
+      "weight": 10
+    },
+    {
+      "id": "c4designer/mermaid-c4-syntax.md",
+      "weight": 10
+    },
+    {
+      "id": "c4designer/mode-update.md",
+      "weight": 8
+    },
+    {
+      "id": "adr-scribe/adr-template.md",
+      "weight": 6
+    },
+    {
+      "id": "adr-scribe/review-checklist.md",
+      "weight": 6
+    },
+    {
+      "id": "c4designer/level-template.md",
+      "weight": 5
+    },
+    {
+      "id": "tests/test-skill-format.sh::info",
+      "weight": 5
+    },
+    {
+      "id": "adr-scribe/SKILL.md",
+      "weight": 4
+    },
+    {
+      "id": "c4designer/mode-document-code.md",
+      "weight": 4
+    },
+    {
+      "id": "c4designer/mode-review.md",
+      "weight": 4
+    },
+    {
+      "id": "tests/test-skill-format.sh::section",
+      "weight": 4
+    },
+    {
+      "id": "c4designer/supporting-diagrams.md",
+      "weight": 3
+    }
+  ],
+  "fan_out_top": [
+    {
+      "id": "tests/test-skill-format.sh",
+      "weight": 38
+    },
+    {
+      "id": "docs/.docusaurus/registry.js",
+      "weight": 27
+    },
+    {
+      "id": "docs/.docusaurus/routes.js",
+      "weight": 27
+    },
+    {
+      "id": "c4designer/SKILL.md",
+      "weight": 19
+    },
+    {
+      "id": "adr-scribe/SKILL.md",
+      "weight": 10
+    },
+    {
+      "id": "c4designer/mode-review.md",
+      "weight": 8
+    },
+    {
+      "id": "c4designer/mode-design.md",
+      "weight": 7
+    },
+    {
+      "id": "c4designer/mode-document-code.md",
+      "weight": 7
+    },
+    {
+      "id": "c4designer/mode-document-prose.md",
+      "weight": 7
+    },
+    {
+      "id": "c4designer/mode-update.md",
+      "weight": 6
+    },
+    {
+      "id": "adr-scribe/mode-interview.md",
+      "weight": 5
+    },
+    {
+      "id": "docs/docs/skills/c4designer/index.md",
+      "weight": 5
+    },
+    {
+      "id": "adr-scribe/mode-retro-document.md",
+      "weight": 4
+    },
+    {
+      "id": "c4designer/supporting-diagrams.md",
+      "weight": 4
+    },
+    {
+      "id": "docs/.docusaurus/client-modules.js",
+      "weight": 4
+    }
+  ],
+  "graph_sha256": "2d93dd527a4f4487fb0c2f46ec9a8333874f5fab7fc841dda265894565e2e8db",
+  "hotspot_definition": "fan-in/fan-out of internal nodes over calls+renders+imports+links; no churn",
+  "parse_errors": [
+    "c4designer/SKILL.md"
+  ],
+  "schema": "kf-code-graph-metrics/1",
+  "source": {
+    "commit_sha": "670fdcd9a8bc6bc9583a56390877ec742fee50ac",
+    "repo": "muthub-ai/c4-skills"
+  }
+}
