@@ -1,0 +1,23 @@
+{
+  "appid": "kfsit",
+  "bootstrap": true,
+  "builder": "process:building-application-bundles@0.1.0",
+  "bundle_kind": "application",
+  "generated_at": "2026-10-20T19:30:00-05:00",
+  "graph_options": {
+    "exclude_globs": [],
+    "generated_globs": [],
+    "third_party_globs": []
+  },
+  "review": {
+    "approver": "@muthub-ai"
+  },
+  "schema": "kf-knowledge-source/1",
+  "source": {
+    "commit_sha": "3afac247ec2848aa9d8844a83f1fc982eb6a6dc0",
+    "repo": "muthub-ai/knowledge-foundation-site",
+    "repo_id": 1423734759,
+    "url": "https://github.com/muthub-ai/knowledge-foundation-site"
+  },
+  "title": "Knowledge Foundation site"
+}

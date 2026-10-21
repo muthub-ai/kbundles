@@ -1,0 +1,302 @@
+{
+  "counts": {
+    "edges_by_kind": {
+      "calls:import-bound": 144,
+      "calls:local": 150,
+      "calls:name-only": 100,
+      "declares:external": 7,
+      "defines:-": 194,
+      "imports:exact": 20,
+      "imports:external": 87,
+      "links:exact": 16
+    },
+    "files_by_lang": {
+      "bash": 4,
+      "javascript": 3,
+      "json": 3,
+      "markdown": 17,
+      "python": 15,
+      "text": 9,
+      "typescript": 4,
+      "yaml": 2
+    },
+    "generated_files": 2,
+    "nodes_by_kind": {
+      "class": 13,
+      "external": 32,
+      "file": 57,
+      "function": 119,
+      "method": 59,
+      "type": 3,
+      "unresolved": 41
+    },
+    "third_party_files": 0
+  },
+  "entrypoints": [
+    ".github/ci-run.sh (cli-main)",
+    "kfsite/__main__.py (cli-main)",
+    "scripts/build.sh (cli-main)",
+    "scripts/fetch_release.py (cli-main)",
+    "scripts/make_quartz_config.py (cli-main)",
+    "scripts/pip_install.sh (cli-main)",
+    "scripts/vercel_build.sh (cli-main)",
+    "tests/serve.py (cli-main)",
+    "tests/test_fetch_release.py (cli-main)",
+    "tests/test_post.py (cli-main)",
+    "tests/test_stage.py (cli-main)"
+  ],
+  "external_dependencies": [
+    {
+      "files": 13,
+      "package": "pathlib"
+    },
+    {
+      "files": 7,
+      "package": "json"
+    },
+    {
+      "files": 7,
+      "package": "re"
+    },
+    {
+      "files": 7,
+      "package": "sys"
+    },
+    {
+      "files": 6,
+      "package": "shutil"
+    },
+    {
+      "files": 6,
+      "package": "yaml"
+    },
+    {
+      "files": 4,
+      "package": "@playwright/test"
+    },
+    {
+      "files": 4,
+      "package": "os"
+    },
+    {
+      "files": 3,
+      "package": "tempfile"
+    },
+    {
+      "files": 3,
+      "package": "typing"
+    },
+    {
+      "files": 3,
+      "package": "unittest"
+    },
+    {
+      "files": 3,
+      "package": "urllib"
+    },
+    {
+      "files": 2,
+      "package": "argparse"
+    },
+    {
+      "files": 2,
+      "package": "esbuild"
+    },
+    {
+      "files": 2,
+      "package": "fs"
+    },
+    {
+      "files": 2,
+      "package": "graphology"
+    },
+    {
+      "files": 2,
+      "package": "markdown"
+    },
+    {
+      "files": 2,
+      "package": "path"
+    },
+    {
+      "files": 2,
+      "package": "sigma"
+    },
+    {
+      "files": 2,
+      "package": "tarfile"
+    },
+    {
+      "files": 1,
+      "package": "dataclasses"
+    },
+    {
+      "files": 1,
+      "package": "datetime"
+    },
+    {
+      "files": 1,
+      "package": "events"
+    },
+    {
+      "files": 1,
+      "package": "functools"
+    },
+    {
+      "files": 1,
+      "package": "http"
+    },
+    {
+      "files": 1,
+      "package": "io"
+    },
+    {
+      "files": 1,
+      "package": "jsonschema"
+    },
+    {
+      "files": 1,
+      "package": "node:path"
+    },
+    {
+      "files": 1,
+      "package": "node:url"
+    },
+    {
+      "files": 1,
+      "package": "posixpath"
+    }
+  ],
+  "fan_in_top": [
+    {
+      "id": "explorer/src/explorer.ts::esc",
+      "weight": 53
+    },
+    {
+      "id": "explorer/src/explorer.ts::$",
+      "weight": 27
+    },
+    {
+      "id": "tests/e2e/explorer.spec.ts::ready",
+      "weight": 14
+    },
+    {
+      "id": "explorer/src/explorer.ts::linkCount",
+      "weight": 11
+    },
+    {
+      "id": "explorer/src/explorer.ts::applyFocus",
+      "weight": 9
+    },
+    {
+      "id": "explorer/src/explorer.ts::updateStatus",
+      "weight": 9
+    },
+    {
+      "id": "kfsite/stage.py",
+      "weight": 8
+    },
+    {
+      "id": "explorer/src/explorer.ts::focusNode",
+      "weight": 7
+    },
+    {
+      "id": "explorer/src/explorer.ts::humanDay",
+      "weight": 7
+    },
+    {
+      "id": "kfsite/bundle.py",
+      "weight": 7
+    },
+    {
+      "id": "explorer/src/explorer.ts::T",
+      "weight": 6
+    },
+    {
+      "id": "explorer/src/explorer.ts::applyFilters",
+      "weight": 6
+    },
+    {
+      "id": "explorer/src/explorer.ts::closePanel",
+      "weight": 6
+    },
+    {
+      "id": "kfsite/bundle.py::load_config",
+      "weight": 6
+    },
+    {
+      "id": "kfsite/bundle.py::resolve",
+      "weight": 6
+    }
+  ],
+  "fan_out_top": [
+    {
+      "id": "tests/e2e/explorer.spec.ts",
+      "weight": 127
+    },
+    {
+      "id": "explorer/src/explorer.ts",
+      "weight": 81
+    },
+    {
+      "id": "tests/e2e/site.spec.ts",
+      "weight": 40
+    },
+    {
+      "id": "explorer/src/explorer.ts::fillPage",
+      "weight": 36
+    },
+    {
+      "id": "explorer/src/explorer.ts::openPanel",
+      "weight": 35
+    },
+    {
+      "id": "explorer/src/explorer.ts::renderList",
+      "weight": 20
+    },
+    {
+      "id": "explorer/src/explorer.ts::paint",
+      "weight": 19
+    },
+    {
+      "id": "scripts/build_explorer.mjs",
+      "weight": 19
+    },
+    {
+      "id": "tests/test_post.py",
+      "weight": 18
+    },
+    {
+      "id": "tests/test_stage.py",
+      "weight": 16
+    },
+    {
+      "id": "kfsite/post.py::finish",
+      "weight": 15
+    },
+    {
+      "id": "tests/build_preview.py",
+      "weight": 14
+    },
+    {
+      "id": "explorer/src/explorer.ts::buildFilters",
+      "weight": 13
+    },
+    {
+      "id": "kfsite/stage.py::Stager.note",
+      "weight": 13
+    },
+    {
+      "id": "explorer/src/explorer.ts::buildLegend",
+      "weight": 12
+    }
+  ],
+  "graph_sha256": "7cce3a8bffd531894689010170006598998a6a2289a14595ccd4f2dfbb604d22",
+  "hotspot_definition": "fan-in/fan-out of internal nodes over calls+renders+imports+links; no churn",
+  "parse_errors": [],
+  "schema": "kf-code-graph-metrics/1",
+  "source": {
+    "commit_sha": "3afac247ec2848aa9d8844a83f1fc982eb6a6dc0",
+    "repo": "muthub-ai/knowledge-foundation-site"
+  }
+}
