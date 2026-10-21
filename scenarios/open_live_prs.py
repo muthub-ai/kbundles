@@ -32,6 +32,12 @@ sys.path.insert(0, os.path.join(ROOT, "tools"))
 import run_fixtures as rf  # noqa: E402
 import simulate_grill as sim  # noqa: E402
 
+# Most red scenarios extend the same D01 meeting, so they would share one deterministic
+# branch (D13: a rerun updates the same PR). Live, each needs its own PR, so each gets
+# its own ceremony date; the run date (log heading) is unchanged.
+LIVE_DATES = {"R01": "2026-10-06", "R03": "2026-10-07", "R06": "2026-10-08", "R08": "2026-10-09",
+              "R09": "2026-10-12", "R13": "2026-10-13"}
+
 MARK_START, MARK_END = "<!-- live-prs:start -->", "<!-- live-prs:end -->"
 FOOTER = ("🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\n"
           "https://claude.ai/code/session_01XNcjE9WcYtrvi6uB5CZfqb")
@@ -44,8 +50,31 @@ def gh(*args) -> str:
     return res.stdout
 
 
+def dated(date: str | None):
+    """Wrap sim.load_scenario so the replayed scenario uses its own ceremony date."""
+    base = sim.load_scenario
+
+    def load(path):
+        sc = base(path)
+        if date:
+            sc["answers"]["ceremony_date"] = date
+            sc["meeting"]["meeting_datetime"] = date + sc["meeting"]["meeting_datetime"][10:]
+            sc["meeting"]["meeting_id"] = sc["meeting"]["meeting_id"][:-10] + date
+        return sc
+    return load
+
+
 def replay(run: rf.Run, sc: dict) -> tuple[str, dict, dict]:
     """Run the scenario's steps up to and including its first gate step; keep the clone."""
+    sim_load = sim.load_scenario
+    sim.load_scenario = dated(LIVE_DATES.get(sc["id"]))
+    try:
+        return _replay(run, sc)
+    finally:
+        sim.load_scenario = sim_load
+
+
+def _replay(run: rf.Run, sc: dict) -> tuple[str, dict, dict]:
     repo = run.clone()
     state = {"prs": {}, "merged": {}, "observed": []}
     for step in sc["steps"]:
