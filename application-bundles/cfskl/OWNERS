@@ -1,0 +1,7 @@
+# OWNERS for cfskl (C4 skills)
+# Who may approve knowledge for this app: ceremony PRs, bundle updates and changes to
+# this file. Read by kf-knowledge-gate from main only. Change it with an owners PR
+# (branch owners/cfskl, title '[KF-OWNERS] cfskl — <what changed>').
+approvers:
+  - genlinemedia
+  - muthub-ai
