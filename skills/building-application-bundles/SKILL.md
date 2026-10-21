@@ -19,8 +19,9 @@ a bundle that validates here passes there.
 - Grammars unavailable? `build_bundle.py graph --inventory-only` produces a
   degraded inventory-only graph; say so in the executive summary.
 
-Scripts live in `scripts/` (run them; do not re-implement them). Paths below
-are relative to this skill folder.
+Scripts live in this skill's `scripts/` (run them; do not re-implement them).
+Run every command from the kbundles repo root with
+`S=skills/building-application-bundles`.
 
 ## Workflow
 
@@ -46,7 +47,7 @@ zones) in a separate tooling PR — the trust root is code-owner reviewed.
 **2. Pin.** Clone the source repo and check out the commit to document, then:
 
 ```bash
-python3 scripts/build_bundle.py init --bundle application-bundles/<appid> --appid <appid> \
+python3 $S/scripts/build_bundle.py init --bundle application-bundles/<appid> --appid <appid> \
   --title "<App title>" --repo <owner/repo> --repo-id <id> --source <clone> \
   --approver @<owner-handle> [--third-party 'glob' ...] [--generated 'glob' ...]
 ```
@@ -57,7 +58,7 @@ so they do not dominate metrics.
 **3. Graph.**
 
 ```bash
-python3 scripts/build_bundle.py graph --bundle application-bundles/<appid> --source <clone>
+python3 $S/scripts/build_bundle.py graph --bundle application-bundles/<appid> --source <clone>
 ```
 
 Read `code-graph/metrics.json` and `code-graph/views/*.md` before writing:
@@ -78,13 +79,13 @@ read it fully first. The rules that fail most often:
 **5. Hashes.**
 
 ```bash
-python3 scripts/fill_citations.py --bundle application-bundles/<appid> --source <clone>
+python3 $S/scripts/fill_citations.py --bundle application-bundles/<appid> --source <clone>
 ```
 
 **6. Controls.**
 
 ```bash
-python3 scripts/build_bundle.py controls --bundle application-bundles/<appid> \
+python3 $S/scripts/build_bundle.py controls --bundle application-bundles/<appid> \
   [--log-summary "Application bundle created" --log-bullet "..."]   # log flags only when adding a log block
 ```
 
@@ -95,7 +96,7 @@ files: [reference/okf-control-files.md](reference/okf-control-files.md).
 **7. Validate — the loop.**
 
 ```bash
-python3 scripts/validate_bundle.py --bundle application-bundles/<appid> --source <clone> \
+python3 $S/scripts/validate_bundle.py --bundle application-bundles/<appid> --source <clone> \
   --registry .github/kf/config.yml --reproduce
 ```
 
