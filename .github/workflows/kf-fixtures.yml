@@ -3,7 +3,9 @@
 name: kf-fixtures
 on:
   push:
-  pull_request:
+    branches: [main]
+  pull_request:   # only PRs that change the gate, tools or scenarios; knowledge PRs are judged by kf-knowledge-gate
+    paths: [".github/**", "gate/**", "tools/**", "skills/**", "scenarios/**"]
   workflow_dispatch:
 permissions:
   contents: read
