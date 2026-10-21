@@ -104,7 +104,7 @@ scratch clone in gate local mode (CI: `kf-fixtures`). Rows marked *live* are
 also open as real pull requests.
 
 <!-- scenario-matrix:start -->
-**40/40 scenarios pass** (23s, gate local mode, fresh scratch clone per scenario).
+**40/40 scenarios pass** (28s, gate local mode, fresh scratch clone per scenario).
 
 | Id | Scenario | Proves (spec / plan) | Live PR | Observed | Result |
 |---|---|---|---|---|---|
