@@ -3,9 +3,9 @@
 
 Takes a GrillResult-shaped scenario (canned meeting output with verbatim
 evidence spans drawn from a fabricated recap) and deterministically produces
-exactly what grill-me would: the ceremony file, a byte-splice of the
-manifest, a date-ordered block in the ceremony-team log, the deterministic
-branch, a commit with the client trailer, and the PR body with the evidence
+exactly what grill-me would: the ceremony file and a date-ordered block in
+the ceremony-team log (both inside knowledge-sources/ — ceremony PRs never
+touch the manifest, spec v0.5), the deterministic branch and PR title, a commit with the client trailer, and the PR body with the evidence
 table. Red scenarios add `tamper` operations after rendering.
 
   simulate_grill.py --scenario S.json --repo . --mode commit   # local branch + commit (fixtures)
@@ -161,8 +161,8 @@ def render(sc: dict, cfg: dict, bootstrap: bool = False) -> dict:
              "team": team, "type": f"agile-ceremony/{cer}"}
     ev_rows = "".join(f'| {fid} | {src} | "{span}" |\n' for fid, (src, span) in sorted(spans.items()))
     pr_body = (f"## [KF] {appid} · {team} · {cer} · {date} — candidate knowledge ({len(items)} items)\n\n"
-               f"**Approver (enforced):** {a['approver']} · **Write-set:** ceremony file + ceremony-team log.md + "
-               f"bundle-manifest.json of `{appid}`\n\n"
+               f"**Approver (enforced):** {a['approver']} · **Write-set:** `{cer_path}` + its team `log.md` — "
+               f"nothing outside `knowledge-sources/`\n\n"
                f"Synthetic scenario `{sc.get('id', '?')}` rendered by {SIM_ID} (no model). Run: {run_id}\n\n"
                "<details><summary>Evidence spans (verbatim, hash-anchored; scrub-able after merge)</summary>\n\n"
                "| Footnote | Source | Span |\n|---|---|---|\n" + ev_rows + "\n</details>\n\n"
@@ -191,21 +191,11 @@ def load_scenario(path: str) -> dict:
 
 
 def write_tree(repo: str, r: dict) -> None:
-    """Apply a rendering to the working tree: add file, byte-splice manifest, insert log block."""
+    """Apply a rendering to the working tree: add the ceremony file and insert its team-log block."""
     cpath = os.path.join(repo, r["cer_path"])
     os.makedirs(os.path.dirname(cpath), exist_ok=True)
     with open(cpath, "w", encoding="utf-8", newline="\n") as fh:
         fh.write(r["cer_text"])
-    mpath = os.path.join(repo, f"application-bundles/{r['appid']}/bundle-manifest.json")
-    if not os.path.exists(mpath):   # a brand-new (possibly unregistered) appid folder
-        from kfbundle.manifest import render_manifest
-        os.makedirs(os.path.dirname(mpath), exist_ok=True)
-        with open(mpath, "w", encoding="utf-8", newline="\n") as fh:
-            fh.write(render_manifest(r["appid"], []))
-    with open(mpath, encoding="utf-8") as fh:
-        manifest = fh.read()
-    with open(mpath, "w", encoding="utf-8", newline="\n") as fh:
-        fh.write(splice_insert(manifest, r["entry"]))
     lpath = os.path.join(repo, r["log_path"])
     if os.path.exists(lpath):
         with open(lpath, encoding="utf-8") as fh:
@@ -283,6 +273,7 @@ def simulate(sc: dict, repo: str, base: str, mode: str, refresh: bool = False) -
               "If an open PR exists for this ceremony-date, comment on it recommending close.")
         return {"zero_findings": True}
     pr = {"author": sc.get("pr", {}).get("author", "muthub-ai"), "branch": r["branch"], "body": r["pr_body"],
+          "title": sc.get("pr_title", r["pr_title"]),
           "labels": sc.get("pr", {}).get("labels", []), "reviews": []}
     if mode in ("commit", "push"):
         git(repo, "switch", "-q", "-C", r["branch"], base)
@@ -319,7 +310,7 @@ def push_and_open(repo: str, r: dict, sc: dict) -> None:
         r["pr_number"] = prs[0]["number"]
         return
     body = r["pr"]["body"] + f"\n\n---\n{sc.get('demo_note', '')}\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n"
-    res = subprocess.run(["gh", "api", f"repos/{full}/pulls", "-f", f"title={sc.get('pr_title', r['pr_title'])}",
+    res = subprocess.run(["gh", "api", f"repos/{full}/pulls", "-f", f"title={r['pr']['title']}",
                           "-f", f"head={r['branch']}", "-f", "base=main", "-f", f"body={body}"],
                          capture_output=True, text=True)
     if res.returncode != 0:

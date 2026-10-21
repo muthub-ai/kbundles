@@ -41,16 +41,15 @@ scenarios:
       - gate: {of: c, expect: success}
       - merge: {of: c}
   - id: F04
-    title: Two teams' FIRST sprint-planning entries share a manifest gap — one conflict, one --refresh, approval survives
-    criterion: "§13 #7b, #8 · I8 (content-bound approval)"
+    title: Two teams' FIRST sprint-planning entries land the same day — no manifest, so no conflict and no --refresh
+    criterion: "spec v0.5 write-set (knowledge-sources/ only) · I9"
     steps:
       - simulate: {scenario: scenarios/cases/D04-kfcor-fabric-core-sprint-planning.json, as: a}
       - simulate: {scenario: scenarios/cases/D05-kfcor-graph-platform-sprint-planning.json, as: b}
       - review: {of: a, user: genlinemedia}
       - review: {of: b, user: genlinemedia}
+      - gate: {of: a, expect: success}
       - merge: {of: a}
-      - merge: {of: b, expect_conflict: true}
-      - refresh: {of: b}
       - gate: {of: b, expect: success}
       - merge: {of: b}
   - id: F05
@@ -202,12 +201,12 @@ scenarios:
       - simulate: {scenario: scenarios/cases/R08-pii-email.json}
       - gate: {expect: failure, gates: [G9]}
   - id: R09
-    title: Manifest re-serialized (parse→stringify) instead of byte-spliced
-    criterion: "§13 #6 · G4 byte-splice"
+    title: Ceremony PR also rewrites the bundle manifest — outside knowledge-sources/
+    criterion: "spec v0.5 write-set · G1 · PC"
     live: true
     steps:
       - simulate: {scenario: scenarios/cases/R09-manifest-reserialized.json}
-      - gate: {expect: failure, gates: [G4]}
+      - gate: {expect: failure, gates: [G1]}
   - id: R10
     title: New ceremony-team log seeded with fabricated history
     criterion: "§13 #9 · G4 creation rule"
@@ -280,6 +279,77 @@ scenarios:
           literal: true
           as: rv
       - gate: {of: rv, expect: failure, class: revert, gates: [RV]}
+  - id: R31
+    title: Ceremony PR title does not follow the naming convention
+    criterion: "spec v0.5 naming · G3"
+    live: true
+    steps:
+      - simulate: {scenario: scenarios/cases/R31-wrong-pr-title.json}
+      - gate: {expect: failure, gates: [G3]}
+  - id: R32
+    title: Named approver is not in the app's OWNERS (nor a steward)
+    criterion: "spec v0.5 OWNERS · G7"
+    live: true
+    steps:
+      - simulate: {scenario: scenarios/cases/R32-approver-not-in-owners.json}
+      - gate: {expect: failure, gates: [G7]}
+  - id: R33
+    title: Approver owns a DIFFERENT app — their OWNERS entry does not carry over to kfcor
+    criterion: "spec v0.5 OWNERS · cross-app isolation · G7"
+    steps:
+      - edit:
+          branch: main
+          message: "fixture: kfsit is owned by other people"
+          ops:
+            - {op: write, file: application-bundles/kfsit/OWNERS, content: "approvers:\n  - kf-nonowner-demo\n  - kf-writer-demo\n"}
+            - {op: write, file: application-bundles/kfcor/OWNERS, content: "approvers:\n  - genlinemedia\n  - muthub-ai\n"}
+      - simulate: {scenario: scenarios/cases/R33-approver-owns-other-app.json}
+      - gate: {expect: failure, gates: [G7]}
+  # ------------------------------------------------------------------ owners class
+  - id: F13
+    title: An app's OWNERS file is claimed by PR — a KF steward approves, then the app governs itself
+    criterion: "spec v0.5 OWNERS claim"
+    steps:
+      - edit:
+          branch: owners/kfsit
+          title: "[KF-OWNERS] kfsit — claim app for site-build and explorer-ux"
+          ops:
+            - {op: write, file: application-bundles/kfsit/OWNERS, content: "# OWNERS for kfsit\napprovers:\n  - genlinemedia\n  - muthub-ai\n  - kf-writer-demo\n"}
+      - gate: {expect: action_required, class: owners}
+      - review: {user: genlinemedia}
+      - gate: {expect: success}
+  - id: R34
+    title: OWNERS change approved by someone who is not a current approver — stays pending
+    criterion: "spec v0.5 OWNERS · approval"
+    steps:
+      - edit:
+          branch: owners/kfsit
+          title: "[KF-OWNERS] kfsit — add a reviewer"
+          ops:
+            - {op: write, file: application-bundles/kfsit/OWNERS, content: "approvers:\n  - genlinemedia\n  - muthub-ai\n  - kf-nonowner-demo\n"}
+      - review: {user: kf-nonowner-demo}
+      - gate: {expect: action_required, class: owners}
+  - id: R35
+    title: OWNERS change on the wrong branch / with the wrong title
+    criterion: "spec v0.5 naming · OW"
+    steps:
+      - edit:
+          branch: tweak-owners
+          title: "update owners"
+          ops:
+            - {op: write, file: application-bundles/kfsit/OWNERS, content: "approvers:\n  - genlinemedia\n  - muthub-ai\n  - kf-writer-demo\n"}
+      - gate: {expect: failure, class: owners, gates: [OW]}
+  - id: R36
+    title: OWNERS change mixed with a section edit — fails closed
+    criterion: "spec v0.5 · one kind of change per PR"
+    steps:
+      - edit:
+          branch: owners/kfsit
+          title: "[KF-OWNERS] kfsit — claim app"
+          ops:
+            - {op: write, file: application-bundles/kfsit/OWNERS, content: "approvers:\n  - genlinemedia\n  - kf-writer-demo\n"}
+            - {op: write, file: application-bundles/kfsit/sections/notes.md, content: "smuggled\n"}
+      - gate: {expect: failure, class: unknown, gates: [CLASS]}
   # ------------------------------------------------------------------ red paths: bundle-update class
   - id: R11
     title: Bundle update touches knowledge-sources/
@@ -341,6 +411,17 @@ scenarios:
             - {op: replace, file: sections/executive-summary.md, find: "## Why it matters\n",
                replace: "## Why it matters\n\nThis paragraph makes a claim with no evidence at all.\n\n"}
       - gate: {expect: failure, gates: [B6]}
+  - id: R37
+    title: Bundle-update PR title does not follow the naming convention
+    criterion: "spec v0.5 naming · B3"
+    steps:
+      - bundle_edit:
+          appid: kfcor
+          title: "kfcor docs refresh"
+          ops:
+            - {op: replace, file: sections/executive-summary.md, find: "## Why it matters\n",
+               replace: "## Why it matters\n\nThe site repository is a separate consumer that builds only from release assets.[^readme-repos]\n\n"}
+      - gate: {expect: failure, gates: [B3]}
   - id: R29
     title: Bundle-update approver is not an owner of the appid
     criterion: "D19 · G7 owners(appid)"

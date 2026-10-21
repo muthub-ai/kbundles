@@ -4,6 +4,7 @@
   bundle-update  sections/, code-graph/, domains-maps/, control files of one appid, or a bundle/ branch
   revert         deletes accepted ceremony knowledge (verified as a semantic inverse), revert/ branch
                  or kf-revert label
+  owners         exactly application-bundles/<appid>/OWNERS of one appid (owners/<appid> branch)
   tooling        trust root and tooling only (.github/, gate/, tools/, skills/, scenarios/):
                  needs a code owner's approval
   other          README.md, PRODUCTION.md, docs/** only
@@ -30,6 +31,11 @@ def _kind(path: str) -> str:
     return "unknown"
 
 
+def _is_owners(path: str) -> bool:
+    parts = path.split("/")
+    return len(parts) == 3 and parts[0] == BUNDLES_ROOT and parts[2] == "OWNERS"
+
+
 def revert_target(ctx) -> str | None:
     for sha in git.commits(ctx.repo, ctx.mb, ctx.head):
         for line in git.message(ctx.repo, sha).splitlines():
@@ -48,6 +54,15 @@ def classify(ctx) -> str:
         ctx.notes["unknown_reason"] = (
             "paths outside every known PR class" if "unknown" in kinds else
             "PR mixes knowledge with tooling/docs changes — split it")
+    elif "bundle" in kinds and any(_is_owners(p) for p in ctx.paths):
+        appids = sorted({p.split("/")[1] for p in ctx.paths if p.count("/") >= 2})
+        ctx.notes["appids"] = appids
+        ctx.appid = appids[0] if len(appids) == 1 else None
+        if all(_is_owners(p) for p in ctx.paths):
+            ctx.cls = "owners"
+        else:
+            ctx.cls = "unknown"
+            ctx.notes["unknown_reason"] = "PR mixes an OWNERS change with other files — split it"
     elif "bundle" in kinds:
         deletes = any(c.status == "D" and "/knowledge-sources/" in c.path for c in ctx.changes)
         if "kf-revert" in ctx.pr.labels or branch.startswith("revert/") or revert_target(ctx) or deletes:

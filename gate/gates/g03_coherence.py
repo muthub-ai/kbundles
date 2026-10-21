@@ -52,6 +52,14 @@ def check(ctx):
         if not ctx.bootstrap:
             if ctx.pr.branch != want_branch or len(ctx.pr.branch.split("/")) != 5:
                 f(f"branch must be exactly '{want_branch}' (found '{ctx.pr.branch}')")
+            doc = n.get("cer_doc")
+            count = len([i for i in doc.items if i.iid]) if doc is not None else None
+            want_title = f"[KF] {ctx.appid} · {ctx.team} · {ctx.ceremony} · {date} — candidate knowledge"
+            m = re.match(rf"^{re.escape(want_title)} \((\d+) items?\)$", ctx.pr.title or "")
+            if not m:
+                f(f"PR title must be exactly '{want_title} (<n> items)' (found '{ctx.pr.title}')")
+            elif count is not None and int(m.group(1)) != count:
+                f(f"PR title says {m.group(1)} items but the file has {count}")
         try:
             day = dt.date.fromisoformat(date)
             if day > ctx.now.astimezone(UTC_PLUS_14).date():

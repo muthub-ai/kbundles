@@ -23,13 +23,14 @@ class PR:
     author: str
     branch: str
     body: str
+    title: str = ""
     labels: list[str] = field(default_factory=list)
     reviews: list[Review] = field(default_factory=list)
 
     @classmethod
     def from_dict(cls, d: dict) -> "PR":
         return cls(number=d.get("number"), author=str(d.get("author", "")).lstrip("@"),
-                   branch=d.get("branch", ""), body=d.get("body", "") or "",
+                   branch=d.get("branch", ""), body=d.get("body", "") or "", title=d.get("title", "") or "",
                    labels=list(d.get("labels", [])),
                    reviews=[Review(str(r["user"]).lstrip("@"), r["state"], r["commit_id"])
                             for r in d.get("reviews", [])])

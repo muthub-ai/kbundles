@@ -1,0 +1,5 @@
+{
+  "extends": "scenarios/cases/D01-kfcor-fabric-core-standup.json",
+  "id": "R32",
+  "answers": {"approver": "@kf-nonowner-demo"}
+}

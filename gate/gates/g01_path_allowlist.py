@@ -1,7 +1,9 @@
-"""G1 — path allowlist (ceremony class): exactly one appid+team, three files.
+"""G1 — path allowlist (ceremony class): exactly one appid+team, two files, both inside
+`application-bundles/<appid>/knowledge-sources/agile-ceremonies/<ceremony>/<team>/`.
 
-Allowed: the ceremony file, that team's ceremony-team log.md, the appid's
-bundle-manifest.json. Symlinks, gitlinks and mode changes are rejected.
+Allowed: the ceremony file and that team's ceremony-team log.md. Nothing outside
+knowledge-sources/ — not the manifest, not sections, not the appid-root log.
+Symlinks, gitlinks and mode changes are rejected.
 """
 from kfgate.context import Finding
 
@@ -20,16 +22,20 @@ def check(ctx):
         return out + [Finding(GATE, f"a ceremony PR must touch exactly one appid; found {', '.join(appids)}")]
     if "cer_path" not in ctx.notes:
         return out + [Finding(GATE, "no ceremony file found under knowledge-sources/agile-ceremonies/")]
-    allowed = {ctx.notes["cer_path"], ctx.notes["log_path"], ctx.notes["manifest_path"]}
+    allowed = {ctx.notes["cer_path"], ctx.notes["log_path"]}
+    team_dir = ctx.notes["log_path"].rsplit("/", 1)[0] + "/"
     for p in ctx.paths:
         if p in allowed:
             continue
-        if p == f"application-bundles/{ctx.appid}/log.md":
+        if "/knowledge-sources/" not in p:
+            out.append(Finding(GATE, "ceremony PRs may only change files under "
+                                     f"{team_dir} — nothing outside knowledge-sources/ (not the manifest, "
+                                     "sections, index or appid-root log)", p))
+        elif p == f"application-bundles/{ctx.appid}/log.md":
             out.append(Finding(GATE, "ceremony PRs may never touch the appid-root log.md (D16)", p))
         elif "/agile-ceremonies/" in p:
             out.append(Finding(GATE, f"second ceremony/team path in one PR — only {ctx.ceremony}/{ctx.team} "
                                      "is allowed here", p))
         else:
-            out.append(Finding(GATE, "outside the ceremony write-set (ceremony file + ceremony-team log + "
-                                     "manifest of one appid)", p))
+            out.append(Finding(GATE, f"outside the ceremony write-set (the ceremony file + log.md in {team_dir})", p))
     return out

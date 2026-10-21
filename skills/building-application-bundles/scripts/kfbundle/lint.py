@@ -169,7 +169,7 @@ def lint_bundle(bundle_dir: str, read_source=None, registry: dict | None = None)
     for root, _dirs, files in os.walk(bundle_dir):
         for name in files:
             rel = os.path.relpath(os.path.join(root, name), bundle_dir).replace(os.sep, "/")
-            if rel.startswith(CEREMONY_PREFIX):
+            if rel.startswith(CEREMONY_PREFIX) or rel == "OWNERS":   # owned by the ceremony / owners classes
                 continue
             present.add(rel)
             if not BUNDLE_FILE_RE.match(rel):

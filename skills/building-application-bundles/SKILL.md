@@ -41,8 +41,10 @@ Bundle progress:
 
 **1. Appid.** Exactly 5 lowercase letters derived from the repo name, not
 reserved, not within edit distance 2 of an existing appid. Add it to
-`.github/kf/config.yml` (title, repo, numeric repo id, owners, teams with time
-zones) in a separate tooling PR — the trust root is code-owner reviewed.
+`.github/kf/config.yml` (title, repo, numeric repo id, teams with time zones) in a
+separate tooling PR — the trust root is code-owner reviewed. Who may approve the
+app's knowledge lives in `application-bundles/<appid>/OWNERS`, claimed with an
+owners PR (branch `owners/<appid>`); until then the KF stewards approve.
 
 **2. Pin.** Clone the source repo and check out the commit to document, then:
 
@@ -107,7 +109,9 @@ views; if it fails, re-run step 3 rather than editing derived files.
 **8. PR.** Branch `bundle/<appid>/<first 12 chars of commit_sha>`, commit
 with the trailer `KF-Bundle-Builder: building-application-bundles@0.1.0`, one
 appid per PR, nothing under `knowledge-sources/`. The approver in
-`knowledge-source.json` must be an owner of the appid and not the author.
+`knowledge-source.json` must be listed in the app's `OWNERS` (or be a KF steward
+while it has none) and not be the author. Title:
+`[KF-BUNDLE] <appid> @ <first 12 of commit_sha> — <summary>`.
 
 ## Regenerating an existing bundle
 

@@ -38,8 +38,9 @@ fix is an App identity that side-branch workflows cannot mint (steps 1–3).
 5. **Push ruleset on all refs:** block changes to `.github/workflows/**`; require code-owner
    review on `.github/**` via `.github/CODEOWNERS` (already present).
 6. **Default `GITHUB_TOKEN` read-only** (repo settings → Actions → Workflow permissions).
-7. **Real identities.** Give named approvers write access; set `owners` per appid in
-   `.github/kf/config.yml`; set `revert_fallback_approvers` to a team. With a second identity
+7. **Real identities.** Give named approvers write access (spec v0.5 lowers this to read);
+   list each app's approvers in `application-bundles/<appid>/OWNERS` (claimed by owners PRs)
+   and the KF stewards in `.github/kf/config.yml`; set `revert_fallback_approvers` to a team. With a second identity
    the green scenarios also run as live PRs.
 8. **Make `kf-fixtures` a required check** for tooling PRs so a gate change that breaks a
    scenario cannot merge.
