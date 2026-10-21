@@ -1,0 +1,311 @@
+{
+  "counts": {
+    "edges_by_kind": {
+      "calls:import-bound": 522,
+      "calls:local": 283,
+      "calls:name-only": 125,
+      "declares:external": 58,
+      "defines:-": 656,
+      "imports:exact": 306,
+      "imports:external": 301,
+      "links:exact": 1,
+      "renders:import-bound": 152,
+      "renders:local": 39,
+      "renders:name-only": 19
+    },
+    "files_by_lang": {
+      "asset": 2,
+      "bash": 1,
+      "javascript": 4,
+      "json": 27,
+      "markdown": 4,
+      "python": 1,
+      "rego": 6,
+      "text": 24,
+      "tsx": 63,
+      "typescript": 99,
+      "yaml": 32
+    },
+    "generated_files": 3,
+    "nodes_by_kind": {
+      "class": 2,
+      "external": 52,
+      "file": 263,
+      "function": 419,
+      "method": 11,
+      "type": 224,
+      "unresolved": 70
+    },
+    "third_party_files": 0
+  },
+  "entrypoints": [
+    "mcp-server/bin/aac-mcp.ts (cli-main)",
+    "mcp-server/src/tools/lint-compliance.ts (mcp-tool)",
+    "mcp-server/src/tools/scaffold-waiver.ts (mcp-tool)",
+    "mcp-server/src/tools/validate-architecture.ts (mcp-tool)",
+    "packages/policies/scripts/build-bundle.sh (cli-main)",
+    "src/app/dashboard/page.tsx (next-route)",
+    "src/app/error.tsx (next-route)",
+    "src/app/layout.tsx (next-route)",
+    "src/app/not-found.tsx (next-route)",
+    "src/app/page.tsx (next-route)",
+    "src/app/systems/[id]/page.tsx (next-route)"
+  ],
+  "external_dependencies": [
+    {
+      "files": 41,
+      "package": "react"
+    },
+    {
+      "files": 40,
+      "package": "lucide-react"
+    },
+    {
+      "files": 38,
+      "package": "node:path"
+    },
+    {
+      "files": 30,
+      "package": "node:fs"
+    },
+    {
+      "files": 25,
+      "package": "js-yaml"
+    },
+    {
+      "files": 22,
+      "package": "@xyflow/react"
+    },
+    {
+      "files": 16,
+      "package": "@modelcontextprotocol/sdk"
+    },
+    {
+      "files": 15,
+      "package": "framer-motion"
+    },
+    {
+      "files": 13,
+      "package": "next"
+    },
+    {
+      "files": 12,
+      "package": "node:url"
+    },
+    {
+      "files": 8,
+      "package": "ajv"
+    },
+    {
+      "files": 8,
+      "package": "ajv-formats"
+    },
+    {
+      "files": 8,
+      "package": "zod"
+    },
+    {
+      "files": 7,
+      "package": "node:os"
+    },
+    {
+      "files": 6,
+      "package": "@base-ui/react"
+    },
+    {
+      "files": 5,
+      "package": "next-themes"
+    },
+    {
+      "files": 4,
+      "package": "plantuml-encoder"
+    },
+    {
+      "files": 3,
+      "package": "@types/js-yaml"
+    },
+    {
+      "files": 3,
+      "package": "@types/node"
+    },
+    {
+      "files": 3,
+      "package": "chalk"
+    },
+    {
+      "files": 3,
+      "package": "class-variance-authority"
+    },
+    {
+      "files": 3,
+      "package": "commander"
+    },
+    {
+      "files": 3,
+      "package": "typescript"
+    },
+    {
+      "files": 3,
+      "package": "vitest"
+    },
+    {
+      "files": 2,
+      "package": "@dagrejs/dagre"
+    },
+    {
+      "files": 2,
+      "package": "@monaco-editor/react"
+    },
+    {
+      "files": 2,
+      "package": "@vitejs/plugin-react"
+    },
+    {
+      "files": 2,
+      "package": "clsx"
+    },
+    {
+      "files": 2,
+      "package": "eslint"
+    },
+    {
+      "files": 2,
+      "package": "eslint-config-next"
+    }
+  ],
+  "fan_in_top": [
+    {
+      "id": "src/lib/utils.ts::cn",
+      "weight": 189
+    },
+    {
+      "id": "scripts/build-standard-pages.ts::escapeHtml",
+      "weight": 52
+    },
+    {
+      "id": "src/lib/parser/yaml-to-graph.ts::yamlToGraph",
+      "weight": 48
+    },
+    {
+      "id": "src/lib/export/drawio-export.test.ts::makeNode",
+      "weight": 43
+    },
+    {
+      "id": "src/lib/export/drawio-export.ts::exportToDrawioXml",
+      "weight": 41
+    },
+    {
+      "id": "scripts/build-waiver-pages.ts::escapeHtml",
+      "weight": 40
+    },
+    {
+      "id": "src/lib/export/drawio-export.test.ts::parseXml",
+      "weight": 40
+    },
+    {
+      "id": "src/lib/export/plantuml-export.test.ts::makeNode",
+      "weight": 39
+    },
+    {
+      "id": "src/lib/utils.ts",
+      "weight": 36
+    },
+    {
+      "id": "scripts/build-pattern-pages.ts::escapeHtml",
+      "weight": 35
+    },
+    {
+      "id": "src/lib/export/plantuml-export.ts::exportToPlantUml",
+      "weight": 32
+    },
+    {
+      "id": "src/lib/layout/dagre-layout.test.ts::makeNode",
+      "weight": 31
+    },
+    {
+      "id": "src/lib/parser/graph-to-yaml.ts::graphToYaml",
+      "weight": 30
+    },
+    {
+      "id": "scripts/build-docs.ts::escapeHtml",
+      "weight": 29
+    },
+    {
+      "id": "scripts/generate-architecture-diagram.py::icon",
+      "weight": 26
+    }
+  ],
+  "fan_out_top": [
+    {
+      "id": "src/lib/export/drawio-export.test.ts",
+      "weight": 137
+    },
+    {
+      "id": "src/lib/validation/system-schema.ts",
+      "weight": 121
+    },
+    {
+      "id": "src/lib/parser/graph-to-yaml.test.ts",
+      "weight": 118
+    },
+    {
+      "id": "src/lib/graph/filter-by-view.test.ts",
+      "weight": 109
+    },
+    {
+      "id": "scripts/generate-architecture-diagram.py",
+      "weight": 102
+    },
+    {
+      "id": "src/components/dashboard/waiver-registry.tsx::WaiverRegistry",
+      "weight": 82
+    },
+    {
+      "id": "src/lib/export/plantuml-export.test.ts",
+      "weight": 82
+    },
+    {
+      "id": "src/components/dashboard/standards-catalog.tsx::StandardsCatalog",
+      "weight": 73
+    },
+    {
+      "id": "cli/src/commands/create.test.ts",
+      "weight": 68
+    },
+    {
+      "id": "src/lib/layout/dagre-layout.test.ts",
+      "weight": 59
+    },
+    {
+      "id": "scripts/build-standard-pages.ts::renderStandardPage",
+      "weight": 50
+    },
+    {
+      "id": "src/lib/parser/yaml-to-graph.test.ts",
+      "weight": 47
+    },
+    {
+      "id": "cli/src/commands/init.test.ts",
+      "weight": 45
+    },
+    {
+      "id": "cli/src/commands/validate.test.ts",
+      "weight": 40
+    },
+    {
+      "id": "scripts/build-waiver-pages.ts::renderWaiverPage",
+      "weight": 40
+    }
+  ],
+  "graph_sha256": "067e6f351a868e049ee59a6ca2db1eb52ea80346a36b47220ba1fefca2774773",
+  "hotspot_definition": "fan-in/fan-out of internal nodes over calls+renders+imports+links; no churn",
+  "parse_errors": [
+    "src/components/dashboard/pattern-detail-drawer.tsx",
+    "src/components/dashboard/utilities/policy-engine-documentation.tsx"
+  ],
+  "schema": "kf-code-graph-metrics/1",
+  "source": {
+    "commit_sha": "fcc5db4d74b50a8a95a1017cd688ce73ac689633",
+    "repo": "muthub-ai/aac"
+  }
+}
