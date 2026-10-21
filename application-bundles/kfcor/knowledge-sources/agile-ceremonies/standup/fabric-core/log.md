@@ -1,5 +1,10 @@
 # standup · fabric-core — log
 
+## 2026-10-20: Standup 2026-10-12 candidate knowledge
+
+- Added [standup_2026-10-12.md](standup_2026-10-12.md) (3 items: 1 action, 1 blocker, 1 decision).
+- Approver: @genlinemedia · Branch: grill/kfcor/standup/fabric-core/2026-10-12 · Run: sim-a327fac497df
+
 ## 2026-10-19: Standup 2026-10-19 candidate knowledge
 
 - Added [standup_2026-10-19.md](standup_2026-10-19.md) (3 items: 1 action, 1 blocker, 1 decision).
