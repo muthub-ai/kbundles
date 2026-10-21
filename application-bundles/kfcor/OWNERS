@@ -1,0 +1,7 @@
+# OWNERS for kfcor (Knowledge Foundation core)
+# Who may approve knowledge for this app: ceremony PRs, bundle updates and changes to
+# this file. Read by kf-knowledge-gate from main only. Change it with an owners PR
+# (branch owners/kfcor, title '[KF-OWNERS] kfcor — <what changed>').
+approvers:
+  - genlinemedia
+  - muthub-ai
