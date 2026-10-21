@@ -18,8 +18,9 @@ def approver_problems(ctx, approver: str | None, path: str, owners: list[str] | 
     if not ctx.ids.exists(a):
         out.append(Finding(GATE, f"approver @{a} is not a resolvable GitHub user", path))
     elif not ctx.ids.can_write(a):
+        seen = ctx.ids.describe(a)
         out.append(Finding(GATE, f"approver @{a} lacks write permission on this repository, so their "
-                                 "approval could never count", path))
+                                 f"approval could never count{f' ({seen})' if seen else ''}", path))
     if a.lower() == ctx.pr.author.lower():
         out.append(Finding(GATE, f"approver @{a} is the PR author — self-approval is not allowed", path))
     if owners is not None and a.lower() not in {o.lower().lstrip("@") for o in owners}:

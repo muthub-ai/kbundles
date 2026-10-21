@@ -13,6 +13,10 @@ class Identities:
     def permission(self, user: str) -> str | None:
         raise NotImplementedError
 
+    def describe(self, user: str) -> str:
+        """What the lookup saw, for messages (empty when there is nothing to add)."""
+        return ""
+
     def can_write(self, user: str) -> bool:
         return (self.permission(user) or "") in WRITE_LEVELS
 
@@ -37,7 +41,7 @@ class FixtureIdentities(Identities):
 
 class GitHubIdentities(Identities):
     def __init__(self, api, repo: str):
-        self.api, self.repo, self._cache = api, repo, {}
+        self.api, self.repo, self._cache, self._seen = api, repo, {}, {}
 
     def exists(self, user: str) -> bool:
         status, _ = self.api.get(f"/users/{user.lstrip('@')}")
@@ -48,4 +52,10 @@ class GitHubIdentities(Identities):
         if u not in self._cache:
             status, body = self.api.get(f"/repos/{self.repo}/collaborators/{u}/permission")
             self._cache[u] = body.get("permission") if status == 200 and isinstance(body, dict) else None
+            self._seen[u] = (f"GitHub reports permission '{self._cache[u]}'" if status == 200 else
+                             f"permission lookup returned HTTP {status}: "
+                             f"{(body or {}).get('message', '') if isinstance(body, dict) else ''}".strip())
         return self._cache[u]
+
+    def describe(self, user: str) -> str:
+        return self._seen.get(user.lstrip("@"), "")

@@ -153,18 +153,20 @@ also open as real pull requests.
 ### Live demo pull requests
 
 <!-- live-prs:start -->
-| Scenario | What it does | Pull request | Expected | Check run on GitHub |
-|---|---|---|---|---|
-| R01 | Ceremony PR also touches a second appid | [#5](https://github.com/muthub-ai/kbundles/pull/5) | G1 | ❌ failure: G1 |
-| R03 | Wrong-appid coherence — path says kfcor, frontmatter says kfsit | [#6](https://github.com/muthub-ai/kbundles/pull/6) | G3 | ❌ failure: G2, G3, G7 |
-| R05 | Team not registered under the appid (team→appid binding) | [#2](https://github.com/muthub-ai/kbundles/pull/2) | G3 | ❌ failure: G3, G7 |
-| R06 | Evidence span tampered — hash no longer matches | [#7](https://github.com/muthub-ai/kbundles/pull/7) | G6 | ❌ failure: G6, G7 |
-| R08 | Email address in knowledge text | [#8](https://github.com/muthub-ai/kbundles/pull/8) | G9 | ❌ failure: G7, G9 |
-| R09 | Manifest re-serialized (parse→stringify) instead of byte-spliced | [#9](https://github.com/muthub-ai/kbundles/pull/9) | G4 | ❌ failure: G4, G7, PC |
-| R11 | Bundle update touches knowledge-sources/ | [#4](https://github.com/muthub-ai/kbundles/pull/4) | B1 | ❌ failure: B1, G7 |
-| R13 | Ceremony PR touches the appid-root log.md | [#10](https://github.com/muthub-ai/kbundles/pull/10) | G1 | ❌ failure: G1, G7, PC |
-| R14 | Trust-root config edited inside a knowledge PR — class unknown, fails closed | [#1](https://github.com/muthub-ai/kbundles/pull/1) | CLASS | ❌ failure: CLASS |
-| R16 | Ceremony date in the future in every time zone (UTC+14 rule) | [#3](https://github.com/muthub-ai/kbundles/pull/3) | G3 | ❌ failure: G3, G7 |
+| Scenario | What it does | Pull request | Expected check |
+|---|---|---|---|
+| L01 | Live green ceremony: standup waits for @genlinemedia, passes on approval | [#11](https://github.com/muthub-ai/kbundles/pull/11) | action_required → success after @genlinemedia approves |
+| L02 | Live green bundle update: cited aacod claim, owner @genlinemedia approves | [#12](https://github.com/muthub-ai/kbundles/pull/12) | action_required → success after @genlinemedia approves |
+| R01 | Ceremony PR also touches a second appid | [#13](https://github.com/muthub-ai/kbundles/pull/13) | failure on G1 |
+| R03 | Wrong-appid coherence — path says kfcor, frontmatter says kfsit | [#14](https://github.com/muthub-ai/kbundles/pull/14) | failure on G3 |
+| R05 | Team not registered under the appid (team→appid binding) | [#15](https://github.com/muthub-ai/kbundles/pull/15) | failure on G3 |
+| R06 | Evidence span tampered — hash no longer matches | [#16](https://github.com/muthub-ai/kbundles/pull/16) | failure on G6 |
+| R08 | Email address in knowledge text | [#17](https://github.com/muthub-ai/kbundles/pull/17) | failure on G9 |
+| R09 | Manifest re-serialized (parse→stringify) instead of byte-spliced | [#18](https://github.com/muthub-ai/kbundles/pull/18) | failure on G4 |
+| R11 | Bundle update touches knowledge-sources/ | [#22](https://github.com/muthub-ai/kbundles/pull/22) | failure on B1 |
+| R13 | Ceremony PR touches the appid-root log.md | [#19](https://github.com/muthub-ai/kbundles/pull/19) | failure on G1 |
+| R14 | Trust-root config edited inside a knowledge PR — class unknown, fails closed | [#20](https://github.com/muthub-ai/kbundles/pull/20) | failure on CLASS |
+| R16 | Ceremony date in the future in every time zone (UTC+14 rule) | [#21](https://github.com/muthub-ai/kbundles/pull/21) | failure on G3 |
 <!-- live-prs:end -->
 
 > **Demo-grade notes.** This repository has one real GitHub identity, so most
